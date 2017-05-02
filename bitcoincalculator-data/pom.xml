@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>net.bounceme.chronos</groupId>
+		<artifactId>bitcoincalculator</artifactId>
+		<version>${my.version}</version>
+	</parent>
+
+	<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
+	<artifactId>bitcoincalculator-data</artifactId>
+	<packaging>jar</packaging>
+	<url>http://bitcoincalculator.buscoloteria.com</url>
+	
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+			  	<groupId>org.apache.maven.plugins</groupId>
+			  	<artifactId>maven-compiler-plugin</artifactId>
+			  	<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+        		<groupId>org.sonarsource.scanner.maven</groupId>
+        		<artifactId>sonar-maven-plugin</artifactId>
+        		<version>3.1.1</version>
+      		</plugin>
+		</plugins>
+	</build>
+
+	<!-- Dependencias globales -->
+	<dependencies>
+
+		<dependency>
+			<groupId>net.bounceme.chronos.chronoslibs</groupId>
+			<artifactId>chronos-data-utils</artifactId>
+			<version>${chronoslibs.version}</version>
+		</dependency>
+
+	</dependencies>
+</project>

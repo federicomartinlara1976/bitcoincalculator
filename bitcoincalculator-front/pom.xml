@@ -1,0 +1,179 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+  http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>net.bounceme.chronos</groupId>
+		<artifactId>bitcoincalculator</artifactId>
+		<version>${my.version}</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
+	<artifactId>bitcoincalculator-front</artifactId>
+	<packaging>war</packaging>
+	<name>Calculadora de bitcoins en tiempo real</name>
+	<url>http://bitcoincalculator.buscoloteria.com</url>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>net.bounceme.chronos.chronoslibs</groupId>
+			<artifactId>chronos-web-utils</artifactId>
+			<version>${chronoslibs.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
+			<artifactId>bitcoincalculator-core</artifactId>
+			<version>${my.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
+			<artifactId>bitcoincalculator-data</artifactId>
+			<version>${my.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
+			<artifactId>bitcoincalculator-theme</artifactId>
+			<version>${my.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.bounceme.chronos.chronoslibs</groupId>
+			<artifactId>chronos-jsf-components</artifactId>
+			<version>${chronoslibs.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>BitcoinCalculator</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/webapp/WEB-INF</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.1.1</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>jee6</id>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webappDirectory>${project.build.directory}/${project.build.finalName}-jee6</webappDirectory>
+							<classifier>jee6</classifier>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+
+			<dependencies>
+
+			</dependencies>
+		</profile>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-war-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>jee6</id>
+								<phase>package</phase>
+								<goals>
+									<goal>war</goal>
+								</goals>
+								<configuration>
+									<webappDirectory>${project.build.directory}/${project.build.finalName}-jee6</webappDirectory>
+									<classifier>jee6</classifier>
+									<packagingExcludes>WEB-INF/lib/javax.faces*</packagingExcludes>
+									<warSourceExcludes>WEB-INF/lib/javax.faces*</warSourceExcludes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>DES</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
+			<properties>
+				<stage>DES</stage>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>TEST</id>
+
+			<properties>
+				<stage>TEST</stage>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>PRO</id>
+
+			<properties>
+				<stage>PRO</stage>
+			</properties>
+		</profile>
+	</profiles>
+
+</project>

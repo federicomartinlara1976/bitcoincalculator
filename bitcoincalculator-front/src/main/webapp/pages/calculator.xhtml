@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:outputPanel styleClass="ui-fluid">
+		<p:messages id="msgs" autoUpdate="true" closable="true" />
+
+		<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+			style="margin-bottom:10px" cellpadding="5" layout="grid"
+			styleClass="ui-panelgrid-blank c100">
+			<h:outputLabel for="hashRateAmount"
+				value="#{res['calculator.tasaHash']}" />
+			<p:inputNumber id="hashRateAmount"
+				value="#{bitcoinCalculator.hashRateAmount}"
+				symbol=" #{bitcoinCalculator.hashRateMultiply}" symbolPosition="s"
+				decimalSeparator="," thousandSeparator=".">
+				<p:ajax event="blur"
+					listener="#{bitcoinCalculator.onChangeHashRate}" process="@form" />
+			</p:inputNumber>
+
+			<h:outputLabel for="hashRateMultiply" value="" />
+			<p:selectOneButton id="hashRateMultiply"
+				value="#{bitcoinCalculator.hashRateMultiply}" style="float:right;">
+				<f:selectItem itemLabel="MH/s" itemValue="MH" />
+				<f:selectItem itemLabel="GH/s" itemValue="GH" />
+				<f:selectItem itemLabel="TH/s" itemValue="TH" />
+
+				<p:ajax event="change"
+					listener="#{bitcoinCalculator.onChangeHashRate}"
+					update="hashRateAmount" process="@form" />
+			</p:selectOneButton>
+
+			<h:outputLabel value="#{res['calculator.dificultad']}" />
+			<h:outputText value="#{sessionBean.difficultyFactor}">
+				<f:convertNumber maxFractionDigits="4" groupingUsed="false" />
+			</h:outputText>
+
+			<h:outputLabel value="#{res['calculator.siguienteDificultad']}" />
+			<h:outputText value="#{sessionBean.nextDifficultyFactor}">
+				<f:convertNumber maxFractionDigits="4" groupingUsed="false" />
+			</h:outputText>
+
+			<h:outputLabel value="#{res['calculator.bcPerBlock']}" />
+			<h:outputText value="#{sessionBean.bcPerBlock}">
+				<f:convertNumber maxFractionDigits="2" groupingUsed="false" />
+			</h:outputText>
+
+			<h:outputLabel for="exchangeAmount"
+				value="#{res['calculator.tasaCambio']}" />
+			<p:inputNumber id="exchangeAmount"
+				value="#{bitcoinCalculator.exchangeAmount}"
+				symbol=" #{bitcoinCalculator.exchangeType}" symbolPosition="s"
+				decimalSeparator="," thousandSeparator="." readonly="true">
+			</p:inputNumber>
+
+			<h:outputLabel for="exchangeType" value="" />
+			<p:selectOneButton id="exchangeType"
+				value="#{bitcoinCalculator.exchangeType}" style="float:right;">
+				<f:selectItem itemLabel="USD" itemValue="USD" />
+				<f:selectItem itemLabel="EUR" itemValue="EUR" />
+
+				<p:ajax event="change"
+					listener="#{bitcoinCalculator.onChangeExchange}"
+					update="exchangeAmount" process="@form" />
+			</p:selectOneButton>
+
+
+			<h:outputLabel for="tradingInfo" value="" />
+			<p:outputPanel id="tradingInfo">
+				<p:panelGrid columns="2" styleClass="ui-panelgrid-blank c100">
+					<h:outputLabel value="#{res['calculator.currentTrader']}" />
+					<p:commandButton title="#{res['calculator.selectTrader']}"
+						icon="ui-icon-search" type="button"
+						onclick="PF('dlgSelectTrader').show();" />
+				</p:panelGrid>
+				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
+					<h:outputLink title="#{sessionBean.currentTrader.name}"
+						value="#{sessionBean.currentTrader.url}" target="_blank"
+						rendered="#{not empty sessionBean.currentTrader.url}">
+						<h:graphicImage value="#{sessionBean.currentTrader.icon}"
+							styleClass="c30" />
+					</h:outputLink>
+				</p:panelGrid>
+			</p:outputPanel>
+
+			<h:outputLabel for="botonera" value="" />
+			<p:panelGrid id="botonera" columns="2" style="margin-bottom:10px"
+				cellpadding="5" styleClass="ui-panelgrid-blank c100">
+				<p:commandButton value="#{res['calculator.calcular']}"
+					id="calculate" actionListener="#{bitcoinCalculator.calculate}"
+					update="resultados" styleClass="ui-priority-primary"
+					style="float:right;" />
+				<p:commandButton value="#{res['calculator.limpiar']}" id="reset"
+					actionListener="#{bitcoinCalculator.reset}"
+					update="hashRateAmount,hashRateMultiply,tradingInfo,exchangeType,exchangeAmount,resultados"
+					styleClass="ui-priority-primary" style="float:right;" />
+			</p:panelGrid>
+		</p:panelGrid>
+
+		<p:outputPanel id="resultados">
+			<p:panel header="#{res['calculator.resultados']}"
+				rendered="#{not empty bitcoinCalculator.thisDifficulty and not empty bitcoinCalculator.nextDifficulty}">
+				<p:panelGrid columns="1">
+					<p:dataTable id="thisDifficulty" var="difficulty"
+						value="#{bitcoinCalculator.thisDifficulty}"
+						paginatorPosition="top" paginatorTemplate="{Titulo}"
+						paginator="true" rows="10" style="margin-bottom:20px">
+
+						<f:facet name="{Titulo}">
+							<p:panelGrid styleClass="ui-panelgrid-blank" columns="4"
+								columnClasses="c15 hleft,c75 hleft,c05 hright,c05 hright">
+								<h:outputLabel value="#{res['calculator.dificultad']}:" />
+								<h:outputText value="#{sessionBean.difficultyFactor}">
+									<f:convertNumber maxFractionDigits="4" groupingUsed="false" />
+								</h:outputText>
+								<h:commandLink>
+									<i class="fa fa-file-excel-o"></i>
+									<p:dataExporter type="xls" target="thisDifficulty"
+										fileName="results" encoding="#{bitcoinCalculator.charset}" />
+								</h:commandLink>
+
+								<h:commandLink>
+									<i class="fa fa-file-pdf-o"></i>
+									<p:dataExporter type="pdf" target="thisDifficulty"
+										fileName="results" encoding="#{bitcoinCalculator.charset}" />
+								</h:commandLink>
+							</p:panelGrid>
+						</f:facet>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{res['calculator.time']}" />
+							</f:facet>
+							<h:outputText value="#{difficulty.time}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{res['calculator.coin']}" />
+							</f:facet>
+							<h:outputText value="#{difficulty.coin}">
+								<f:convertNumber maxFractionDigits="8" groupingUsed="false" />
+							</h:outputText>
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{bitcoinCalculator.exchangeType}" />
+							</f:facet>
+							<h:outputText value="#{difficulty.currency}">
+								<f:convertNumber maxFractionDigits="2" groupingUsed="false" />
+							</h:outputText>
+						</p:column>
+					</p:dataTable>
+
+					<p:dataTable id="nextDifficulty" var="difficulty"
+						value="#{bitcoinCalculator.nextDifficulty}"
+						paginatorPosition="top" paginatorTemplate="{Titulo}"
+						paginator="true" rows="10" style="margin-bottom:20px">
+
+						<f:facet name="{Titulo}">
+							<p:panelGrid columns="4" styleClass="ui-panelgrid-blank"
+								columnClasses="c15 hleft,c75 hleft,c05 hright,c05 hright">
+								<h:outputLabel value="#{res['calculator.siguienteDificultad']}:" />
+								<h:outputText value="#{sessionBean.nextDifficultyFactor}">
+									<f:convertNumber maxFractionDigits="4" groupingUsed="false" />
+								</h:outputText>
+								<h:commandLink>
+									<i class="fa fa-file-excel-o"></i>
+									<p:dataExporter type="xls" target="nextDifficulty"
+										fileName="results" encoding="#{bitcoinCalculator.charset}" />
+								</h:commandLink>
+
+								<h:commandLink>
+									<i class="fa fa-file-pdf-o"></i>
+									<p:dataExporter type="pdf" target="nextDifficulty"
+										fileName="results" encoding="#{bitcoinCalculator.charset}" />
+								</h:commandLink>
+							</p:panelGrid>
+						</f:facet>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{res['calculator.time']}" />
+							</f:facet>
+							<h:outputText value="#{difficulty.time}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{res['calculator.coin']}" />
+							</f:facet>
+							<h:outputText value="#{difficulty.coin}">
+								<f:convertNumber maxFractionDigits="8" groupingUsed="false" />
+							</h:outputText>
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#{bitcoinCalculator.exchangeType}" />
+							</f:facet>
+							<h:outputText value="#{difficulty.currency}">
+								<f:convertNumber maxFractionDigits="2" groupingUsed="false" />
+							</h:outputText>
+						</p:column>
+					</p:dataTable>
+
+				</p:panelGrid>
+			</p:panel>
+		</p:outputPanel>
+
+		<p:dialog id="traderSelector"
+			header="#{res['calculator.selectTrader']}"
+			widgetVar="dlgSelectTrader" modal="true">
+			<p:carousel value="#{bitcoinCalculator.traders}" var="trader"
+				itemStyle="text-align:center" numVisible="1" easing="easeOutBounce"
+				style="width:290px" circular="true">
+				<h:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
+					<p:commandLink id="selectTrader"
+						update="tradingInfo,exchangeAmount" disabled="#{trader.disabled}"
+						action="#{bitcoinCalculator.onSelectTrader}"
+						oncomplete="PF('dlgSelectTrader').hide();">
+						<f:setPropertyActionListener value="#{trader}"
+							target="#{sessionBean.currentTrader}" />
+						<h:graphicImage value="#{trader.icon}" styleClass="c90" />
+					</p:commandLink>
+				</h:panelGrid>
+			</p:carousel>
+		</p:dialog>
+
+	</p:outputPanel>
+
+</ui:composition>

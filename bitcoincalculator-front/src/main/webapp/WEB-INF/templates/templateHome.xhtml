@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<f:view locale="#{sessionBean.lang}">
+		<h:html lang="#{sessionBean.lang}">
+		<h:head>
+			<title>#{appBean.name}</title>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<meta name="viewport"
+				content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+			<link rel="stylesheet" type="text/css"
+				href="#{appBean.context}/css/styles.css" />
+
+			<ui:insert name="javascripts"></ui:insert>
+			<ui:insert name="styles"></ui:insert>
+		</h:head>
+
+		<h:body role="document">
+			<h:form prependId="false">
+				<p:sticky target="header" />
+
+				<p:ajaxStatus onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+
+				<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+					closable="false" resizable="false" showHeader="false">
+					<i class="fa fa-clock-o"></i>
+				</p:dialog>
+
+				<p:outputPanel id="main" styleClass="main" layout="block">
+
+					<p:panelGrid id="header" columns="2" columnClasses="c90,c10"
+						layout="grid" styleClass="header ui-panelgrid-blank c100">
+						<p:outputPanel>
+							<ui:insert name="pageTitle">Default content</ui:insert>
+						</p:outputPanel>
+						<p:selectOneMenu id="selectLang"
+							valueChangeListener="#{sessionBean.reset}"
+							value="#{sessionBean.lang}" onchange="submit()" effect="slide">
+							<f:selectItem itemLabel="Español" itemValue="es" />
+							<f:selectItem itemLabel="Ingles" itemValue="en" />
+							<f:selectItem itemLabel="Francés" itemValue="fr" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+
+					<p:outputPanel id="content" layout="block">
+						<p:panelGrid columns="3" columnClasses="c20,c60,c20" layout="grid"
+							styleClass="ui-panelgrid-blank c100">
+							<p:outputPanel id="publi1">
+								<p:panel id="banner">
+									<f:facet name="header">
+										<i class="fa fa-info-circle"></i>
+									</f:facet>
+
+									<p:outputPanel id="bannerContent" styleClass="content c100">
+										<ui:insert name="banner">Default content</ui:insert>
+									</p:outputPanel>
+								</p:panel>
+							</p:outputPanel>
+							<p:outputPanel id="contentPage">
+								<ui:insert name="body">Default content</ui:insert>
+							</p:outputPanel>
+							<p:outputPanel id="publi2"></p:outputPanel>
+						</p:panelGrid>
+					</p:outputPanel>
+
+					<p:panelGrid id="footer" columns="3" layout="grid"
+						styleClass="footer ui-panelgrid-blank c100">
+
+						<p:outputPanel styleClass="section c100" layout="block">
+							<p:panelGrid columns="1">
+								<h:outputText styleClass="white"
+									value="#{res['calculator.pie.texto1']}" />
+								<h:outputLink styleClass="white"
+									value="https://alloscomp.com/bitcoin/calculator"
+									target="_blank">Bitcoin Mining Calculator</h:outputLink>
+							</p:panelGrid>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="section c100" layout="block">
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="section c100" layout="block">
+							<p>
+								<h:outputText styleClass="white"
+									value="#{res['calculator.copyright']}" escape="true" />
+							</p>
+							<p:outputPanel styleClass="social">
+								<h:outputLink value="https://github.com/federicomartinlara1976">
+									<p:graphicImage
+										name="#{FacesContext.getCurrentInstance().getExternalContext()}/images/github-128.png"
+										width="24" />
+								</h:outputLink>
+							</p:outputPanel>
+
+						</p:outputPanel>
+					</p:panelGrid>
+
+				</p:outputPanel>
+			</h:form>
+		</h:body>
+		</h:html>
+	</f:view>
+</ui:composition>
