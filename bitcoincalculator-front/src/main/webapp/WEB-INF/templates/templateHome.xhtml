@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#{sessionBean.lang}"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -44,12 +44,12 @@
 						<p:outputPanel>
 							<ui:insert name="pageTitle">Default content</ui:insert>
 						</p:outputPanel>
-						<p:selectOneMenu id="selectLang"
-							valueChangeListener="#{sessionBean.reset}"
-							value="#{sessionBean.lang}" onchange="submit()" effect="slide">
+						<p:selectOneMenu id="selectLang" value="#{sessionBean.lang}">
 							<f:selectItem itemLabel="Español" itemValue="es" />
 							<f:selectItem itemLabel="Ingles" itemValue="en" />
 							<f:selectItem itemLabel="Francés" itemValue="fr" />
+							
+							<p:ajax event="change" listener="#{sessionBean.reset}" oncomplete="submit()"/>
 						</p:selectOneMenu>
 					</p:panelGrid>
 
