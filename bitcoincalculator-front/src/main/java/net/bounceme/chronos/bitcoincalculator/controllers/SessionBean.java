@@ -49,6 +49,7 @@ public class SessionBean extends BaseBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		try {
+			lang = "en";
 			difficultyFactor = calculatorService.getCurrentDifficultyFactor();
 			nextDifficultyFactor = calculatorService.getNextDifficultyFactor();
 			bcPerBlock = calculatorService.getCurrentBcPerBlock();
