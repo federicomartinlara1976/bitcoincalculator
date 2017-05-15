@@ -4,7 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	template="/layouts/templateHome.xhtml">
+	xmlns:chronos="http://chronos.componentes.jsf/composite"
+	template="/layouts/landing.xhtml">
 	
 	<ui:define name="ads">
 		<script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -16,17 +17,27 @@
 		</script>
 	</ui:define>
 
-	<ui:define name="pageTitle">
-		<h3>
-			<h:outputText value="#{res['calculator.title']}" />
-		</h3>
-	</ui:define>
-	
-	<ui:define name="banner">
-		<h:outputText value="#{pub['calculator.title']}"/>
-	</ui:define>
-
-	<ui:define name="body">
-		<ui:include src="/pages/calculator.xhtml" />
+	<ui:define name="content">
+		<chronos:landing menuPosition="sticky">
+			<f:facet name="header">
+				<h1>Cabecera</h1>
+			</f:facet>
+			<f:facet name="footer">
+				<h1>Pie</h1>
+			</f:facet>
+			
+			<chronos:landingSection id="section1" label="Section 1">
+				<h1>Features</h1>
+			</chronos:landingSection>
+			<chronos:landingSection id="section2" label="Section 2">
+				<h1>Events</h1>
+			</chronos:landingSection>
+			<chronos:landingSection id="section3" label="Section 3">
+				<h1>Pricing</h1>
+			</chronos:landingSection>
+			<chronos:landingSection id="section4" label="Section 4">
+				<h1>Video</h1>
+			</chronos:landingSection>
+		</chronos:landing>	
 	</ui:define>
 </ui:composition>

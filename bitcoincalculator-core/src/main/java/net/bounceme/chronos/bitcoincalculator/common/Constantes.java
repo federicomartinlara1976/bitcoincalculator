@@ -14,20 +14,6 @@ public class Constantes extends net.bounceme.chronos.utils.common.Constantes {
 		USD, EUR
 	}
 	
-	public static enum Locales {
-		es(Locale.getDefault()), en(Locale.ENGLISH), fr(Locale.FRANCE);
-		
-		private Locale locale;
-		
-		private Locales(Locale locale) {
-			this.locale = locale;
-		}
-		
-		public Locale value() {
-			return locale;
-		}
-	}
-	
 	public static enum HashRates {
 		MH(1000L), GH(1000000L), TH(1000000000L);
 

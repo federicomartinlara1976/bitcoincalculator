@@ -34,11 +34,15 @@
 			<artifactId>bitcoincalculator-data</artifactId>
 			<version>${my.version}</version>
 		</dependency>
-		
+
+		<!-- <dependency> <groupId>net.bounceme.chronos.bitcoincalculator</groupId> 
+			<artifactId>bitcoincalculator-theme</artifactId> <version>${my.version}</version> 
+			</dependency> -->
+
 		<dependency>
-			<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
-			<artifactId>bitcoincalculator-theme</artifactId>
-			<version>${my.version}</version>
+			<groupId>net.bounceme.chronos.apptest</groupId>
+			<artifactId>AppTest-theme</artifactId>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

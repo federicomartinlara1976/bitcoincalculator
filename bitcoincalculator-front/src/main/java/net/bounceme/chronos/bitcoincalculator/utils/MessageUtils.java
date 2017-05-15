@@ -2,7 +2,7 @@ package net.bounceme.chronos.bitcoincalculator.utils;
 
 import java.util.Locale;
 
-import net.bounceme.chronos.bitcoincalculator.common.Constantes.Locales;
+import net.bounceme.chronos.utils.common.Constantes.Locales;
 
 public class MessageUtils {
 
