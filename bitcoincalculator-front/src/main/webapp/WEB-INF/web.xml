@@ -71,6 +71,16 @@
 		<location>/faces/error.xhtml</location>
 	</error-page>
 	
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/faces/error.xhtml</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/faces/404.xhtml</location>
+	</error-page>
+	
 	<resource-ref>
 		<description>Bitcoin Datasource</description>
 		<res-ref-name>jdbc/bitcoinCalculatorDS</res-ref-name>
