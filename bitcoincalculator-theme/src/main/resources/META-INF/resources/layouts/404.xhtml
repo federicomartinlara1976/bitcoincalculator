@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:insert name="ads"></ui:insert>
+
+	<title>#{appBean.name}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+	<h:outputStylesheet library="primefaces-AppTest" name="layout-default.css" />
+	<h:outputStylesheet library="primefaces-AppTest" name="styles.css" />
+</h:head>
+
+<h:body role="document" styleClass="exception-body notfound">
+
+	<p:outputPanel styleClass="exception-panel"
+		layout="block">
+		<p:outputPanel styleClass="exception-panel-content" layout="block">
+			<p:graphicImage value="#{resource['primefaces-AppTest:images/404-icon.png']}"/>
+			<h1>404</h1>
+			<ui:insert name="msg"></ui:insert>
+		</p:outputPanel>
+
+		<p:outputPanel styleClass="exception-panel-footer" layout="block">
+			<ui:insert name="footer"></ui:insert>		
+		</p:outputPanel>
+	</p:outputPanel>
+</h:body>
+</html>

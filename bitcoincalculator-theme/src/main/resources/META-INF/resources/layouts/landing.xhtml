@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<ui:insert name="ads"></ui:insert>
+
+	<title>#{appBean.name}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+	<h:outputStylesheet library="primefaces-AppTest" name="layout-default.css" />
+	<h:outputStylesheet library="primefaces-AppTest" name="styles.css" />
+</h:head>
+
+<h:body role="document">
+	<ui:insert name="content"></ui:insert>
+</h:body>
+</html>
