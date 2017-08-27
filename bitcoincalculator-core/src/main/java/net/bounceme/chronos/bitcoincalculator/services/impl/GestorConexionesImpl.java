@@ -48,9 +48,7 @@ public class GestorConexionesImpl implements GestorConexiones {
 		JSONClient conn = pool.get();
 		try {
 			conn.setParameters(parameters);
-			String result = conn.get();
-			
-			return result;
+			return conn.get();
 		} catch (JSONClientException e) {
 			LOGGER.log(LogLevels.ERROR, e);
 			throw new ServiceException(e);

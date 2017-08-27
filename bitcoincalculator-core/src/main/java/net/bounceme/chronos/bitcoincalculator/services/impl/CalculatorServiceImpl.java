@@ -37,7 +37,7 @@ import net.bounceme.chronos.utils.mapping.JacksonConverter;
 public class CalculatorServiceImpl implements CalculatorService {
 	private static final Log LOGGER = LogFactory.getInstance().getLog(CalculatorServiceImpl.class);
 
-	private static enum Params {
+	private enum Params {
 		hashrate, exchange_rate
 	}
 
@@ -97,9 +97,10 @@ public class CalculatorServiceImpl implements CalculatorService {
 	}
 
 	@Override
+	// TODO - Integrar cache infinispan
 	public BitcoinCalculatorDTO getData(Long hashRate, BigDecimal exchangeAmount) throws ServiceException {
 		try {
-			Map<String, String> parameters = new HashMap<String, String>();
+			Map<String, String> parameters = new HashMap<>();
 			parameters.put(Params.hashrate.name(), hashRate.toString());
 			parameters.put(Params.exchange_rate.name(),
 					exchangeAmount.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
@@ -114,7 +115,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 
 	private void initializeData() {
 		try {
-			Map<String, String> parameters = new HashMap<String, String>();
+			Map<String, String> parameters = new HashMap<>();
 			parameters.put(Params.hashrate.name(), Constantes.INITIAL_HASHRATE);
 			String result = gestorConexiones.getData(parameters);
 			data = bitcoinConverter.reverseAssemble(result);
@@ -127,7 +128,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 	@Override
 	public List<Trader> getTraders() throws ServiceException {
 		try {
-			List<Trader> results = new ArrayList<Trader>();
+			List<Trader> results = new ArrayList<>();
 			Traders[] traders = traderFactory.getTraders();
 			for (Traders trader : traders) {
 				Trader t = traderFactory.getTrader(trader);
