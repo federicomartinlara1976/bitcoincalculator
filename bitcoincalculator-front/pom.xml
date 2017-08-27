@@ -36,9 +36,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>net.bounceme.chronos.apptest</groupId>
-			<artifactId>AppTest-theme</artifactId>
-			<version>1.0.Final</version>
+			<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
+			<artifactId>bitcoincalculator-theme</artifactId>
+			<version>${my.version}</version>
 		</dependency>
 
 		<dependency>

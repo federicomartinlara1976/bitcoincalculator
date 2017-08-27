@@ -5,37 +5,33 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.services.GestorConexiones;
-import net.bounceme.chronos.bitcoincalculator.services.PropertiesService;
-import net.bounceme.chronos.utils.exceptions.JSONClientException;
-import net.bounceme.chronos.utils.json.JSONClient;
-import net.bounceme.chronos.utils.json.JSONPoolSingleton;
 import net.bounceme.chronos.utils.log.Log;
 import net.bounceme.chronos.utils.log.Log.LogLevels;
 import net.bounceme.chronos.utils.log.LogFactory;
+import net.bounceme.chronos.utils.net.exceptions.JSONClientException;
+import net.bounceme.chronos.utils.net.json.JSONClient;
+import net.bounceme.chronos.utils.net.json.JSONPool;
 
 @Service(GestorConexiones.NAME)
 @Scope("singleton")
 public class GestorConexionesImpl implements GestorConexiones {
 	private static final Log LOGGER = LogFactory.getInstance().getLog(GestorConexionesImpl.class);
 
-	@Autowired
-	@Qualifier(PropertiesService.NAME)
-	private PropertiesService propertiesService;
+	@Value("${BitcoinCalculator.api}")
+	private String url;
 
-	private JSONPoolSingleton pool;
+	@Autowired
+	private JSONPool pool;
 
 	@PostConstruct
 	public void initializePool() {
 		try {
-			String url = propertiesService.getProperty("BitcoinCalculator.api");
-
-			pool = JSONPoolSingleton.getInstance();
 			pool.setLimit(5);
 			pool.initialize();
 			pool.broadcastURL(url);

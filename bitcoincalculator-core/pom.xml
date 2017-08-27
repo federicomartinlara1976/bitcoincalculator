@@ -61,7 +61,7 @@
 		
 		<dependency>
 			<groupId>net.bounceme.chronos.chronoslibs</groupId>
-			<artifactId>chronos-web-utils</artifactId>
+			<artifactId>chronos-net-utils</artifactId>
 			<version>1.0.Final</version>
 		</dependency>
 

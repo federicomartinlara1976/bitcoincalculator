@@ -7,10 +7,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 
-import net.bounceme.chronos.bitcoincalculator.services.PropertiesService;
 import net.bounceme.chronos.utils.jsf.controller.BaseBean;
 import net.bounceme.chronos.utils.log.Log;
 import net.bounceme.chronos.utils.log.Log.LogLevels;
@@ -33,11 +31,10 @@ public class AppBean extends BaseBean {
 
 	private static final Log LOGGER = LogFactory.getInstance().getLog(AppBean.class);
 
-	@Autowired
-	@Qualifier(PropertiesService.NAME)
-	private PropertiesService propertiesService;
-	
+	@Value("${BitcoinCalculator.name}")
 	private String name;
+	
+	@Value("${BitcoinCalculator.title}")
 	private String title;
 	private String context;
 	private ExternalContext externalContext;
@@ -49,9 +46,6 @@ public class AppBean extends BaseBean {
 	@PostConstruct
 	public void postContruct() {
 		try {
-			name = propertiesService.getProperty("BitcoinCalculator.name");
-			title = propertiesService.getProperty("BitcoinCalculator.title");
-			
 			HttpServletRequest request = getJsfHelper().getRequest();
 			context = request.getContextPath();
 			externalContext = FacesContext.getCurrentInstance().getExternalContext();

@@ -21,7 +21,6 @@ import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
 import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.GestorConexiones;
-import net.bounceme.chronos.bitcoincalculator.services.PropertiesService;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
 import net.bounceme.chronos.utils.exceptions.AssembleException;
 import net.bounceme.chronos.utils.log.Log;
@@ -45,10 +44,6 @@ public class CalculatorServiceImpl implements CalculatorService {
 	@Autowired
 	@Qualifier(GestorConexiones.NAME)
 	private GestorConexiones gestorConexiones;
-
-	@Autowired
-	@Qualifier(PropertiesService.NAME)
-	private PropertiesService propertiesService;
 
 	@Autowired
 	@Qualifier(TraderFactory.NAME)
