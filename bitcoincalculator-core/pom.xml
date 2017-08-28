@@ -64,6 +64,12 @@
 			<artifactId>chronos-net-utils</artifactId>
 			<version>1.0.Final</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>net.bounceme.chronos.chronoslibs</groupId>
+			<artifactId>chronos-cache-utils</artifactId>
+			<version>1.0.Final</version>
+		</dependency>
 
 		<!-- AspectJ dependencies -->
 		<dependency>

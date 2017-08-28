@@ -2,16 +2,19 @@ package net.bounceme.chronos.bitcoincalculator.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import net.bounceme.chronos.bitcoincalculator.common.Constantes;
 import net.bounceme.chronos.bitcoincalculator.dto.BitcoinCalculatorDTO;
 import net.bounceme.chronos.bitcoincalculator.dto.ExchangeDTO;
+import net.bounceme.chronos.utils.cache.config.RemoteCacheConfiguration;
 import net.bounceme.chronos.utils.mapping.JacksonConverter;
 import net.bounceme.chronos.utils.net.json.JSONPool;
 
 @Configuration
+@Import(RemoteCacheConfiguration.class)
 @PropertySource(value={"classpath:application.properties"})
 public class AppConfig {
 
