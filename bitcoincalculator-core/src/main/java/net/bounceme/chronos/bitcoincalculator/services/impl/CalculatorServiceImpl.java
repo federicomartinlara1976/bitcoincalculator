@@ -98,7 +98,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 	}
 
 	@Override
-	@Cacheable("bitcoin-calculator")
+	@Cacheable(AppConfig.CACHE)
 	public BitcoinCalculatorDTO getData(Long hashRate, BigDecimal exchangeAmount) throws ServiceException {
 		try {
 			Map<String, String> parameters = new HashMap<>();
