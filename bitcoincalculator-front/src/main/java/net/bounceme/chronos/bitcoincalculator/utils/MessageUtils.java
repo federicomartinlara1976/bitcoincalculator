@@ -16,4 +16,8 @@ public class MessageUtils {
 		return MessageProperties.getInstance().getString(key, locale, value);
 	}
 
+	public static String getMessage(String key, String lang, String... values) {
+		Locale locale = (Locales.valueOf(Locales.class, lang)).value();
+		return MessageProperties.getInstance().getString(key, locale, values);
+	}
 }

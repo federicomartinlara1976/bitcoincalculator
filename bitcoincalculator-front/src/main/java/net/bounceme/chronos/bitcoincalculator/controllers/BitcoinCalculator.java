@@ -155,9 +155,9 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 	private void setNewExchange() throws ServiceException {
 		ExchangeTypes eType = getEType(exchangeType);
-		exchangeAmount = getExchangeAmount(exchangeAmount, eType);
+		exchangeAmount = getExchangeAmount(exchangeAmount, eType).setScale(2, BigDecimal.ROUND_HALF_UP);
 		String message = MessageUtils.getMessage("calculator.tasaCambioSeleccionado", sessionBean.getLang(),
-				exchangeAmount.toString());
+				exchangeAmount.toString(), exchangeType);
 		addMessage(FacesMessage.SEVERITY_INFO, message);
 	}
 
@@ -180,7 +180,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 	private void calculateHashRate() {
 		Long hashRateNum = HashRates.valueOf(HashRates.class, hashRateMultiply).getMultiply();
-		hashRate = (new Double(hashRateAmount * hashRateNum)).longValue();
+		hashRate = (Double.valueOf(hashRateAmount * hashRateNum)).longValue();
 	}
 
 	private Boolean validateHash() {
@@ -214,7 +214,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	 * @return
 	 */
 	private List<CoinItem> buildThisFromResults(BitcoinCalculatorDTO dto) {
-		List<CoinItem> data = new ArrayList<CoinItem>();
+		List<CoinItem> data = new ArrayList<>();
 		try {
 			// Ganancia al día
 			CoinItem item = new CoinItem();
@@ -267,7 +267,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	 * @return
 	 */
 	private List<CoinItem> buildNextFromResults(BitcoinCalculatorDTO dto) {
-		List<CoinItem> data = new ArrayList<CoinItem>();
+		List<CoinItem> data = new ArrayList<>();
 		try {
 			// Ganancia al día
 			CoinItem item = new CoinItem();
