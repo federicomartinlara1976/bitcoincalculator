@@ -18,7 +18,7 @@
     <url>http://bitcoincalculator.salasierra12.es</url>
 
     <properties>
-    	<jdk.version>1.7</jdk.version>
+    	<jdk.version>1.8</jdk.version>
     	<my.version>1.2-SNAPSHOT</my.version>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<project.build.locale>es_ES</project.build.locale>
@@ -140,40 +140,6 @@
     </dependencies>
     
     <profiles>
-    	<profile>
-            <id>MYSQL</id>
-            
-            <properties>
-                <mysql.version>5.1.6</mysql.version>
-            </properties>
-            
-            <dependencies>
-                <dependency>
-                    <groupId>mysql</groupId>
-                    <artifactId>mysql-connector-java</artifactId>
-                    <version>${mysql.version}</version>
-                </dependency>
-            </dependencies>
-        </profile>
-        
-        <profile>
-            <id>POSTGRESQL</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            
-            <properties>
-                <postgresql.version>9.4.1207</postgresql.version>
-            </properties>
-            
-            <dependencies>
-                <dependency>
-					<groupId>org.postgresql</groupId>
-					<artifactId>postgresql</artifactId>
-					<version>${postgresql.version}</version>
-				</dependency>
-            </dependencies>
-        </profile>
         
     	<profile>
     		<id>DEVELOP</id>
@@ -184,14 +150,7 @@
     		<properties>
     			<debug.mode>true</debug.mode>
     			<logs.root.level>INFO</logs.root.level>
-    			<logs.front.file>logs/buscoloteria-front.log</logs.front.file>
-    			<logs.components.file>logs/buscoloteria-components.log</logs.components.file>
-    			<logs.core.file>logs/buscoloteria-core.log</logs.core.file>
-    			<logs.data.file>logs/buscoloteria-data.log</logs.data.file>
-    			<logs.generator.file>logs/buscoloteria-generator.log</logs.generator.file>
-    			<logs.jms.file>logs/buscoloteria-jms.log</logs.jms.file>
-    			<logs.rest.file>logs/buscoloteria-rest.log</logs.rest.file>
-    			<logs.theme.file>logs/buscoloteria-theme.log</logs.theme.file>
+    			<logs.file>logs/bitcoin-calculator.log</logs.front.file>
     		</properties>
     	</profile>
     	<profile>
@@ -200,14 +159,7 @@
     		<properties>
     			<debug.mode>false</debug.mode>
     			<logs.root.level>ERROR</logs.root.level>
-    			<logs.front.file>/var/log/tomcat/buscoloteria-front.log</logs.front.file>
-    			<logs.components.file>/var/log/tomcat/buscoloteria-components.log</logs.components.file>
-    			<logs.core.file>/var/log/tomcat/buscoloteria-core.log</logs.core.file>
-    			<logs.data.file>/var/log/tomcat/buscoloteria-data.log</logs.data.file>
-    			<logs.generator.file>/var/log/tomcat/buscoloteria-generator.log</logs.generator.file>
-    			<logs.jms.file>/var/log/tomcat/buscoloteria-jms.log</logs.jms.file>
-    			<logs.rest.file>/var/log/tomcat/buscoloteria-rest.log</logs.rest.file>
-    			<logs.theme.file>/var/log/tomcat/buscoloteria-theme.log</logs.theme.file>
+    			<logs.file>/var/log/tomcat/bitcoin-calculator.log</logs.front.file>
     		</properties>
     	</profile>
     </profiles>
