@@ -2,13 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.4.RELEASE</version>
-        <relativePath /> <!-- lookup parent from repository -->
-    </parent>
-	
     <groupId>net.bounceme.chronos</groupId>
     <artifactId>bitcoincalculator</artifactId>
     <version>${my.version}</version>
@@ -150,7 +143,7 @@
     		<properties>
     			<debug.mode>true</debug.mode>
     			<logs.root.level>INFO</logs.root.level>
-    			<logs.file>logs/bitcoin-calculator.log</logs.front.file>
+    			<logs.file>logs/bitcoin-calculator.log</logs.file>
     		</properties>
     	</profile>
     	<profile>
@@ -159,7 +152,7 @@
     		<properties>
     			<debug.mode>false</debug.mode>
     			<logs.root.level>ERROR</logs.root.level>
-    			<logs.file>/var/log/tomcat/bitcoin-calculator.log</logs.front.file>
+    			<logs.file>/var/log/tomcat/bitcoin-calculator.log</logs.file>
     		</properties>
     	</profile>
     </profiles>
