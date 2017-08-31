@@ -16,8 +16,10 @@ import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
 import net.bounceme.chronos.bitcoincalculator.utils.MessageUtils;
-import net.bounceme.chronos.utils.jsf.JSFContextHelper;
 import net.bounceme.chronos.utils.jsf.controller.BaseBean;
+import net.bounceme.chronos.utils.log.Log;
+import net.bounceme.chronos.utils.log.LogFactory;
+import net.bounceme.chronos.utils.log.Log.LogLevels;
 
 @ManagedBean(name = SessionBean.NAME)
 @SessionScoped
@@ -27,12 +29,14 @@ public class SessionBean extends BaseBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4764455202310413427L;
+	
+	private static final Log LOGGER = LogFactory.getInstance().getLog(SessionBean.class);
 
 	public static final String NAME = "sessionBean";
 
 	@Autowired
 	@Qualifier(CalculatorService.NAME)
-	private CalculatorService calculatorService;
+	private transient CalculatorService calculatorService;
 
 	private String lang;
 
@@ -42,9 +46,9 @@ public class SessionBean extends BaseBean implements Serializable {
 
 	private BigDecimal bcPerBlock;
 
-	private Trader prevTrader;
+	private transient Trader prevTrader;
 	
-	private Trader currentTrader;
+	private transient Trader currentTrader;
 	
 	@PostConstruct
 	public void init() {
@@ -62,7 +66,7 @@ public class SessionBean extends BaseBean implements Serializable {
 	}
 
 	public void reset() {
-		((JSFContextHelper) getJsfHelper()).getFacesContext().getViewRoot().getViewMap().remove("bitcoinCalculator");
+		LOGGER.log(LogLevels.DEBUG, "Change lang to " + lang);
 	}
 
 	public String getLang() {

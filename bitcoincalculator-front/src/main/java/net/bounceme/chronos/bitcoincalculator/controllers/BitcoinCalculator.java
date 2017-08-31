@@ -51,11 +51,11 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 	@Autowired
 	@Qualifier(CalculatorService.NAME)
-	private CalculatorService calculatorService;
+	private transient CalculatorService calculatorService;
 
 	@Autowired
 	@Qualifier(ExchangeService.NAME)
-	private ExchangeService exchangeService;
+	private transient ExchangeService exchangeService;
 
 	private Double hashRateAmount;
 
@@ -71,20 +71,41 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 	private String exchangeRateSource;
 
-	private List<Trader> traders;
+	private transient List<Trader> traders;
 
 	private List<CoinItem> thisDifficulty;
 
 	private List<CoinItem> nextDifficulty;
 
 	private ExchangeTypes lastType;
-
-	public BitcoinCalculator() {
-	}
-
+	
+	/**
+	 * 
+	 */
 	@PostConstruct
-	public void init() {
-		initVars();
+	public void initVars() {
+		try {
+			hashRateMultiply = HashRates.GH.name();
+			hashRateAmount = 0.0;
+			hashRate = 0L;
+			lastType = ExchangeTypes.USD;
+			exchangeType = lastType.name();
+			
+			exchangeAmount = calculatorService.getCurrentExchange();
+			exchangeRateSource = calculatorService.getCurrentExchangeRateSource();
+			exchange = BigDecimal.ZERO;
+			traders = calculatorService.getTraders();
+			if (thisDifficulty != null) {
+				thisDifficulty.clear();
+			}
+			if (nextDifficulty != null) {
+				nextDifficulty.clear();
+			}
+		}
+		catch (ServiceException e) {
+			String message = MessageUtils.getMessage("calculator.noTraders", sessionBean.getLang());
+			addMessage(FacesMessage.SEVERITY_ERROR, message);
+		}
 	}
 
 	public void setSessionBean(SessionBean sessionBean) {
@@ -92,6 +113,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	}
 
 	public void calculate(ActionEvent actionEvent) {
+		LOGGER.log(LogLevels.DEBUG, actionEvent);
 		try {
 			if (validateHash() && validateExchange()) {
 				calculateHashRate();
@@ -107,6 +129,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	}
 
 	public void reset(ActionEvent actionEvent) {
+		LOGGER.log(LogLevels.DEBUG, actionEvent);
 		try {
 			initVars();
 			sessionBean.setCurrentTrader(calculatorService.getTrader(Traders.Default));
@@ -310,33 +333,6 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			addErrorMessage(e);
 		}
 		return data;
-	}
-
-	/**
-	 * 
-	 */
-	private void initVars() {
-		try {
-			hashRateMultiply = HashRates.GH.name();
-			hashRateAmount = 0.0;
-			hashRate = 0L;
-			lastType = ExchangeTypes.USD;
-			exchangeType = lastType.name();
-			exchangeAmount = calculatorService.getCurrentExchange();
-			exchangeRateSource = calculatorService.getCurrentExchangeRateSource();
-			exchange = BigDecimal.ZERO;
-			traders = calculatorService.getTraders();
-			if (thisDifficulty != null) {
-				thisDifficulty.clear();
-			}
-			if (nextDifficulty != null) {
-				nextDifficulty.clear();
-			}
-		}
-		catch (ServiceException e) {
-			String message = MessageUtils.getMessage("calculator.noTraders", sessionBean.getLang());
-			addMessage(FacesMessage.SEVERITY_ERROR, message);
-		}
 	}
 
 	/**
