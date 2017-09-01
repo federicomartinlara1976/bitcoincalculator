@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -16,10 +15,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import net.bounceme.chronos.bitcoincalculator.common.Constantes.Traders;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
+import net.bounceme.chronos.bitcoincalculator.messages.MessageProperties;
+import net.bounceme.chronos.bitcoincalculator.messages.PubliProperties;
 import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
-import net.bounceme.chronos.bitcoincalculator.utils.MessageUtils;
-import net.bounceme.chronos.bitcoincalculator.utils.PubliProperties;
 import net.bounceme.chronos.utils.jsf.controller.BaseBean;
 import net.bounceme.chronos.utils.log.Log;
 import net.bounceme.chronos.utils.log.Log.LogLevels;
@@ -41,6 +40,12 @@ public class SessionBean extends BaseBean implements Serializable {
 	@Autowired
 	@Qualifier(CalculatorService.NAME)
 	private transient CalculatorService calculatorService;
+	
+	@Autowired
+	private transient PubliProperties publiProperties;
+	
+	@Autowired
+	private transient MessageProperties messageProperties;
 
 	private String lang;
 
@@ -64,7 +69,7 @@ public class SessionBean extends BaseBean implements Serializable {
 			currentTrader = calculatorService.getTrader(Traders.Default);
 		}
 		catch (ServiceException e) {
-			String message = MessageUtils.getMessage("calculator.noTraders", lang);
+			String message = messageProperties.getString("calculator.noTraders", lang);
 			addMessage(FacesMessage.SEVERITY_ERROR, message);
 		}
 	}
@@ -139,11 +144,10 @@ public class SessionBean extends BaseBean implements Serializable {
 	
 	public List<String> getBanners() {
 		List<String> banners = new ArrayList<>();
-		PubliProperties publiProperties = PubliProperties.getInstance();
 		
-		banners.add(publiProperties.getString("index.banner.1", Locale.forLanguageTag(lang)));
-		banners.add(publiProperties.getString("index.banner.2", Locale.forLanguageTag(lang)));
-		banners.add(publiProperties.getString("index.banner.3", Locale.forLanguageTag(lang)));
+		banners.add(publiProperties.getString("index.banner.1", lang));
+		banners.add(publiProperties.getString("index.banner.2", lang));
+		banners.add(publiProperties.getString("index.banner.3", lang));
 		
 		return banners;
 	}

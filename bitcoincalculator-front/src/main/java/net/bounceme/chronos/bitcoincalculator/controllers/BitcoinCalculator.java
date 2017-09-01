@@ -23,11 +23,11 @@ import net.bounceme.chronos.bitcoincalculator.common.Constantes.Traders;
 import net.bounceme.chronos.bitcoincalculator.dto.BitcoinCalculatorDTO;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
+import net.bounceme.chronos.bitcoincalculator.messages.MessageProperties;
 import net.bounceme.chronos.bitcoincalculator.model.CoinItem;
 import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.ExchangeService;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
-import net.bounceme.chronos.bitcoincalculator.utils.MessageUtils;
 import net.bounceme.chronos.utils.jsf.controller.BaseBean;
 import net.bounceme.chronos.utils.log.Log;
 import net.bounceme.chronos.utils.log.Log.LogLevels;
@@ -56,6 +56,9 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	@Autowired
 	@Qualifier(ExchangeService.NAME)
 	private transient ExchangeService exchangeService;
+	
+	@Autowired
+	private transient MessageProperties messageProperties;
 
 	private Double hashRateAmount;
 
@@ -103,7 +106,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			}
 		}
 		catch (ServiceException e) {
-			String message = MessageUtils.getMessage("calculator.noTraders", sessionBean.getLang());
+			String message = messageProperties.getString("calculator.noTraders", sessionBean.getLang());
 			addMessage(FacesMessage.SEVERITY_ERROR, message);
 		}
 	}
@@ -143,7 +146,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	public void onChangeHashRate() {
 		if (validateHash()) {
 			calculateHashRate();
-			String message = MessageUtils.getMessage("calculator.tasaSeleccionada", sessionBean.getLang(),
+			String message = messageProperties.getString("calculator.tasaSeleccionada", sessionBean.getLang(),
 					hashRate.toString());
 			addMessage(FacesMessage.SEVERITY_INFO, message);
 		}
@@ -179,7 +182,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	private void setNewExchange() throws ServiceException {
 		ExchangeTypes eType = getEType(exchangeType);
 		exchangeAmount = getExchangeAmount(exchangeAmount, eType).setScale(2, BigDecimal.ROUND_HALF_UP);
-		String message = MessageUtils.getMessage("calculator.tasaCambioSeleccionado", sessionBean.getLang(),
+		String message = messageProperties.getString("calculator.tasaCambioSeleccionado", sessionBean.getLang(),
 				exchangeAmount.toString(), exchangeType);
 		addMessage(FacesMessage.SEVERITY_INFO, message);
 	}
@@ -208,13 +211,13 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 	private Boolean validateHash() {
 		if (StringUtils.isEmpty(hashRateMultiply)) {
-			String message = MessageUtils.getMessage("calculator.medidaHashVacia", sessionBean.getLang());
+			String message = messageProperties.getString("calculator.medidaHashVacia", sessionBean.getLang());
 			addMessage(FacesMessage.SEVERITY_WARN, message);
 			return Boolean.FALSE;
 		}
 
 		if (hashRateAmount == 0L) {
-			String message = MessageUtils.getMessage("calculator.tasaHashVacia", sessionBean.getLang());
+			String message = messageProperties.getString("calculator.tasaHashVacia", sessionBean.getLang());
 			addMessage(FacesMessage.SEVERITY_WARN, message);
 			return Boolean.FALSE;
 		}
@@ -224,7 +227,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 	private Boolean validateExchange() {
 		if (StringUtils.isEmpty(exchangeType)) {
-			String message = MessageUtils.getMessage("calculator.tipoCambioVacio", sessionBean.getLang());
+			String message = messageProperties.getString("calculator.tipoCambioVacio", sessionBean.getLang());
 			addMessage(FacesMessage.SEVERITY_WARN, message);
 			return Boolean.FALSE;
 		}
@@ -241,7 +244,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 		try {
 			// Ganancia al día
 			CoinItem item = new CoinItem();
-			String time = MessageUtils.getMessage("calculator.porDia", sessionBean.getLang());
+			String time = messageProperties.getString("calculator.porDia", sessionBean.getLang());
 			BigDecimal coins24 = dto.getCoins_per_hour().multiply(Constantes.DAY_TIME_FACTOR);
 			BigDecimal currency24 = dto.getDollars_per_hour().multiply(Constantes.DAY_TIME_FACTOR)
 					.multiply(Constantes.DOLLAR_MULTIPLY_FACTOR);
@@ -258,7 +261,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 			// Ganancia a la semana
 			item = new CoinItem();
-			time = MessageUtils.getMessage("calculator.porSemana", sessionBean.getLang());
+			time = messageProperties.getString("calculator.porSemana", sessionBean.getLang());
 			BigDecimal coinsSem = coins24.multiply(Constantes.WEEK_TIME_FACTOR);
 			BigDecimal currencySem = currency24.multiply(Constantes.WEEK_TIME_FACTOR);
 			item.setTime(time);
@@ -268,7 +271,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 			// Ganancia al mes
 			item = new CoinItem();
-			time = MessageUtils.getMessage("calculator.porMes", sessionBean.getLang());
+			time = messageProperties.getString("calculator.porMes", sessionBean.getLang());
 			BigDecimal coinsMes = coins24.multiply(Constantes.AVERAGE_MONTH_TIME_FACTOR);
 			BigDecimal currencyMes = currency24.multiply(Constantes.AVERAGE_MONTH_TIME_FACTOR);
 			item.setTime(time);
@@ -294,7 +297,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 		try {
 			// Ganancia al día
 			CoinItem item = new CoinItem();
-			String time = MessageUtils.getMessage("calculator.porDia", sessionBean.getLang());
+			String time = messageProperties.getString("calculator.porDia", sessionBean.getLang());
 			BigDecimal coins24 = dto.getCoins_per_hour_after_retarget().multiply(Constantes.DAY_TIME_FACTOR);
 			BigDecimal currency24 = dto.getDollars_per_hour_after_retarget().multiply(Constantes.DAY_TIME_FACTOR)
 					.multiply(Constantes.DOLLAR_MULTIPLY_FACTOR);
@@ -311,7 +314,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 			// Ganancia a la semana
 			item = new CoinItem();
-			time = MessageUtils.getMessage("calculator.porSemana", sessionBean.getLang());
+			time = messageProperties.getString("calculator.porSemana", sessionBean.getLang());
 			BigDecimal coinsSem = coins24.multiply(Constantes.WEEK_TIME_FACTOR);
 			BigDecimal currencySem = currency24.multiply(Constantes.WEEK_TIME_FACTOR);
 			item.setTime(time);
@@ -321,7 +324,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 			// Ganancia al mes
 			item = new CoinItem();
-			time = MessageUtils.getMessage("calculator.porMes", sessionBean.getLang());
+			time = messageProperties.getString("calculator.porMes", sessionBean.getLang());
 			BigDecimal coinsMes = coins24.multiply(Constantes.AVERAGE_MONTH_TIME_FACTOR);
 			BigDecimal currencyMes = currency24.multiply(Constantes.AVERAGE_MONTH_TIME_FACTOR);
 			item.setTime(time);

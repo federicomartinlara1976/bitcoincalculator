@@ -1,9 +1,11 @@
-package net.bounceme.chronos.bitcoincalculator.utils;
+package net.bounceme.chronos.bitcoincalculator.messages;
 
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+
+import net.bounceme.chronos.utils.common.Constantes.Locales;
 
 public class BaseProperties {
 	protected String bundleName;
@@ -14,9 +16,9 @@ public class BaseProperties {
 	 * @param key
 	 * @return
 	 */
-	public String getString(String key, Locale locale) {
+	public String getString(String key, String lang) {
 		try {
-			resourceBundle = ResourceBundle.getBundle(bundleName, locale);
+			loadBundle(lang);
 			return resourceBundle.getString(key);
 		}
 		catch (MissingResourceException e) {
@@ -24,13 +26,18 @@ public class BaseProperties {
 		}
 	}
 	
-	public String getString(String key, Locale locale, String... arguments) {
+	public String getString(String key, String lang, String... arguments) {
 		try {
-			resourceBundle = ResourceBundle.getBundle(bundleName, locale);
+			loadBundle(lang);
 			return MessageFormat.format(resourceBundle.getString(key), arguments);
 		}
 		catch (MissingResourceException e) {
 			return '!' + key + '!';
 		}
+	}
+	
+	private void loadBundle(String lang) {
+		Locale locale = (Locales.valueOf(Locales.class, lang)).value();
+		resourceBundle = ResourceBundle.getBundle(bundleName, locale);
 	}
 }
