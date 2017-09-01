@@ -2,6 +2,9 @@ package net.bounceme.chronos.bitcoincalculator.controllers;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -16,10 +19,11 @@ import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
 import net.bounceme.chronos.bitcoincalculator.utils.MessageUtils;
+import net.bounceme.chronos.bitcoincalculator.utils.PubliProperties;
 import net.bounceme.chronos.utils.jsf.controller.BaseBean;
 import net.bounceme.chronos.utils.log.Log;
-import net.bounceme.chronos.utils.log.LogFactory;
 import net.bounceme.chronos.utils.log.Log.LogLevels;
+import net.bounceme.chronos.utils.log.LogFactory;
 
 @ManagedBean(name = SessionBean.NAME)
 @SessionScoped
@@ -131,5 +135,16 @@ public class SessionBean extends BaseBean implements Serializable {
 	 */
 	public void setPrevTrader(Trader prevTrader) {
 		this.prevTrader = prevTrader;
+	}
+	
+	public List<String> getBanners() {
+		List<String> banners = new ArrayList<>();
+		PubliProperties publiProperties = PubliProperties.getInstance();
+		
+		banners.add(publiProperties.getString("index.banner.1", Locale.forLanguageTag(lang)));
+		banners.add(publiProperties.getString("index.banner.2", Locale.forLanguageTag(lang)));
+		banners.add(publiProperties.getString("index.banner.3", Locale.forLanguageTag(lang)));
+		
+		return banners;
 	}
 }

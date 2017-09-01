@@ -6,26 +6,40 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:chronos="http://chronos.componentes.jsf/composite"
 	template="/layouts/landing.xhtml">
-	
+
 	<ui:define name="ads">
 		<script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<script>
-  			(adsbygoogle = window.adsbygoogle || []).push({
-    				google_ad_client: "ca-pub-5308962568744638",
-    				enable_page_level_ads: true
-  			});
+			(adsbygoogle = window.adsbygoogle || []).push({
+				google_ad_client : "ca-pub-5308962568744638",
+				enable_page_level_ads : true
+			});
 		</script>
 	</ui:define>
 
 	<ui:define name="content">
 		<chronos:landing menuPosition="sticky" styleClass="home">
 			<f:facet name="header">
-				<h1>BitcoinCalculator</h1>
+				<p:dataGrid var="banner" value="#{sessionBean.banners}" columns="3"
+					layout="grid" rows="1" id="banners">
+
+					<f:facet name="header">
+            			<h1>BitcoinCalculator</h1>
+        			</f:facet>
+
+					<p:panel style="text-align:center">
+						<h:panelGrid columns="1" style="width:100%">
+							<h:outputText value="#{banner}" />
+						</h:panelGrid>
+					</p:panel>
+
+				</p:dataGrid>
+				
 			</f:facet>
 			<f:facet name="footer">
 				<h1>Pie</h1>
 			</f:facet>
-			
+
 			<chronos:landingSection id="section1" label="Section 1" link="false">
 				<h1>Features</h1>
 			</chronos:landingSection>
@@ -38,6 +52,6 @@
 			<chronos:landingSection id="section4" label="Video">
 				<h1>Video</h1>
 			</chronos:landingSection>
-		</chronos:landing>	
+		</chronos:landing>
 	</ui:define>
 </ui:composition>
