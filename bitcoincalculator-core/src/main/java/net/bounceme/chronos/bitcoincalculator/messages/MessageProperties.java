@@ -1,10 +1,12 @@
 package net.bounceme.chronos.bitcoincalculator.messages;
 
+import net.bounceme.chronos.utils.messages.MessageBaseProperties;
+
 /**
  * @author frederik
  *
  */
-public class MessageProperties extends BaseProperties {
+public class MessageProperties extends MessageBaseProperties {
 
 	public MessageProperties() {
 		super();

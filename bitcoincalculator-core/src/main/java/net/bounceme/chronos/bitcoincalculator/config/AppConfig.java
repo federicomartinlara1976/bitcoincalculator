@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 import net.bounceme.chronos.bitcoincalculator.common.Constantes;
 import net.bounceme.chronos.bitcoincalculator.dto.BitcoinCalculatorDTO;
@@ -19,7 +18,6 @@ import net.bounceme.chronos.utils.net.json.JSONPool;
 @Configuration
 @Import(RemoteCacheConfiguration.class)
 @PropertySource(value={"classpath:application.properties"})
-@EnableScheduling
 public class AppConfig {
 	public static final String BITCOIN_CONVERTER = "bitcoinConverter";
 	
