@@ -5,8 +5,6 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import net.bounceme.chronos.utils.common.Constantes.Locales;
-
 public class BaseProperties {
 	protected String bundleName;
 	
@@ -16,7 +14,7 @@ public class BaseProperties {
 	 * @param key
 	 * @return
 	 */
-	public String getString(String key, String lang) {
+	public String getString(String key, Locale lang) {
 		try {
 			loadBundle(lang);
 			return resourceBundle.getString(key);
@@ -26,7 +24,7 @@ public class BaseProperties {
 		}
 	}
 	
-	public String getString(String key, String lang, String... arguments) {
+	public String getString(String key, Locale lang, String... arguments) {
 		try {
 			loadBundle(lang);
 			return MessageFormat.format(resourceBundle.getString(key), arguments);
@@ -36,8 +34,7 @@ public class BaseProperties {
 		}
 	}
 	
-	private void loadBundle(String lang) {
-		Locale locale = (Locales.valueOf(Locales.class, lang)).value();
-		resourceBundle = ResourceBundle.getBundle(bundleName, locale);
+	private void loadBundle(Locale lang) {
+		resourceBundle = ResourceBundle.getBundle(bundleName, lang);
 	}
 }

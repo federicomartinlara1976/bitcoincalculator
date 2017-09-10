@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,9 +22,6 @@ import net.bounceme.chronos.bitcoincalculator.messages.PubliProperties;
 import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
 import net.bounceme.chronos.utils.jsf.controller.BaseBean;
-import net.bounceme.chronos.utils.log.Log;
-import net.bounceme.chronos.utils.log.Log.LogLevels;
-import net.bounceme.chronos.utils.log.LogFactory;
 
 @ManagedBean(name = SessionBean.NAME)
 @SessionScoped
@@ -33,8 +32,6 @@ public class SessionBean extends BaseBean implements Serializable {
 	 */
 	private static final long serialVersionUID = -4764455202310413427L;
 	
-	private static final Log LOGGER = LogFactory.getInstance().getLog(SessionBean.class);
-
 	public static final String NAME = "sessionBean";
 
 	@Autowired
@@ -47,7 +44,7 @@ public class SessionBean extends BaseBean implements Serializable {
 	@Autowired
 	private transient MessageProperties messageProperties;
 
-	private String lang;
+	private Locale lang;
 
 	private Double difficultyFactor;
 
@@ -62,7 +59,7 @@ public class SessionBean extends BaseBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		try {
-			lang = "en";
+			lang = FacesContext.getCurrentInstance().getApplication().getDefaultLocale();
 			difficultyFactor = calculatorService.getCurrentDifficultyFactor();
 			nextDifficultyFactor = calculatorService.getNextDifficultyFactor();
 			bcPerBlock = calculatorService.getCurrentBcPerBlock();
@@ -72,18 +69,6 @@ public class SessionBean extends BaseBean implements Serializable {
 			String message = messageProperties.getString("calculator.noTraders", lang);
 			addMessage(FacesMessage.SEVERITY_ERROR, message);
 		}
-	}
-
-	public void reset() {
-		LOGGER.log(LogLevels.DEBUG, "Change lang to " + lang);
-	}
-
-	public String getLang() {
-		return lang;
-	}
-
-	public void setLang(String lang) {
-		this.lang = lang;
 	}
 
 	public Double getDifficultyFactor() {
@@ -141,7 +126,7 @@ public class SessionBean extends BaseBean implements Serializable {
 	public void setPrevTrader(Trader prevTrader) {
 		this.prevTrader = prevTrader;
 	}
-	
+
 	public List<String> getBanners() {
 		List<String> banners = new ArrayList<>();
 		
@@ -150,5 +135,19 @@ public class SessionBean extends BaseBean implements Serializable {
 		banners.add(publiProperties.getString("index.banner.3", lang));
 		
 		return banners;
+	}
+
+	/**
+	 * @return the lang
+	 */
+	public synchronized Locale getLang() {
+		return lang;
+	}
+
+	/**
+	 * @param lang the lang to set
+	 */
+	public synchronized void setLang(Locale lang) {
+		this.lang = lang;
 	}
 }
