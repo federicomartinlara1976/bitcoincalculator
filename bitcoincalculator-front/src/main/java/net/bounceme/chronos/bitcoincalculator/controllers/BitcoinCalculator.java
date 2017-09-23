@@ -234,19 +234,27 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 		return Boolean.TRUE;
 	}
+	
+	private List<CoinItem> buildThisFromResults(BitcoinCalculatorDTO dto) {
+		return buildEarnings(dto.getCoins_per_hour(), dto.getDollars_per_hour());
+	}
+	
+	private List<CoinItem> buildNextFromResults(BitcoinCalculatorDTO dto) {
+		return buildEarnings(dto.getCoins_per_hour_after_retarget(), dto.getDollars_per_hour_after_retarget());
+	}
 
 	/**
 	 * @param resultados2
 	 * @return
 	 */
-	private List<CoinItem> buildThisFromResults(BitcoinCalculatorDTO dto) {
+	private List<CoinItem> buildEarnings(BigDecimal coins, BigDecimal dollars) {
 		List<CoinItem> data = new ArrayList<>();
 		try {
 			// Ganancia al día
 			CoinItem item = new CoinItem();
 			String time = messageProperties.getString("calculator.porDia", sessionBean.getLang());
-			BigDecimal coins24 = dto.getCoins_per_hour().multiply(Constantes.DAY_TIME_FACTOR);
-			BigDecimal currency24 = dto.getDollars_per_hour().multiply(Constantes.DAY_TIME_FACTOR)
+			BigDecimal coins24 = coins.multiply(Constantes.DAY_TIME_FACTOR);
+			BigDecimal currency24 = dollars.multiply(Constantes.DAY_TIME_FACTOR)
 					.multiply(Constantes.DOLLAR_MULTIPLY_FACTOR);
 
 			ExchangeTypes eType = getEType(exchangeType);
@@ -282,56 +290,6 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			return data;
 		}
 		catch (ServiceException e) {
-			LOGGER.log(LogLevels.ERROR, e);
-			addErrorMessage(e);
-		}
-		return data;
-	}
-
-	/**
-	 * @param resultados2
-	 * @return
-	 */
-	private List<CoinItem> buildNextFromResults(BitcoinCalculatorDTO dto) {
-		List<CoinItem> data = new ArrayList<>();
-		try {
-			// Ganancia al día
-			CoinItem item = new CoinItem();
-			String time = messageProperties.getString("calculator.porDia", sessionBean.getLang());
-			BigDecimal coins24 = dto.getCoins_per_hour_after_retarget().multiply(Constantes.DAY_TIME_FACTOR);
-			BigDecimal currency24 = dto.getDollars_per_hour_after_retarget().multiply(Constantes.DAY_TIME_FACTOR)
-					.multiply(Constantes.DOLLAR_MULTIPLY_FACTOR);
-			
-			ExchangeTypes eType = getEType(exchangeType);
-			if (!eType.equals(ExchangeTypes.USD)) {
-				currency24 = exchangeService.changeCurrency(currency24, ExchangeTypes.USD, eType);
-			}
-			
-			item.setTime(time);
-			item.setCoin(coins24);
-			item.setCurrency(currency24);
-			data.add(item);
-
-			// Ganancia a la semana
-			item = new CoinItem();
-			time = messageProperties.getString("calculator.porSemana", sessionBean.getLang());
-			BigDecimal coinsSem = coins24.multiply(Constantes.WEEK_TIME_FACTOR);
-			BigDecimal currencySem = currency24.multiply(Constantes.WEEK_TIME_FACTOR);
-			item.setTime(time);
-			item.setCoin(coinsSem);
-			item.setCurrency(currencySem);
-			data.add(item);
-
-			// Ganancia al mes
-			item = new CoinItem();
-			time = messageProperties.getString("calculator.porMes", sessionBean.getLang());
-			BigDecimal coinsMes = coins24.multiply(Constantes.AVERAGE_MONTH_TIME_FACTOR);
-			BigDecimal currencyMes = currency24.multiply(Constantes.AVERAGE_MONTH_TIME_FACTOR);
-			item.setTime(time);
-			item.setCoin(coinsMes);
-			item.setCurrency(currencyMes);
-			data.add(item);
-		} catch (ServiceException e) {
 			LOGGER.log(LogLevels.ERROR, e);
 			addErrorMessage(e);
 		}
