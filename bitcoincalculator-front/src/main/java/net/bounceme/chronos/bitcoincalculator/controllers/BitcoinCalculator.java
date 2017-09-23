@@ -16,10 +16,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import net.bounceme.chronos.bitcoincalculator.common.Constantes;
-import net.bounceme.chronos.bitcoincalculator.common.Constantes.ExchangeTypes;
-import net.bounceme.chronos.bitcoincalculator.common.Constantes.HashRates;
-import net.bounceme.chronos.bitcoincalculator.common.Constantes.Traders;
+import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator;
+import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.ExchangeTypes;
+import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.HashRates;
+import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
 import net.bounceme.chronos.bitcoincalculator.dto.BitcoinCalculatorDTO;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
@@ -106,6 +106,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			}
 		}
 		catch (ServiceException e) {
+			LOGGER.log(LogLevels.ERROR, e);
 			String message = messageProperties.getString("calculator.noTraders", sessionBean.getLang());
 			addMessage(FacesMessage.SEVERITY_ERROR, message);
 		}
@@ -253,9 +254,9 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			// Ganancia al día
 			CoinItem item = new CoinItem();
 			String time = messageProperties.getString("calculator.porDia", sessionBean.getLang());
-			BigDecimal coins24 = coins.multiply(Constantes.DAY_TIME_FACTOR);
-			BigDecimal currency24 = dollars.multiply(Constantes.DAY_TIME_FACTOR)
-					.multiply(Constantes.DOLLAR_MULTIPLY_FACTOR);
+			BigDecimal coins24 = coins.multiply(ConstantesBitcoinCalculator.DAY_TIME_FACTOR);
+			BigDecimal currency24 = dollars.multiply(ConstantesBitcoinCalculator.DAY_TIME_FACTOR)
+					.multiply(ConstantesBitcoinCalculator.DOLLAR_MULTIPLY_FACTOR);
 
 			ExchangeTypes eType = getEType(exchangeType);
 			if (!eType.equals(ExchangeTypes.USD)) {
@@ -270,8 +271,8 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			// Ganancia a la semana
 			item = new CoinItem();
 			time = messageProperties.getString("calculator.porSemana", sessionBean.getLang());
-			BigDecimal coinsSem = coins24.multiply(Constantes.WEEK_TIME_FACTOR);
-			BigDecimal currencySem = currency24.multiply(Constantes.WEEK_TIME_FACTOR);
+			BigDecimal coinsSem = coins24.multiply(ConstantesBitcoinCalculator.WEEK_TIME_FACTOR);
+			BigDecimal currencySem = currency24.multiply(ConstantesBitcoinCalculator.WEEK_TIME_FACTOR);
 			item.setTime(time);
 			item.setCoin(coinsSem);
 			item.setCurrency(currencySem);
@@ -280,8 +281,8 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			// Ganancia al mes
 			item = new CoinItem();
 			time = messageProperties.getString("calculator.porMes", sessionBean.getLang());
-			BigDecimal coinsMes = coins24.multiply(Constantes.AVERAGE_MONTH_TIME_FACTOR);
-			BigDecimal currencyMes = currency24.multiply(Constantes.AVERAGE_MONTH_TIME_FACTOR);
+			BigDecimal coinsMes = coins24.multiply(ConstantesBitcoinCalculator.AVERAGE_MONTH_TIME_FACTOR);
+			BigDecimal currencyMes = currency24.multiply(ConstantesBitcoinCalculator.AVERAGE_MONTH_TIME_FACTOR);
 			item.setTime(time);
 			item.setCoin(coinsMes);
 			item.setCurrency(currencyMes);
@@ -423,6 +424,6 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	}
 
 	public String getCharset() {
-		return Constantes.ENCODING_EXPORTS;
+		return ConstantesBitcoinCalculator.ENCODING_EXPORTS;
 	}
 }

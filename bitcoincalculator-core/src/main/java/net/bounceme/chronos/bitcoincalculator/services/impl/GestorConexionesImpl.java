@@ -38,8 +38,8 @@ public class GestorConexionesImpl implements GestorConexiones {
 
 		}
 		catch (JSONClientException e) {
+			LOGGER.log(LogLevels.ERROR, e);
 			pool.setInitialized(Boolean.FALSE);
-			LOGGER.log(LogLevels.ERROR, "Pool not initialized!");
 		}
 	}
 

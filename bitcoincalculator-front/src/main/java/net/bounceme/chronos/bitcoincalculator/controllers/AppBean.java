@@ -32,12 +32,12 @@ public class AppBean extends BaseBean {
 	private static final Log LOGGER = LogFactory.getInstance().getLog(AppBean.class);
 
 	@Value("${BitcoinCalculator.name}")
-	private String name;
+	private String sname;
 	
 	@Value("${BitcoinCalculator.title}")
 	private String title;
 	private String context;
-	private ExternalContext externalContext;
+	private transient ExternalContext externalContext;
 	
 	
 	/* (non-Javadoc)
@@ -55,11 +55,11 @@ public class AppBean extends BaseBean {
 	}
 	
 	public String getName() {
-        return name;
+        return sname;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.sname = name;
     }
     
     public String getContext() {

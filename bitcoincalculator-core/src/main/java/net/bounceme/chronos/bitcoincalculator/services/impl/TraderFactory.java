@@ -2,7 +2,7 @@ package net.bounceme.chronos.bitcoincalculator.services.impl;
 
 import org.springframework.stereotype.Service;
 
-import net.bounceme.chronos.bitcoincalculator.common.Constantes.Traders;
+import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
 import net.bounceme.chronos.utils.log.Log;
@@ -15,8 +15,6 @@ public class TraderFactory {
 	public static final String NAME = "traderFactory";
 	
 	private static final Log LOGGER = LogFactory.getInstance().getLog(TraderFactory.class);
-	
-	public TraderFactory() {}
 
 	/**
 	 * @param name

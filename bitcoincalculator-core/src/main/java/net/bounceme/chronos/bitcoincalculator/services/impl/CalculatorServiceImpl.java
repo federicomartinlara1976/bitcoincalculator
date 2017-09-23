@@ -14,8 +14,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import net.bounceme.chronos.bitcoincalculator.common.Constantes;
-import net.bounceme.chronos.bitcoincalculator.common.Constantes.Traders;
+import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator;
+import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
 import net.bounceme.chronos.bitcoincalculator.config.AppConfig;
 import net.bounceme.chronos.bitcoincalculator.dto.BitcoinCalculatorDTO;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
@@ -117,7 +117,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 	private void initializeData() {
 		try {
 			Map<String, String> parameters = new HashMap<>();
-			parameters.put(Params.hashrate.name(), Constantes.INITIAL_HASHRATE);
+			parameters.put(Params.hashrate.name(), ConstantesBitcoinCalculator.INITIAL_HASHRATE);
 			String result = gestorConexiones.getData(parameters);
 			data = bitcoinConverter.reverseAssemble(result);
 		}

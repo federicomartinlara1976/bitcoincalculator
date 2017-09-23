@@ -1,20 +1,19 @@
 package net.bounceme.chronos.bitcoincalculator.common;
 
 import java.math.BigDecimal;
-import java.util.Locale;
 
 import net.bounceme.chronos.bitcoincalculator.services.trading.BitStampTrader;
 import net.bounceme.chronos.bitcoincalculator.services.trading.DefaultTrader;
 import net.bounceme.chronos.bitcoincalculator.services.trading.MtGoxTrader;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Plus500Trader;
 
-public class Constantes extends net.bounceme.chronos.utils.common.Constantes {
+public class ConstantesBitcoinCalculator extends net.bounceme.chronos.utils.common.Constantes {
 
-	public static enum ExchangeTypes {
+	public enum ExchangeTypes {
 		USD, EUR
 	}
 	
-	public static enum HashRates {
+	public enum HashRates {
 		MH(1000L), GH(1000000L), TH(1000000000L);
 
 		private Long multiply;
@@ -44,13 +43,13 @@ public class Constantes extends net.bounceme.chronos.utils.common.Constantes {
 	
 	public static final String INITIAL_HASHRATE = "1";
 	
-	public static final BigDecimal DAY_TIME_FACTOR = new BigDecimal(24);
+	public static final BigDecimal DAY_TIME_FACTOR = BigDecimal.valueOf(24);
 	
-	public static final BigDecimal WEEK_TIME_FACTOR = new BigDecimal(7);
+	public static final BigDecimal WEEK_TIME_FACTOR = BigDecimal.valueOf(7);
 	
-	public static final BigDecimal AVERAGE_MONTH_TIME_FACTOR = new BigDecimal(30.4);
+	public static final BigDecimal AVERAGE_MONTH_TIME_FACTOR = BigDecimal.valueOf(30.4);
 	
-	public static final BigDecimal DOLLAR_MULTIPLY_FACTOR = new BigDecimal(1000);
+	public static final BigDecimal DOLLAR_MULTIPLY_FACTOR = BigDecimal.valueOf(1000);
 	
 	public static final String ENCODING_EXPORTS = "ISO-8859-1";
 }

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import net.bounceme.chronos.bitcoincalculator.common.Constantes.ExchangeTypes;
+import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.ExchangeTypes;
 import net.bounceme.chronos.bitcoincalculator.config.AppConfig;
 import net.bounceme.chronos.bitcoincalculator.dto.ExchangeDTO;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
@@ -41,7 +41,7 @@ public class ExchangeServiceImpl implements ExchangeService {
 				return sCurrency;
 			}
 			
-			Map<String, String> parameters = new HashMap<String, String>();
+			Map<String, String> parameters = new HashMap<>();
 			parameters.put("base", base.name());
 			parameters.put("symbols", symbol.name());
 			JSONClient client = new JSONClient();

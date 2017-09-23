@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
-import net.bounceme.chronos.bitcoincalculator.common.Constantes;
 import net.bounceme.chronos.bitcoincalculator.dto.BitcoinCalculatorDTO;
 import net.bounceme.chronos.bitcoincalculator.dto.ExchangeDTO;
 import net.bounceme.chronos.bitcoincalculator.messages.MessageProperties;
@@ -25,13 +24,13 @@ public class AppConfig {
 	
 	public static final String CACHE = "bitcoin-calculator";
 	
-	@SuppressWarnings({ Constantes.UNCHECKED, Constantes.RAWTYPES })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Bean(name = BITCOIN_CONVERTER)
 	public JacksonConverter<BitcoinCalculatorDTO> bitcoinConverter() {
 		return new JacksonConverter(BitcoinCalculatorDTO.class);
 	}
 	
-	@SuppressWarnings({ Constantes.UNCHECKED, Constantes.RAWTYPES })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Bean(name = EXCHANGE_CONVERTER)
 	public JacksonConverter<ExchangeDTO> exchangeConverter() {
 		return new JacksonConverter(ExchangeDTO.class);

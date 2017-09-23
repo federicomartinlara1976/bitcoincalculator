@@ -3,7 +3,7 @@ package net.bounceme.chronos.bitcoincalculator.services;
 import java.math.BigDecimal;
 import java.util.List;
 
-import net.bounceme.chronos.bitcoincalculator.common.Constantes.Traders;
+import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
 import net.bounceme.chronos.bitcoincalculator.dto.BitcoinCalculatorDTO;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;

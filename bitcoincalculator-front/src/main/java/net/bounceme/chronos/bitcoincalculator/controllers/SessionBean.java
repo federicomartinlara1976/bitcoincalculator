@@ -15,13 +15,16 @@ import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import net.bounceme.chronos.bitcoincalculator.common.Constantes.Traders;
+import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.messages.MessageProperties;
 import net.bounceme.chronos.bitcoincalculator.messages.PubliProperties;
 import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
 import net.bounceme.chronos.utils.jsf.controller.BaseBean;
+import net.bounceme.chronos.utils.log.Log;
+import net.bounceme.chronos.utils.log.LogFactory;
+import net.bounceme.chronos.utils.log.Log.LogLevels;
 
 @ManagedBean(name = SessionBean.NAME)
 @SessionScoped
@@ -33,6 +36,8 @@ public class SessionBean extends BaseBean implements Serializable {
 	private static final long serialVersionUID = -4764455202310413427L;
 	
 	public static final String NAME = "sessionBean";
+	
+	private static final Log LOGGER = LogFactory.getInstance().getLog(SessionBean.class);
 
 	@Autowired
 	@Qualifier(CalculatorService.NAME)
@@ -66,6 +71,7 @@ public class SessionBean extends BaseBean implements Serializable {
 			currentTrader = calculatorService.getTrader(Traders.Default);
 		}
 		catch (ServiceException e) {
+			LOGGER.log(LogLevels.ERROR, e);
 			String message = messageProperties.getString("calculator.noTraders", lang);
 			addMessage(FacesMessage.SEVERITY_ERROR, message);
 		}
