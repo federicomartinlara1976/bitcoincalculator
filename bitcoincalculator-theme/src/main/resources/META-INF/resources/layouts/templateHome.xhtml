@@ -14,8 +14,15 @@
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-		<link rel="stylesheet" type="text/css"
-			href="#{appBean.context}/css/styles.css" />
+		<link rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+		
+		<h:outputStylesheet library="primefaces-bitcoincalculator"
+			name="layout-default.css" />
+		<h:outputStylesheet library="primefaces-bitcoincalculator"
+			name="styles.css" />
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 		<ui:insert name="javascripts"></ui:insert>
 		<ui:insert name="styles"></ui:insert>
@@ -40,10 +47,10 @@
 					<p:outputPanel>
 						<ui:insert name="pageTitle">Default content</ui:insert>
 					</p:outputPanel>
-					<chronos:langSelector lang="#{sessionBean.lang}" flags="true"/>
+					<chronos:langSelector lang="#{sessionBean.lang}" flags="true" />
 					<p:commandLink id="nonAjax" action="index" ajax="false">
-        				<h:outputText value="#{res['home']}" />
-    				</p:commandLink>
+						<h:outputText value="#{res['home']}" />
+					</p:commandLink>
 				</p:panelGrid>
 
 				<p:outputPanel id="content" layout="block">

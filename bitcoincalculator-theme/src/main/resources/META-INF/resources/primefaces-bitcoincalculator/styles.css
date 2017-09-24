@@ -54,3 +54,11 @@
 .c100 {
 	width: 100%;
 }
+
+.first {
+	float: left;
+}
+
+.last {
+	float: right;
+}
