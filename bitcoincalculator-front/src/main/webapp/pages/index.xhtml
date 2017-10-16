@@ -19,6 +19,10 @@
 
 	<ui:define name="content">
 		<chronos:landing menuPosition="sticky" styleClass="home">
+			<f:facet name="menuCustom">
+				<chronos:langSelector lang="#{sessionBean.lang}" flags="true"/>
+			</f:facet>
+		
 			<f:facet name="header">
 				<p:dataGrid var="banner" value="#{sessionBean.banners}" columns="3"
 					layout="grid" rows="1" id="banners">

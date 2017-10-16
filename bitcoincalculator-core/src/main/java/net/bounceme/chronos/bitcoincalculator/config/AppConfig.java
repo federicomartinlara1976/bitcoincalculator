@@ -15,7 +15,7 @@ import net.bounceme.chronos.utils.mapping.JacksonConverter;
 import net.bounceme.chronos.utils.net.json.JSONPool;
 
 @Configuration
-@Import(RemoteCacheConfiguration.class)
+@Import({RemoteCacheConfiguration.class, LogPerformanceConfig.class})
 @PropertySource(value={"classpath:application.properties"})
 public class AppConfig {
 	public static final String BITCOIN_CONVERTER = "bitcoinConverter";

@@ -23,7 +23,7 @@
 	
 	<!-- Root Logger -->
 	<root>
-		<priority value="${logs.root.level}" />
+		<priority value="INFO" />
 		<appender-ref ref="allLog" />
 		<appender-ref ref="console" />
 	</root>

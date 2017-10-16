@@ -142,7 +142,7 @@
     		
     		<properties>
     			<debug.mode>true</debug.mode>
-    			<logs.root.level>INFO</logs.root.level>
+    			<logs.root.level>DEBUG</logs.root.level>
     			<logs.file>logs/bitcoin-calculator.log</logs.file>
     		</properties>
     	</profile>
