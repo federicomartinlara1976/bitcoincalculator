@@ -16,7 +16,6 @@
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<project.build.locale>es_ES</project.build.locale>
 	<chronoslibs.version>1.0.Final</chronoslibs.version>
-	<aspectj.version>1.7.4</aspectj.version>
 	<activemq.version>5.10.0</activemq.version>
 	<jsoup.version>1.8.3</jsoup.version>
 	<xml-apis.version>1.4.01</xml-apis.version>

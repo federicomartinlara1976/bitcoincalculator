@@ -13,7 +13,7 @@
 	<packaging>jar</packaging>
 	<url>http://bitcoincalculator.salasierra12.net</url>
 	<description>Calculador de bitcoins en tiempo real</description>
-	
+
 	<build>
 		<resources>
 			<resource>
@@ -23,9 +23,9 @@
 		</resources>
 		<plugins>
 			<plugin>
-			  	<groupId>org.apache.maven.plugins</groupId>
-			  	<artifactId>maven-compiler-plugin</artifactId>
-			  	<configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
 				</configuration>
@@ -43,10 +43,10 @@
 				</executions>
 			</plugin>
 			<plugin>
-        		<groupId>org.sonarsource.scanner.maven</groupId>
-        		<artifactId>sonar-maven-plugin</artifactId>
-        		<version>3.1.1</version>
-      		</plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.1.1</version>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -58,30 +58,17 @@
 			<artifactId>bitcoincalculator-data</artifactId>
 			<version>${my.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>net.bounceme.chronos.chronoslibs</groupId>
 			<artifactId>chronos-net-utils</artifactId>
 			<version>1.0.Final</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>net.bounceme.chronos.chronoslibs</groupId>
 			<artifactId>chronos-cache-utils</artifactId>
 			<version>1.0.Final</version>
-		</dependency>
-
-		<!-- AspectJ dependencies -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${aspectj.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjtools</artifactId>
-			<version>${aspectj.version}</version>
 		</dependency>
 
 		<!-- HTML parser -->
@@ -96,7 +83,7 @@
 			<artifactId>xml-apis</artifactId>
 			<version>${xml-apis.version}</version>
 		</dependency>
-		
+
 	</dependencies>
 
 </project>
