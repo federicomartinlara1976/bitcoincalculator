@@ -31,6 +31,8 @@
 
 	<h:body role="document">
 		<h:form prependId="false">
+			<chronos:csrf/>
+			
 			<p:sticky target="header" />
 
 			<p:ajaxStatus onstart="PF('statusDialog').show()"
