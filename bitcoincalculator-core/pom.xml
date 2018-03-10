@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>net.bounceme.chronos</groupId>
 		<artifactId>bitcoincalculator</artifactId>
-		<version>${my.version}</version>
+		<version>1.0.0</version>
 	</parent>
 
 	<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
@@ -13,6 +13,7 @@
 	<packaging>jar</packaging>
 	<url>http://bitcoincalculator.salasierra12.net</url>
 	<description>Calculador de bitcoins en tiempo real</description>
+	<version>1.0.0</version>
 
 	<build>
 		<resources>
@@ -56,7 +57,7 @@
 		<dependency>
 			<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
 			<artifactId>bitcoincalculator-data</artifactId>
-			<version>${my.version}</version>
+			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
@@ -69,6 +70,13 @@
 			<groupId>net.bounceme.chronos.chronoslibs</groupId>
 			<artifactId>chronos-cache-utils</artifactId>
 			<version>1.0.Final</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.bounceme.chronos.chronoslibs</groupId>
+			<artifactId>chronos-utils</artifactId>
+			<version>1.0.Final</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- HTML parser -->

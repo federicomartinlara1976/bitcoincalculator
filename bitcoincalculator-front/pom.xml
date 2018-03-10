@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>net.bounceme.chronos</groupId>
 		<artifactId>bitcoincalculator</artifactId>
-		<version>${my.version}</version>
+		<version>1.0.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -14,7 +14,8 @@
 	<packaging>war</packaging>
 	<name>Calculadora de bitcoins en tiempo real</name>
 	<url>http://bitcoincalculator.buscoloteria.com</url>
-	
+	<version>1.0.0</version>
+
 	<properties>
 		<jsf.version>2.2.6</jsf.version>
 	</properties>
@@ -30,19 +31,19 @@
 		<dependency>
 			<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
 			<artifactId>bitcoincalculator-core</artifactId>
-			<version>${my.version}</version>
+			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
 			<artifactId>bitcoincalculator-data</artifactId>
-			<version>${my.version}</version>
+			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
 			<artifactId>bitcoincalculator-theme</artifactId>
-			<version>${my.version}</version>
+			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
@@ -61,20 +62,9 @@
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>4.2.0.RELEASE</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>4.2.0.RELEASE</version>
-		</dependency>
-		
 		<!-- Oficial Oracle JSF -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -82,13 +72,13 @@
 			<version>${jsf.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
 			<version>${jsf.version}</version>
 			<scope>provided</scope>
-		</dependency> 
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -130,6 +120,53 @@
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.1.1</version>
 			</plugin>
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>1.1.0.Final</version>
+				<configuration>
+					<hostname>localhost</hostname>
+					<port>9990</port>
+					<username>admin</username>
+					<password>mre13185</password>
+					<jboss-home>/opt/EAP</jboss-home>
+					<name>${project.build.finalName}.${project.packaging}</name>
+				</configuration>
+				<executions>
+					<execution>
+						<id>undeploy</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>undeploy</goal>
+						</goals>
+						<configuration>
+							<ignoreMissingDeployment>true</ignoreMissingDeployment>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>deploy</id>
+						<phase>install</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+            	<groupId>org.jboss.as.plugins</groupId>
+            	<artifactId>jboss-as-maven-plugin</artifactId>
+            	<version>7.5.Final</version>
+            	<configuration>
+                	<force>true</force>
+                	<hostname>localhost</hostname>
+                	<username>admin</username>
+                	<password>mre13185</password>
+                	<fileNames>
+                    	<fileName>target/BitcoinCalculator.war</fileName>
+                	</fileNames>
+            	</configuration>
+        	</plugin>
 		</plugins>
 	</build>
 

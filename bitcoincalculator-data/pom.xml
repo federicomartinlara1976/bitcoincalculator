@@ -5,13 +5,14 @@
 	<parent>
 		<groupId>net.bounceme.chronos</groupId>
 		<artifactId>bitcoincalculator</artifactId>
-		<version>${my.version}</version>
+		<version>1.0.0</version>
 	</parent>
 
 	<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
 	<artifactId>bitcoincalculator-data</artifactId>
 	<packaging>jar</packaging>
 	<url>http://bitcoincalculator.buscoloteria.com</url>
+	<version>1.0.0</version>
 	
 	<build>
 		<resources>
