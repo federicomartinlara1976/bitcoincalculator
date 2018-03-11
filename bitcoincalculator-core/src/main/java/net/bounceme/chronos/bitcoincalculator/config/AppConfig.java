@@ -2,6 +2,7 @@ package net.bounceme.chronos.bitcoincalculator.config;
 
 import javax.annotation.Resource;
 
+import org.infinispan.manager.CacheContainer;
 import org.infinispan.manager.DefaultCacheManager;
 import org.infinispan.spring.provider.SpringEmbeddedCacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -19,7 +20,7 @@ import net.bounceme.chronos.utils.mapping.JacksonConverter;
 import net.bounceme.chronos.utils.net.json.JSONPool;
 
 @Configuration
-@EnableCaching
+//@EnableCaching
 @Import({LogPerformanceConfig.class})
 @PropertySource(value={"classpath:application.properties"})
 public class AppConfig {
@@ -29,8 +30,8 @@ public class AppConfig {
 	
 	public static final String CACHE = "bitcoin-calculator";
 	
-	@Resource(lookup="java:jboss/infinispan/container/BitcoinCalculator") 
-	DefaultCacheManager cacheManager;
+//	@Resource(lookup="java:jboss/infinispan/container/ejb") 
+//	private CacheContainer cacheContainer;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Bean(name = BITCOIN_CONVERTER)
@@ -65,8 +66,8 @@ public class AppConfig {
 		return new JSONPool();
 	}
     
-    @Bean
-	public SpringEmbeddedCacheManager cacheManager() {
-		return new SpringEmbeddedCacheManager(cacheManager);
-	}
+//    @Bean
+//	public SpringEmbeddedCacheManager cacheManager() {
+//		return new SpringEmbeddedCacheManager(cacheContainer.get);
+//	}
 }
