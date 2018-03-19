@@ -14,8 +14,7 @@
 	<packaging>war</packaging>
 	<name>Calculadora de bitcoins en tiempo real</name>
 	<url>http://bitcoincalculator.buscoloteria.com</url>
-	<version>1.0.0</version>
-
+	
 	<properties>
 		<jsf.version>2.2.6</jsf.version>
 	</properties>

@@ -13,7 +13,6 @@
 	<packaging>jar</packaging>
 	<url>http://bitcoincalculator.salasierra12.net</url>
 	<description>Calculador de bitcoins en tiempo real</description>
-	<version>1.0.0</version>
 
 	<build>
 		<resources>

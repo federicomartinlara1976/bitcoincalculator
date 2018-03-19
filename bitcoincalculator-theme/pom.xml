@@ -12,7 +12,6 @@
 	<artifactId>bitcoincalculator-theme</artifactId>
 	<packaging>jar</packaging>
 	<url>http://maven.apache.org</url>
-	<version>1.0.0</version>
 	
 	<build>
 		<resources>
