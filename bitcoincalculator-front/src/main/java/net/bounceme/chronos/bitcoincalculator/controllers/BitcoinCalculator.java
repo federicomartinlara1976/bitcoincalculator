@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -29,9 +30,7 @@ import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.ExchangeService;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
 import net.bounceme.chronos.utils.jsf.controller.BaseBean;
-import net.bounceme.chronos.utils.log.Log;
 import net.bounceme.chronos.utils.log.Log.LogLevels;
-import net.bounceme.chronos.utils.log.LogFactory;
 
 @ManagedBean(name = BitcoinCalculator.NAME)
 @ViewScoped
@@ -44,8 +43,8 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 	public static final String NAME = "bitcoinCalculator";
 
-	private static final Log LOGGER = LogFactory.getInstance().getLog(BitcoinCalculator.class);
-
+	private static Logger log = Logger.getLogger(BitcoinCalculator.class.getName());
+	
 	@ManagedProperty(value = "#{sessionBean}")
 	private SessionBean sessionBean;
 
@@ -106,7 +105,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			}
 		}
 		catch (ServiceException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			String message = messageProperties.getString("calculator.noTraders", sessionBean.getLang());
 			addMessage(FacesMessage.SEVERITY_ERROR, message);
 		}
@@ -117,7 +116,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	}
 
 	public void calculate(ActionEvent actionEvent) {
-		LOGGER.log(LogLevels.DEBUG, actionEvent);
+		log.debug(actionEvent.toString());
 		try {
 			if (validateHash() && validateExchange()) {
 				calculateHashRate();
@@ -127,19 +126,19 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			}
 		}
 		catch (ServiceException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			addErrorMessage(e);
 		}
 	}
 
 	public void reset(ActionEvent actionEvent) {
-		LOGGER.log(LogLevels.DEBUG, actionEvent);
+		log.debug(actionEvent.toString());
 		try {
 			initVars();
 			sessionBean.setCurrentTrader(calculatorService.getTrader(Traders.Default));
 		}
 		catch (ServiceException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			addErrorMessage(e);
 		}
 	}
@@ -161,7 +160,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			setNewExchange();
 		}
 		catch (ServiceException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			addErrorMessage(e);
 		}
 	}
@@ -175,7 +174,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			setNewExchange();
 		}
 		catch (ServiceException | TraderException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			addErrorMessage(e);
 		}
 	}
@@ -291,7 +290,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			return data;
 		}
 		catch (ServiceException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			addErrorMessage(e);
 		}
 		return data;

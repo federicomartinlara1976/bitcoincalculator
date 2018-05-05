@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -22,8 +23,6 @@ import net.bounceme.chronos.bitcoincalculator.messages.PubliProperties;
 import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
 import net.bounceme.chronos.utils.jsf.controller.BaseBean;
-import net.bounceme.chronos.utils.log.Log;
-import net.bounceme.chronos.utils.log.LogFactory;
 import net.bounceme.chronos.utils.log.Log.LogLevels;
 
 @ManagedBean(name = SessionBean.NAME)
@@ -37,8 +36,8 @@ public class SessionBean extends BaseBean implements Serializable {
 	
 	public static final String NAME = "sessionBean";
 	
-	private static final Log LOGGER = LogFactory.getInstance().getLog(SessionBean.class);
-
+	private static Logger log = Logger.getLogger(SessionBean.class.getName());
+	
 	@Autowired
 	@Qualifier(CalculatorService.NAME)
 	private transient CalculatorService calculatorService;
@@ -71,7 +70,7 @@ public class SessionBean extends BaseBean implements Serializable {
 			currentTrader = calculatorService.getTrader(Traders.Default);
 		}
 		catch (ServiceException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			String message = messageProperties.getString("calculator.noTraders", lang);
 			addMessage(FacesMessage.SEVERITY_ERROR, message);
 		}

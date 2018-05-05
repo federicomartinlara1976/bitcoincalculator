@@ -1,21 +1,20 @@
 package net.bounceme.chronos.bitcoincalculator.services.impl;
 
+import org.jboss.logging.Logger;
 import org.springframework.stereotype.Service;
 
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
-import net.bounceme.chronos.utils.log.Log;
 import net.bounceme.chronos.utils.log.Log.LogLevels;
-import net.bounceme.chronos.utils.log.LogFactory;
 
 @Service(TraderFactory.NAME)
 public class TraderFactory {
 
 	public static final String NAME = "traderFactory";
 	
-	private static final Log LOGGER = LogFactory.getInstance().getLog(TraderFactory.class);
-
+	private static Logger log = Logger.getLogger(TraderFactory.class.getName());
+	
 	/**
 	 * @param name
 	 * @return
@@ -26,7 +25,7 @@ public class TraderFactory {
 			Class<?> traderClass = Traders.valueOf(Traders.class, name).getTraderClass();
 			return (Trader) traderClass.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			throw new TraderException(e);
 		}
 	}
@@ -41,7 +40,7 @@ public class TraderFactory {
 			Class<?> traderClass = trader.getTraderClass();
 			return (Trader) traderClass.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			throw new TraderException(e);
 		}
 	}

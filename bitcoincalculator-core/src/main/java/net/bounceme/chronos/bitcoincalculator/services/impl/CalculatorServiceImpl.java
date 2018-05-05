@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -23,9 +24,7 @@ import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.GestorConexiones;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
 import net.bounceme.chronos.utils.exceptions.AssembleException;
-import net.bounceme.chronos.utils.log.Log;
 import net.bounceme.chronos.utils.log.Log.LogLevels;
-import net.bounceme.chronos.utils.log.LogFactory;
 import net.bounceme.chronos.utils.mapping.JacksonConverter;
 
 /**
@@ -35,8 +34,8 @@ import net.bounceme.chronos.utils.mapping.JacksonConverter;
 @Service(CalculatorService.NAME)
 @Scope("session")
 public class CalculatorServiceImpl implements CalculatorService {
-	private static final Log LOGGER = LogFactory.getInstance().getLog(CalculatorServiceImpl.class);
-
+	private static Logger log = Logger.getLogger(CalculatorServiceImpl.class.getName());
+	
 	private enum Params {
 		hashrate, exchange_rate
 	}
@@ -91,7 +90,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 			return (trader!=null) ? trader.getExchange() : BigDecimal.ZERO;
 		}
 		catch (TraderException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			throw new ServiceException(e);
 		}
 	}
@@ -107,7 +106,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 			return bitcoinConverter.reverseAssemble(result);
 		}
 		catch (ServiceException | AssembleException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			throw new ServiceException(e);
 		}
 	}
@@ -120,7 +119,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 			data = bitcoinConverter.reverseAssemble(result);
 		}
 		catch (ServiceException | AssembleException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 		}
 	}
 
@@ -136,7 +135,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 			return results;
 		}
 		catch (TraderException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			throw new ServiceException(e);
 		}
 	}
@@ -147,7 +146,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 			return traderFactory.getTrader(traders);
 		}
 		catch (TraderException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			throw new ServiceException(e);
 		}
 	}

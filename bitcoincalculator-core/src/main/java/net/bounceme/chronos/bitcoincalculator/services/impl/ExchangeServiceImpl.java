@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -15,9 +16,7 @@ import net.bounceme.chronos.bitcoincalculator.dto.ExchangeDTO;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.services.ExchangeService;
 import net.bounceme.chronos.utils.exceptions.AssembleException;
-import net.bounceme.chronos.utils.log.Log;
 import net.bounceme.chronos.utils.log.Log.LogLevels;
-import net.bounceme.chronos.utils.log.LogFactory;
 import net.bounceme.chronos.utils.mapping.JacksonConverter;
 import net.bounceme.chronos.utils.net.exceptions.JSONClientException;
 import net.bounceme.chronos.utils.net.json.JSONClient;
@@ -26,8 +25,8 @@ import net.bounceme.chronos.utils.net.json.JSONClient;
 @Scope("session")
 public class ExchangeServiceImpl implements ExchangeService {
 	
-	private static final Log LOGGER = LogFactory.getInstance().getLog(ExchangeServiceImpl.class);
-
+	private static Logger log = Logger.getLogger(ExchangeServiceImpl.class.getName());
+	
 	@Autowired
 	@Qualifier(AppConfig.EXCHANGE_CONVERTER)
 	private JacksonConverter<ExchangeDTO> exchangeConverter;
@@ -42,10 +41,11 @@ public class ExchangeServiceImpl implements ExchangeService {
 			}
 			
 			Map<String, String> parameters = new HashMap<>();
+			parameters.put("access_key", "83c697dc432b65773d1d83c98ea09e77");
 			parameters.put("base", base.name());
 			parameters.put("symbols", symbol.name());
 			JSONClient client = new JSONClient();
-			client.setUrl("http://api.fixer.io/latest");
+			client.setUrl("http://data.fixer.io/api/latest");
 			client.setParameters(parameters);
 			String result = client.get();
 			
@@ -54,7 +54,7 @@ public class ExchangeServiceImpl implements ExchangeService {
 			
 			return sCurrency.multiply(value);
 		} catch (JSONClientException | AssembleException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			throw new ServiceException(e);
 		}
 	}

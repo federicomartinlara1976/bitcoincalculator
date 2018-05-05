@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -11,9 +12,7 @@ import org.springframework.stereotype.Service;
 
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.services.GestorConexiones;
-import net.bounceme.chronos.utils.log.Log;
 import net.bounceme.chronos.utils.log.Log.LogLevels;
-import net.bounceme.chronos.utils.log.LogFactory;
 import net.bounceme.chronos.utils.net.exceptions.JSONClientException;
 import net.bounceme.chronos.utils.net.json.JSONClient;
 import net.bounceme.chronos.utils.net.json.JSONPool;
@@ -21,8 +20,8 @@ import net.bounceme.chronos.utils.net.json.JSONPool;
 @Service(GestorConexiones.NAME)
 @Scope("singleton")
 public class GestorConexionesImpl implements GestorConexiones {
-	private static final Log LOGGER = LogFactory.getInstance().getLog(GestorConexionesImpl.class);
-
+	private static Logger log = Logger.getLogger(GestorConexionesImpl.class.getName());
+	
 	@Value("${BitcoinCalculator.api}")
 	private String url;
 
@@ -38,7 +37,7 @@ public class GestorConexionesImpl implements GestorConexiones {
 
 		}
 		catch (JSONClientException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			pool.setInitialized(Boolean.FALSE);
 		}
 	}
@@ -50,7 +49,7 @@ public class GestorConexionesImpl implements GestorConexiones {
 			conn.setParameters(parameters);
 			return conn.get();
 		} catch (JSONClientException e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			log.error(LogLevels.ERROR.name(), e);
 			throw new ServiceException(e);
 		} finally {
 			pool.put(conn);
