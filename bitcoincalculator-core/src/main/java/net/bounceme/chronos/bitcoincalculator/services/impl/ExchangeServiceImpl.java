@@ -54,7 +54,7 @@ public class ExchangeServiceImpl implements ExchangeService {
 			
 			return sCurrency.multiply(value);
 		} catch (JSONClientException | AssembleException e) {
-			log.error(LogLevels.ERROR.name(), e);
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}
 	}

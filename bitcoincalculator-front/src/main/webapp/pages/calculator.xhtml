@@ -26,8 +26,11 @@
 
 	<ui:define name="body">
 	
+		<p:growl id="msgs" closable="true">
+			<p:autoUpdate/>
+		</p:growl>
+	
 		<p:outputPanel styleClass="ui-fluid">
-			<p:messages id="msgs" autoUpdate="true" closable="true" />
 
 			<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
 				style="margin-bottom:10px" cellpadding="5" layout="grid"
