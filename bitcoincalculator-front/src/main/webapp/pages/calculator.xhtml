@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	template="/layouts/templateHome.xhtml">
-	
+
 	<ui:define name="ads">
 		<script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<script>
@@ -15,21 +15,23 @@
   			});
 		</script>
 	</ui:define>
-	
+
 	<ui:define name="pageTitle">
-		<h2><h:outputText value="#{res['calculator.title']}"/></h2>
+		<h2>
+			<h:outputText value="#{res['calculator.title']}" />
+		</h2>
 	</ui:define>
 
 	<ui:define name="banner">
-		<h:outputText value="#{pub['calculator.title']}"/>
+		<h:outputText value="#{pub['calculator.title']}" />
 	</ui:define>
 
 	<ui:define name="body">
-	
+
 		<p:growl id="msgs" closable="true">
-			<p:autoUpdate/>
+			<p:autoUpdate />
 		</p:growl>
-	
+
 		<p:outputPanel styleClass="ui-fluid">
 
 			<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"

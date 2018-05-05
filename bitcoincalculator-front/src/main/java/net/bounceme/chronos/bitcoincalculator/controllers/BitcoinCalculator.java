@@ -151,7 +151,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			setNewExchange();
 		}
 		catch (ServiceException e) {
-			addErrorMessage(e);
+			addErrorMessage("Error al cambiar de divisa");
 		}
 	}
 

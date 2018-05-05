@@ -16,7 +16,6 @@ import net.bounceme.chronos.bitcoincalculator.dto.ExchangeDTO;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.services.ExchangeService;
 import net.bounceme.chronos.utils.exceptions.AssembleException;
-import net.bounceme.chronos.utils.log.Log.LogLevels;
 import net.bounceme.chronos.utils.mapping.JacksonConverter;
 import net.bounceme.chronos.utils.net.exceptions.JSONClientException;
 import net.bounceme.chronos.utils.net.json.JSONClient;
