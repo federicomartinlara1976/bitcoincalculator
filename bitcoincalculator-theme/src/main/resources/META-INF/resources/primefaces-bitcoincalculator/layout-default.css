@@ -556,11 +556,11 @@
   background-size: cover;
   overflow: hidden; }
   .exception-body.error {
-    background-image: url("#{resource['primefaces-AppTest:images/error-bg.png']}"); }
+    background-image: url("#{resource['primefaces-bitcoincalculator:images/error-bg.png']}"); }
   .exception-body.access {
-    background-image: url("#{resource['primefaces-AppTest:images/access-bg.png']}"); }
+    background-image: url("#{resource['primefaces-bitcoincalculator:images/access-bg.png']}"); }
   .exception-body.notfound {
-    background-image: url("#{resource['primefaces-AppTest:images/404-bg.png']}"); }
+    background-image: url("#{resource['primefaces-bitcoincalculator:images/404-bg.png']}"); }
   .exception-body .exception-panel {
     width: 400px;
     margin: 0 auto;

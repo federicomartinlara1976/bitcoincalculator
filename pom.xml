@@ -26,10 +26,10 @@
 	</properties>
 
 	<modules>
-		<module>bitcoincalculator-front</module>
 		<module>bitcoincalculator-core</module>
 		<module>bitcoincalculator-data</module>
 		<module>bitcoincalculator-theme</module>
+		<module>bitcoincalculator-front</module>
 	</modules>
 
 	<build>
