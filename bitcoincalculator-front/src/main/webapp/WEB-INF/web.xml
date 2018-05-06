@@ -39,12 +39,12 @@
 	</listener>
 
 	<welcome-file-list>
-		<welcome-file>/pages/index.jsf</welcome-file>
+		<welcome-file>/index.jsf</welcome-file>
 	</welcome-file-list>
 
 	<error-page>
 		<exception-type>java.lang.Exception</exception-type>
-		<location>/pages/error.jsf</location>
+		<location>/error.jsf</location>
 	</error-page>
 
 	<mime-mapping>

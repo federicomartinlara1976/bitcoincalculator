@@ -64,6 +64,8 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	private String exchangeType;
 
 	private BigDecimal exchangeAmount;
+	
+	private BigDecimal exchangeBase;
 
 	private BigDecimal exchange;
 
@@ -77,6 +79,8 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 	private ExchangeTypes lastType;
 	
+	private ExchangeTypes baseType;
+	
 	/**
 	 * 
 	 */
@@ -86,10 +90,13 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			hashRateMultiply = HashRates.GH.name();
 			hashRateAmount = 0.0;
 			hashRate = 0L;
-			lastType = ExchangeTypes.USD;
+			baseType = ExchangeTypes.EUR;
+			lastType = baseType;
 			exchangeType = lastType.name();
 			
-			exchangeAmount = calculatorService.getCurrentExchange();
+			BigDecimal amount = calculatorService.getCurrentExchange();
+			exchangeBase = exchangeService.initCurrency(amount, ExchangeTypes.USD);
+			exchangeAmount = exchangeBase;
 			exchangeRateSource = calculatorService.getCurrentExchangeRateSource();
 			exchange = BigDecimal.ZERO;
 			traders = calculatorService.getTraders();
@@ -187,7 +194,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	private BigDecimal getExchangeAmount(BigDecimal source, ExchangeTypes eType) throws ServiceException {
 		BigDecimal value = source;
 		if (!eType.equals(lastType)) {
-			value = exchangeService.changeCurrency(source, lastType, eType);
+			value = (eType.equals(baseType)) ? exchangeBase : exchangeService.changeCurrency(source, eType);
 			lastType = eType;
 		}
 		return value;
@@ -248,7 +255,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 			ExchangeTypes eType = getEType(exchangeType);
 			if (!eType.equals(ExchangeTypes.USD)) {
-				currency24 = exchangeService.changeCurrency(currency24, ExchangeTypes.USD, eType);
+				currency24 = exchangeService.changeCurrency(currency24, eType);
 			}
 
 			item.setTime(time);
