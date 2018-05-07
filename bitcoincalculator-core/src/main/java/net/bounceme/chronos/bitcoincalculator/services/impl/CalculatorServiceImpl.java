@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -96,6 +97,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 	}
 
 	@Override
+	@Cacheable("bitcoincalculator")
 	public BitcoinCalculatorDTO getData(Long hashRate, BigDecimal exchangeAmount) throws ServiceException {
 		try {
 			Map<String, String> parameters = new HashMap<>();
