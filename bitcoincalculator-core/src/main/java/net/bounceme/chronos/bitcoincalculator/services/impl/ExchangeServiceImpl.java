@@ -8,6 +8,7 @@ import java.util.Map;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,7 @@ public class ExchangeServiceImpl implements ExchangeService {
 	private JacksonConverter<ExchangeDTO> exchangeConverter;
 	
 	@Override
+	@Cacheable("bitcoincalculator")
 	public BigDecimal changeCurrency(BigDecimal sCurrency, ExchangeTypes symbol)
 			throws ServiceException {
 		try {
