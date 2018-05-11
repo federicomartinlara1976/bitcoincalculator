@@ -16,6 +16,10 @@
 			});
 		</script>
 	</ui:define>
+	
+	<ui:define name="customCss">
+		<link rel="stylesheet" href="css/styles.css" />
+	</ui:define>
 
 	<ui:define name="content">
 	
@@ -26,13 +30,13 @@
 		
 			<f:facet name="header">
 				<p:dataGrid var="banner" value="#{sessionBean.banners}" columns="3"
-					layout="grid" rows="1" id="banners">
+					layout="grid" rows="1" id="banners" styleClass="banners">
 
 					<f:facet name="header">
             			<h1>BitcoinCalculator</h1>
         			</f:facet>
 
-					<p:panel style="text-align:center">
+					<p:panel styleClass="panelBanner" style="text-align:center">
 						<h:panelGrid columns="1" style="width:100%">
 							<h:outputText value="#{banner}" />
 						</h:panelGrid>
