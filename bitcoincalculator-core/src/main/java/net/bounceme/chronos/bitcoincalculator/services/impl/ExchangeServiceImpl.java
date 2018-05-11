@@ -8,6 +8,7 @@ import java.util.Map;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,12 @@ import net.bounceme.chronos.utils.net.json.JSONClient;
 public class ExchangeServiceImpl implements ExchangeService {
 	
 	private static Logger log = Logger.getLogger(ExchangeServiceImpl.class.getName());
+	
+	@Value("${BitcoinCalculator.exchangeCurrency}")
+	private String exchangeCurrencyUrl;
+	
+	@Value("${BitcoinCalculator.accessKey}")
+	private String accessKey;
 	
 	@Autowired
 	@Qualifier(AppConfig.EXCHANGE_CONVERTER)
@@ -49,9 +56,9 @@ public class ExchangeServiceImpl implements ExchangeService {
 
 	private ExchangeDTO queryExchangeRates() throws JSONClientException, AssembleException {
 		Map<String, String> parameters = new HashMap<>();
-		parameters.put("access_key", "83c697dc432b65773d1d83c98ea09e77");
+		parameters.put("access_key", accessKey);
 		JSONClient client = new JSONClient();
-		client.setUrl("http://data.fixer.io/api/latest");
+		client.setUrl(exchangeCurrencyUrl);
 		client.setParameters(parameters);
 		String result = client.get();
 		
