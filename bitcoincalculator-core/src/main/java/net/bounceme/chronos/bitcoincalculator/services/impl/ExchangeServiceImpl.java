@@ -55,6 +55,7 @@ public class ExchangeServiceImpl implements ExchangeService {
 	}
 
 	private ExchangeDTO queryExchangeRates() throws JSONClientException, AssembleException {
+		log.debug("Loading currency rates...");
 		Map<String, String> parameters = new HashMap<>();
 		parameters.put("access_key", accessKey);
 		JSONClient client = new JSONClient();
