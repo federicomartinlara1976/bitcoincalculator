@@ -1,3 +1,9 @@
+body {
+	font-family: "Roboto", "Helvetica Neue", sans-serif;
+    color: #757575;
+    font-size: 13px;
+}
+
 .icon {
 	width: 24px;
 	height: 24px;
@@ -9,4 +15,17 @@
 
 .last {
 	float: right;
+}
+
+.landing-header .header-top {
+	background-color: #457fca;
+}
+
+.landing-header .menu-container {
+	padding: 1em;
+	background-color: #457fca;
+}
+
+.landing-header .selectLang {
+	float:right;
 }
