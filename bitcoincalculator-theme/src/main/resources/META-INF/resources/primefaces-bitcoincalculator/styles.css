@@ -2,6 +2,7 @@ body {
 	font-family: "Roboto", "Helvetica Neue", sans-serif;
     color: #757575;
     font-size: 13px;
+    background-color: #EEF2F6!important;
 }
 
 .icon {
@@ -19,6 +20,7 @@ body {
 
 .landing-header .header-top {
 	background-color: #457fca;
+	height: 66px;
 }
 
 .landing-header .menu-container {
@@ -28,4 +30,9 @@ body {
 
 .landing-header .selectLang {
 	float:right;
+	min-width: 138px;
+}
+
+.landing-footer {
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
 }
