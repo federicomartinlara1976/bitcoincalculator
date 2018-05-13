@@ -2,8 +2,23 @@
 	clear:both;
 }
 
+.banners {
+	background: none;
+}
+
+.banners .ui-datagrid-header {
+	background: none;
+	border: none;
+}
+
+.banners .ui-datagrid-header h1 {
+	color: #ffffff;
+}
+
 .banners .ui-datagrid-content {
-	padding: 0.5em;
+	padding: 0.5em 3.5em 0.5em 3.5em;
+	background: none;
+	border: none;
 }
 
 .panelBanner {
@@ -12,17 +27,24 @@
 	height: 150px;
 }
 
-.banner_1 {
+.baner_1, .banner_2, .banner_3 {
 	text-align: center;
+}
+
+.banner_1 {
 	background-color: #9189fd;
 }
 
 .banner_2 {
-	text-align:center;
 	background-color: #ffbf79;
 }
 
 .banner_3 {
-	text-align:center;
 	background-color: #8dc8ff;
+}
+
+.banner_1 .ui-widget-content, .banner_2 .ui-widget-content, .banner_3 .ui-widget-content {
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 18px;
 }

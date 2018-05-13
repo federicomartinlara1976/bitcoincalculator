@@ -18,19 +18,55 @@ body {
 	float: right;
 }
 
-.landing-header .header-top {
-	background-color: #457fca;
-	height: 66px;
+.landing-menu li a {
+	color: #ffffff;
 }
 
-.landing-header .menu-container {
-	padding: 1em;
-	background-color: #457fca;
+.landing-header {
+	background-image: url("#{resource['primefaces-bitcoincalculator:images/landing-main.jpg']}");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;	
 }
 
 .landing-header .selectLang {
 	float:right;
 	min-width: 138px;
+}
+
+.landing-header .header-top {
+	background: none;
+	height: 66px;
+}
+
+.landing-header .header-top.ui-sticky {
+	background-color: #457fca;
+	opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+.landing-header .header-top.ui-sticky .menu-container {
+	opacity: 1.0;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+.landing-header .menu-container {
+	padding: 1em;
+}
+
+.landing-header .landing-header-content {
+	text-align: center;
+	padding: 1.5em 0 3.5em 0;
+}
+
+.landing-header .landing-header-content .ui-button {
+	color: #ffffff!important;
+	padding: 0.5em!important;
+	background-color: #337ab7;
+	border: 1px solid transparent;
+	font-size: 14px;
+	width: 170px;
+	border-radius: 4px;
 }
 
 .landing-footer {
