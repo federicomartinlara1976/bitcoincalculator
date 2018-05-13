@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
+import net.bounceme.chronos.bitcoincalculator.dto.BannerDTO;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.messages.MessageProperties;
 import net.bounceme.chronos.bitcoincalculator.messages.PubliProperties;
@@ -132,12 +133,23 @@ public class SessionBean extends BaseBean implements Serializable {
 		this.prevTrader = prevTrader;
 	}
 
-	public List<String> getBanners() {
-		List<String> banners = new ArrayList<>();
+	public List<BannerDTO> getBanners() {
+		List<BannerDTO> banners = new ArrayList<>();
 		
-		banners.add(publiProperties.getString("index.banner.1", lang));
-		banners.add(publiProperties.getString("index.banner.2", lang));
-		banners.add(publiProperties.getString("index.banner.3", lang));
+		BannerDTO banner = new BannerDTO();
+		banner.setContent(publiProperties.getString("index.banner.1", lang));
+		banner.setStyleClass("banner_1");
+		banners.add(banner);
+		
+		banner = new BannerDTO();
+		banner.setContent(publiProperties.getString("index.banner.2", lang));
+		banner.setStyleClass("banner_2");
+		banners.add(banner);
+		
+		banner = new BannerDTO();
+		banner.setContent(publiProperties.getString("index.banner.3", lang));
+		banner.setStyleClass("banner_3");
+		banners.add(banner);
 		
 		return banners;
 	}
