@@ -6,6 +6,13 @@
 	background: none;
 }
 
+/* Responsive */
+@media ( max-width : 640px) {
+	.banners {
+		padding-top: 66px;
+	}
+}
+
 .banners .ui-datagrid-header {
 	background: none;
 	border: none;
@@ -15,7 +22,7 @@
 	color: #ffffff;
 }
 
-.banners .ui-datagrid-content {
+.banners .ui-datagrid-content, .landing-section .ui-datagrid-content {
 	padding: 0.5em 3.5em 0.5em 3.5em;
 	background: none;
 	border: none;
