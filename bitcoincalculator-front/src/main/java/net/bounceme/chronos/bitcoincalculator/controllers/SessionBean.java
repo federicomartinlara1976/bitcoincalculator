@@ -158,24 +158,28 @@ public class SessionBean extends BaseBean implements Serializable {
 		features = new ArrayList<>();
 		
 		FeatureDTO feature = new FeatureDTO();
+		feature.setIcon(publiProperties.getString("index.feature.icon.1", lang));
 		feature.setTitle(publiProperties.getString("index.feature.title.1", lang));
 		feature.setContent(publiProperties.getString("index.feature.content.1", lang));
 		feature.setStyleClass(FEATURE_CLASS);
 		features.add(feature);
 
 		feature = new FeatureDTO();
+		feature.setIcon(publiProperties.getString("index.feature.icon.2", lang));
 		feature.setTitle(publiProperties.getString("index.feature.title.2", lang));
 		feature.setContent(publiProperties.getString("index.feature.content.2", lang));
 		feature.setStyleClass(FEATURE_CLASS);
 		features.add(feature);
 
 		feature = new FeatureDTO();
+		feature.setIcon(publiProperties.getString("index.feature.icon.3", lang));
 		feature.setTitle(publiProperties.getString("index.feature.title.3", lang));
 		feature.setContent(publiProperties.getString("index.feature.content.3", lang));
 		feature.setStyleClass(FEATURE_CLASS);
 		features.add(feature);
 
 		feature = new FeatureDTO();
+		feature.setIcon(publiProperties.getString("index.feature.icon.4", lang));
 		feature.setTitle(publiProperties.getString("index.feature.title.4", lang));
 		feature.setContent(publiProperties.getString("index.feature.content.4", lang));
 		feature.setStyleClass(FEATURE_CLASS);
