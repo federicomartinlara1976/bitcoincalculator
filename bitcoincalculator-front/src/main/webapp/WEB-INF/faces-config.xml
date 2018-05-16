@@ -23,6 +23,15 @@
 			<base-name>net.bounceme.chronos.bitcoincalculator.PubliBundle</base-name>
 			<var>pub</var>
 		</resource-bundle>
+		
+		<system-event-listener>
+        	<system-event-listener-class>
+            	net.bounceme.chronos.bitcoincalculator.listeners.InitListener
+        	</system-event-listener-class>
+        	<system-event-class>
+            	javax.faces.event.PostConstructApplicationEvent
+        	</system-event-class>
+    	</system-event-listener>
 	</application>
 
 	<!-- Global navigation rules -->

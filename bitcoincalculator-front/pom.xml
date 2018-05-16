@@ -73,6 +73,12 @@
 			<artifactId>chronos-jsf-components</artifactId>
 			<version>${chronoslibs.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>net.bounceme.chronos.chronoslibs</groupId>
+			<artifactId>chronos-i18n-utils</artifactId>
+			<version>${chronoslibs.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>

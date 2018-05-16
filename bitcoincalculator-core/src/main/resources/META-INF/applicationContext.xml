@@ -11,6 +11,7 @@
       	http://www.springframework.org/schema/jee/spring-jee.xsd">
 
 	<import resource="classpath:META-INF/services.xml" />
+	<import resource="classpath:META-INF/i18n.xml" />
 
 	<bean id="applicationContextProvider"
 		class="net.bounceme.chronos.utils.spring.ApplicationContextProvider" />
