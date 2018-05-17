@@ -565,7 +565,8 @@
     width: 400px;
     margin: 0 auto;
     background-color: #ffffff;
-    margin-top: 200px; }
+    margin-top: 200px; 
+    border-radius: 4px; }
     .exception-body .exception-panel .exception-panel-content {
       padding: 50px 50px 25px 50px;
       border-bottom: 8px solid #dee4e9; }
