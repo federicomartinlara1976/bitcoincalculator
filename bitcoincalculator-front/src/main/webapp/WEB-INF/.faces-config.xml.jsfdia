@@ -10,15 +10,15 @@
   SHAPE="256,33,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#index.xhtml:0" NAME="item"
    PATH="/index.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="calculator::#calculator.xhtml" NAME="output"
-    PATH="/calculator.xhtml" TARGET="rules:#calculator.xhtml"
-    TITLE="calculator" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="calculator::#pageCalculator.xhtml"
+    NAME="output" PATH="/pageCalculator.xhtml"
+    TARGET="rules:#pageCalculator.xhtml" TITLE="calculator" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#calculator.xhtml" PATH="/calculator.xhtml"
-  SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#calculator.xhtml:0" NAME="item"
-   PATH="/calculator.xhtml" model-entity="JSFProcessItem">
+ <PROCESS-ITEM NAME="rules:#pageCalculator.xhtml"
+  PATH="/pageCalculator.xhtml" SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pageCalculator.xhtml:0" NAME="item"
+   PATH="/pageCalculator.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="index::#index.xhtml" NAME="output"
     PATH="/index.xhtml" TARGET="rules:#index.xhtml" TITLE="index" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/layouts/templateHome.xhtml">
+
+	<ui:define name="ads">
+		<script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script>
+  			(adsbygoogle = window.adsbygoogle || []).push({
+    				google_ad_client: "ca-pub-5308962568744638",
+    				enable_page_level_ads: true
+  			});
+		</script>
+	</ui:define>
+
+	<ui:define name="pageTitle">
+		<h2>
+			<h:outputText value="#{res['calculator.title']}" />
+		</h2>
+	</ui:define>
+
+	<ui:define name="banner">
+		<h:outputText value="#{pub['calculator.title']}" />
+	</ui:define>
+
+	<ui:define name="body">
+
+		<p:growl id="msgs" closable="true">
+			<p:autoUpdate />
+		</p:growl>
+
+		<ui:include src="calculator.xhtml" />
+	</ui:define>
+
+</ui:composition>
