@@ -62,43 +62,43 @@
 		<p:panelGrid columns="3" layout="grid"
 			styleClass="ui-panelgrid-blank c100">
 
-			<p:outputPanel layout="block">
+			<p:panel layout="block" styleClass="panelBanner">
 				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
 					<h:outputLabel value="#{res['calculator.dificultad']}" />
 					<h:outputText value="#{sessionBean.difficultyFactor}">
 						<f:convertNumber maxFractionDigits="4" groupingUsed="false" />
 					</h:outputText>
 				</p:panelGrid>
-			</p:outputPanel>
+			</p:panel>
 
-			<p:outputPanel layout="block">
+			<p:panel layout="block" styleClass="panelBanner">
 				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
 					<h:outputLabel value="#{res['calculator.siguienteDificultad']}" />
 					<h:outputText value="#{sessionBean.nextDifficultyFactor}">
 						<f:convertNumber maxFractionDigits="4" groupingUsed="false" />
 					</h:outputText>
 				</p:panelGrid>
-			</p:outputPanel>
+			</p:panel>
 
-			<p:outputPanel layout="block">
+			<p:panel layout="block" styleClass="panelBanner">
 				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
 					<h:outputLabel value="#{res['calculator.bcPerBlock']}" />
 					<h:outputText value="#{sessionBean.bcPerBlock}">
 						<f:convertNumber maxFractionDigits="2" groupingUsed="false" />
 					</h:outputText>
 				</p:panelGrid>
-			</p:outputPanel>
+			</p:panel>
 		</p:panelGrid>
 
 		<p:panelGrid id="botonera" columns="2" style="margin-bottom:10px"
 			cellpadding="5" styleClass="ui-panelgrid-blank c100">
 			<p:commandButton value="#{res['calculator.calcular']}" id="calculate"
 				actionListener="#{bitcoinCalculator.calculate}" update="resultados"
-				styleClass="ui-priority-primary" style="float:right;" />
+				styleClass="ui-button" />
 			<p:commandButton value="#{res['calculator.limpiar']}" id="reset"
 				actionListener="#{bitcoinCalculator.reset}"
 				update="hashRateAmount,hashRateMultiply,exchangeType,exchangeAmount,resultados"
-				styleClass="ui-priority-primary" style="float:right;" />
+				styleClass="ui-button" />
 		</p:panelGrid>
 	</p:outputPanel>
 

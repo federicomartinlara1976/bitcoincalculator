@@ -112,3 +112,8 @@ body {
 .landing-footer {
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
 }
+
+.panelBanner {
+	padding: 0.5em;
+	border-radius: 4px;
+}

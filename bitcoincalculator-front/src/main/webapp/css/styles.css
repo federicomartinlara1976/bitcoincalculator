@@ -28,14 +28,9 @@
 	border: none;
 }
 
-.panelBanner {
-	padding: 0.5em;
-	border-radius: 4px;
-	height: 150px;
-}
-
-.baner_1, .banner_2, .banner_3 {
+.banner_1, .banner_2, .banner_3 {
 	text-align: center;
+	height: 150px;
 }
 
 .banner_1 {
