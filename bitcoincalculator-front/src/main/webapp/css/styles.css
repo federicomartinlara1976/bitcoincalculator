@@ -2,33 +2,35 @@
 	clear:both;
 }
 
-.banners {
+.home .banners {
 	background: none;
 }
 
 /* Responsive */
 @media ( max-width : 640px) {
-	.banners {
+	.home .banners {
 		padding-top: 66px;
 	}
 }
 
-.banners .ui-datagrid-header {
+.home .banners .ui-datagrid-header {
 	background: none;
 	border: none;
 }
 
-.banners .ui-datagrid-header h1 {
+.home .banners .ui-datagrid-header h1 {
 	color: #ffffff;
 }
 
-.banners .ui-datagrid-content, .landing-section .ui-datagrid-content {
+.home .banners .ui-datagrid-content, .landing-section .ui-datagrid-content {
 	padding: 0.5em 3.5em 0.5em 3.5em;
 	background: none;
 	border: none;
 }
 
-.banner_1, .banner_2, .banner_3 {
+.home .banner_1, 
+.home .banner_2, 
+.home .banner_3 {
 	text-align: center;
 	height: 150px;
 }
@@ -45,8 +47,22 @@
 	background-color: #8dc8ff;
 }
 
-.banner_1 .ui-widget-content, .banner_2 .ui-widget-content, .banner_3 .ui-widget-content {
+.home .banner_1 .ui-widget-content, 
+.home .banner_2 .ui-widget-content, 
+.home .banner_3 .ui-widget-content {
 	color: #ffffff;
 	font-weight: bold;
 	font-size: 18px;
+}
+
+.dlgDemo .panelBanner {
+	height: 90px;
+}
+
+.dlgDemo .panelBanner label {
+	font-size: 10pt;
+}
+
+.dlgDemo .panelBanner .value {
+	font-size: 12pt;
 }

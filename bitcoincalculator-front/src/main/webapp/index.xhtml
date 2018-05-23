@@ -22,9 +22,6 @@
 	</ui:define>
 
 	<ui:define name="content">
-		<p:growl id="msgs" closable="true">
-			<p:autoUpdate />
-		</p:growl>
 
 		<chronos:landing menuPosition="sticky" styleClass="home">
 			<f:facet name="menuCustom">
@@ -36,7 +33,7 @@
 					layout="grid" rows="1" id="banners" styleClass="banners">
 
 					<f:facet name="header">
-						<h1>Bitcoin calculator</h1>
+						<chronos:title type="1" value="Bitcoin calculator"/>
 					</f:facet>
 
 					<p:panel styleClass="panelBanner #{banner.styleClass}">
@@ -68,9 +65,7 @@
 							<p:graphicImage
 								name="#{FacesContext.getCurrentInstance().getExternalContext()}/images/#{feature.icon}" />
 							<p:outputPanel>
-								<h4>
-									<h:outputText value="#{feature.title}" />
-								</h4>
+								<chronos:title type="4" value="#{feature.title}"/>
 							</p:outputPanel>
 							<h:outputText value="#{feature.content}" />
 						</h:panelGrid>
@@ -92,7 +87,7 @@
 			</chronos:landingSection>
 		</chronos:landing>
 
-		<p:dialog header="#{pub['index.demo.title']}" modal="true"
+		<p:dialog header="#{pub['index.demo.title']}" styleClass="dlgDemo" modal="true"
 			widgetVar="dlgDemoCalc" showEffect="fade" hideEffect="fade"
 			minHeight="40">
 			<ui:include src="calculator.xhtml" />

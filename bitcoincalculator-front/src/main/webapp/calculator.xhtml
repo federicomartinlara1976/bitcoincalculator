@@ -5,9 +5,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
+	<p:messages id="msgs" closable="true">
+		<p:autoUpdate />
+	</p:messages>
+
 	<p:outputPanel id="parametros" styleClass="ui-fluid">
 
 		<p:panelGrid columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6"
+			rendered="#{empty bitcoinCalculator.thisDifficulty and empty bitcoinCalculator.nextDifficulty}"
 			style="margin-bottom:10px" cellpadding="5" layout="grid"
 			styleClass="ui-panelgrid-blank c100">
 
@@ -60,47 +65,51 @@
 		</p:panelGrid>
 
 		<p:panelGrid columns="3" layout="grid"
+			rendered="#{empty bitcoinCalculator.thisDifficulty and empty bitcoinCalculator.nextDifficulty}"
 			styleClass="ui-panelgrid-blank c100">
 
-			<p:panel layout="block" styleClass="panelBanner">
+			<p:panel layout="block" styleClass="panelBanner banner_1">
 				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
 					<h:outputLabel value="#{res['calculator.dificultad']}" />
-					<h:outputText value="#{sessionBean.difficultyFactor}">
+					<h:outputText styleClass="value"
+						value="#{sessionBean.difficultyFactor}">
 						<f:convertNumber maxFractionDigits="4" groupingUsed="false" />
 					</h:outputText>
 				</p:panelGrid>
 			</p:panel>
 
-			<p:panel layout="block" styleClass="panelBanner">
+			<p:panel layout="block" styleClass="panelBanner banner_2">
 				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
 					<h:outputLabel value="#{res['calculator.siguienteDificultad']}" />
-					<h:outputText value="#{sessionBean.nextDifficultyFactor}">
+					<h:outputText styleClass="value"
+						value="#{sessionBean.nextDifficultyFactor}">
 						<f:convertNumber maxFractionDigits="4" groupingUsed="false" />
 					</h:outputText>
 				</p:panelGrid>
 			</p:panel>
 
-			<p:panel layout="block" styleClass="panelBanner">
+			<p:panel layout="block" styleClass="panelBanner banner_3">
 				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
 					<h:outputLabel value="#{res['calculator.bcPerBlock']}" />
-					<h:outputText value="#{sessionBean.bcPerBlock}">
+					<h:outputText styleClass="value" value="#{sessionBean.bcPerBlock}">
 						<f:convertNumber maxFractionDigits="2" groupingUsed="false" />
 					</h:outputText>
 				</p:panelGrid>
 			</p:panel>
 		</p:panelGrid>
-
-		<p:panelGrid id="botonera" columns="2" style="margin-bottom:10px"
-			cellpadding="5" styleClass="ui-panelgrid-blank c100">
-			<p:commandButton value="#{res['calculator.calcular']}" id="calculate"
-				actionListener="#{bitcoinCalculator.calculate}" update="resultados"
-				styleClass="ui-button" />
-			<p:commandButton value="#{res['calculator.limpiar']}" id="reset"
-				actionListener="#{bitcoinCalculator.reset}"
-				update="hashRateAmount,hashRateMultiply,exchangeType,exchangeAmount,resultados"
-				styleClass="ui-button" />
-		</p:panelGrid>
 	</p:outputPanel>
+	
+	<p:panelGrid id="botonera" columns="2" style="margin-bottom:10px"
+		cellpadding="5" styleClass="ui-panelgrid-blank c100">
+		<p:commandButton value="#{res['calculator.calcular']}" id="calculate"
+			rendered="#{empty bitcoinCalculator.thisDifficulty and empty bitcoinCalculator.nextDifficulty}"
+			actionListener="#{bitcoinCalculator.calculate}"
+			update="parametros,resultados" styleClass="ui-button" />
+		<p:commandButton value="#{res['calculator.limpiar']}" id="reset"
+			actionListener="#{bitcoinCalculator.reset}"
+			update="hashRateAmount,hashRateMultiply,exchangeType,exchangeAmount,parametros,resultados"
+			styleClass="ui-button" />
+	</p:panelGrid>
 
 	<p:outputPanel id="resultados">
 		<p:panel header="#{res['calculator.resultados']}"
