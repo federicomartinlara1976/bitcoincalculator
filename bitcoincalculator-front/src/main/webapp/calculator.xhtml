@@ -104,11 +104,11 @@
 		<p:commandButton value="#{res['calculator.calcular']}" id="calculate"
 			rendered="#{empty bitcoinCalculator.thisDifficulty and empty bitcoinCalculator.nextDifficulty}"
 			actionListener="#{bitcoinCalculator.calculate}"
-			update="parametros,resultados" styleClass="ui-button" />
+			update="parametros,botonera,resultados" styleClass="ui-button c100" />
 		<p:commandButton value="#{res['calculator.limpiar']}" id="reset"
 			actionListener="#{bitcoinCalculator.reset}"
-			update="hashRateAmount,hashRateMultiply,exchangeType,exchangeAmount,parametros,resultados"
-			styleClass="ui-button" />
+			update="hashRateAmount,hashRateMultiply,exchangeType,exchangeAmount,parametros,botonera,resultados"
+			styleClass="ui-button c100" />
 	</p:panelGrid>
 
 	<p:outputPanel id="resultados">
