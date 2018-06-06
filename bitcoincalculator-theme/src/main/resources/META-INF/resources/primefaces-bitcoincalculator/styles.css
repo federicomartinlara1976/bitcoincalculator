@@ -26,6 +26,13 @@ body {
 	display: none !important;
 }
 
+.landing-header .landing-header-top {
+	position: fixed!important; 
+	top: 0px!important; 
+	width: 100%!important;
+	border-bottom: 1px solid #c5c5c5;
+}
+
 /* Responsive */
 @media ( max-width : 640px) {
 	.full {
@@ -34,13 +41,6 @@ body {
 	
 	.responsive {
 		display: inline-block !important;
-	}
-	
-	.landing-header .landing-header-top {
-		position: fixed!important; 
-		top: 0px!important; 
-		width: 100%!important;
-		border-bottom: 1px solid #c5c5c5;
 	}
 	
 	.landing-header .landing-header-top .dropdown-menu {
