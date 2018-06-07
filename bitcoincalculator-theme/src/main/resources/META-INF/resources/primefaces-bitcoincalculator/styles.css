@@ -54,6 +54,10 @@ body {
 	}
 }
 
+.landing-scrolltop-button {
+	background-color: #9189fd;	
+}
+
 .landing-menu li a {
 	color: #ffffff;
 }
