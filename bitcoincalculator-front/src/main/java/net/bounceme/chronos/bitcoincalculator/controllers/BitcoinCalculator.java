@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.event.FlowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -290,6 +291,10 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 		}
 		return data;
 	}
+	
+	public String onFlowProcess(FlowEvent event) {
+        return event.getNewStep();
+    }
 
 	/**
 	 * @return the hashRateMultiply

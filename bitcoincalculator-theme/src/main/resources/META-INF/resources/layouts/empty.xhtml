@@ -7,6 +7,8 @@
 	xmlns:p="http://primefaces.org/ui">
 <f:view locale="#{sessionBean.lang.language}">
 	<h:head>
+		<h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head"/>
 		<ui:insert name="ads"></ui:insert>
 
 		<title>#{appBean.name}</title>
