@@ -82,7 +82,7 @@ body {
 	width: 100% !important;
 }
 
-.landing-header .landing-header-top.ui-sticky {
+.landing-header .landing-header-top {
 	background: rgba(69, 127, 202, 0.5);
 }
 
