@@ -5,7 +5,8 @@
 	<parent>
 		<groupId>net.bounceme.chronos</groupId>
 		<artifactId>bitcoincalculator</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
+		<relativePath>..</relativePath>
 	</parent>
 
 	<groupId>net.bounceme.chronos.bitcoincalculator</groupId>

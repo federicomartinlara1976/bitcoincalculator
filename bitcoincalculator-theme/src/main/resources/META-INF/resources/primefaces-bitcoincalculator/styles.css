@@ -1,3 +1,10 @@
+body {
+	font-family: "Roboto", "Helvetica Neue", sans-serif;
+	color: #757575;
+	font-size: 13px;
+	background-color: #EEF2F6 !important;
+}
+
 .icon {
 	width: 24px;
 	height: 24px;
@@ -9,4 +16,108 @@
 
 .last {
 	float: right;
+}
+
+.full {
+	display: inline-block !important;	
+}
+
+.responsive {
+	display: none !important;
+}
+
+.landing-header .landing-header-top {
+	position: fixed!important; 
+	top: 0px!important; 
+	width: 100%!important;
+	border-bottom: 1px solid #c5c5c5;
+}
+
+/* Responsive */
+@media ( max-width : 640px) {
+	.full {
+		display: none!important;
+	}
+	
+	.responsive {
+		display: inline-block !important;
+	}
+	
+	.landing-header .landing-header-top .dropdown-menu {
+		margin-left: 1em;
+		margin-top: -1em;
+	}
+	
+	.landing-header .landing-header-content {
+		text-align: center;
+		padding: 0 0 3.5em 0;
+	}
+}
+
+.landing-scrolltop-button {
+	background-color: #9189fd;	
+}
+
+.landing-menu li a {
+	color: #ffffff;
+}
+
+.landing-header {
+	background-image:
+		url("#{resource['primefaces-bitcoincalculator:images/landing-main.jpg']}");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.landing-header .selectLang {
+	float: right;
+	min-width: 138px;
+	max-width: 138px;
+}
+
+.landing-header .landing-header-top {
+	background: none;
+	height: 66px;
+	width: 100% !important;
+}
+
+.landing-header .landing-header-top {
+	background: rgba(69, 127, 202, 0.5);
+}
+
+.landing-header .landing-menu-container {
+	padding: 1em;
+}
+
+.landing-header .landing-header-content {
+	text-align: center;
+	padding: 1.5em 0 3.5em 0;
+}
+
+.landing-header .landing-header-content .ui-button {
+	color: #ffffff !important;
+	padding: 0.5em !important;
+	background-color: #337ab7;
+	border: 1px solid transparent;
+	font-size: 14px;
+	width: 170px;
+	border-radius: 4px;
+}
+
+.landing-body .landing-wrapper .header-content {
+	padding: 0 0 75px 0;
+}
+
+.landing-body .landing-wrapper .landing-section {
+	padding: 60px 0 75px 0;
+}
+
+.landing-footer {
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+}
+
+.panelBanner {
+	padding: 0.5em;
+	border-radius: 4px;
 }

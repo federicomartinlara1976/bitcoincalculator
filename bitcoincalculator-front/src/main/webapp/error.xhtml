@@ -3,24 +3,21 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
 	template="/layouts/error.xhtml">
 
-	<f:loadBundle
-		basename="net.bounceme.chronos.bitcoincalculator.MessageBundle"
-		var="res" />
-
 	<ui:define name="msg">
-		<p>
-			<h:outputText value="Ocurrio un error" />
-		</p>
+		<p:outputPanel>
+			<h4><h:outputText value="#{pub['error.title']}" /></h4>
+		</p:outputPanel>
 
-		<p>To our chagrin, an internal error has occurred in this program.
-			Please contact technical support.</p>
-		<p>If instructed by our support staff, please copy and paste the
-			following report into an email message</p>
+		<p><h:outputText value="#{pub['error.parrafo.1']}" /></p>
+		<p><h:outputText value="#{pub['error.parrafo.2']}" /></p>
 	</ui:define>
 
 	<ui:define name="footer">
-
+		<p:commandLink id="nonAjax" action="index" ajax="false">
+			<h:outputText value="#{res['home']}" />
+		</p:commandLink>
 	</ui:define>
 </ui:composition>

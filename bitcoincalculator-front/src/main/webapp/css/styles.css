@@ -1,9 +1,62 @@
-body {
-	font-family: "Roboto", "Helvetica Neue", sans-serif;
-    color: #757575;
-    font-size: 13px;
-}
-
 .copyright {
 	clear:both;
+}
+
+.home .banners {
+	background: none;
+	padding-top: 66px;
+}
+
+.home .banners .ui-datagrid-header {
+	background: none;
+	border: none;
+}
+
+.home .banners .ui-datagrid-header h1 {
+	color: #ffffff;
+}
+
+.home .banners .ui-datagrid-content, .landing-section .ui-datagrid-content {
+	padding: 0.5em 3.5em 0.5em 3.5em;
+	background: none;
+	border: none;
+}
+
+.home .banner_1, 
+.home .banner_2, 
+.home .banner_3 {
+	text-align: center;
+	height: 150px;
+}
+
+.banner_1 {
+	background-color: #9189fd;
+}
+
+.banner_2 {
+	background-color: #ffbf79;
+}
+
+.banner_3 {
+	background-color: #8dc8ff;
+}
+
+.home .banner_1 .ui-widget-content, 
+.home .banner_2 .ui-widget-content, 
+.home .banner_3 .ui-widget-content {
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.dlgDemo .panelBanner {
+	height: 90px;
+}
+
+.dlgDemo .panelBanner label {
+	font-size: 10pt;
+}
+
+.dlgDemo .panelBanner .value {
+	font-size: 12pt;
 }

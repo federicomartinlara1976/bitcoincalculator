@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
+import net.bounceme.chronos.bitcoincalculator.dto.BannerDTO;
+import net.bounceme.chronos.bitcoincalculator.dto.FeatureDTO;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.messages.MessageProperties;
 import net.bounceme.chronos.bitcoincalculator.messages.PubliProperties;
@@ -33,18 +35,20 @@ public class SessionBean extends BaseBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4764455202310413427L;
-	
+
 	public static final String NAME = "sessionBean";
 	
+	private static final String FEATURE_CLASS = "feature";
+
 	private static Logger log = Logger.getLogger(SessionBean.class.getName());
-	
+
 	@Autowired
 	@Qualifier(CalculatorService.NAME)
 	private transient CalculatorService calculatorService;
-	
+
 	@Autowired
 	private transient PubliProperties publiProperties;
-	
+
 	@Autowired
 	private transient MessageProperties messageProperties;
 
@@ -57,9 +61,13 @@ public class SessionBean extends BaseBean implements Serializable {
 	private BigDecimal bcPerBlock;
 
 	private transient Trader prevTrader;
-	
+
 	private transient Trader currentTrader;
-	
+
+	private List<BannerDTO> banners;
+
+	private transient List<FeatureDTO> features;
+
 	@PostConstruct
 	public void init() {
 		try {
@@ -112,7 +120,7 @@ public class SessionBean extends BaseBean implements Serializable {
 	 */
 	public void setCurrentTrader(Trader currentTrader) {
 		// Guarda el trader anterior antes de cambiarlo
-		if (this.currentTrader!=null) {
+		if (this.currentTrader != null) {
 			prevTrader = this.currentTrader;
 		}
 		this.currentTrader = currentTrader;
@@ -132,14 +140,70 @@ public class SessionBean extends BaseBean implements Serializable {
 		this.prevTrader = prevTrader;
 	}
 
-	public List<String> getBanners() {
-		List<String> banners = new ArrayList<>();
-		
-		banners.add(publiProperties.getString("index.banner.1", lang));
-		banners.add(publiProperties.getString("index.banner.2", lang));
-		banners.add(publiProperties.getString("index.banner.3", lang));
-		
+	public List<BannerDTO> getBanners() {
+		// Hay que hacerlo aquí por el cambio de idioma
+		buildBanners();
 		return banners;
+	}
+
+	/**
+	 * @return the features
+	 */
+	public List<FeatureDTO> getFeatures() {
+		buildFeatures();
+		return features;
+	}
+	
+	private void buildFeatures() {
+		features = new ArrayList<>();
+		
+		FeatureDTO feature = new FeatureDTO();
+		feature.setIcon(publiProperties.getString("index.feature.icon.1", lang));
+		feature.setTitle(publiProperties.getString("index.feature.title.1", lang));
+		feature.setContent(publiProperties.getString("index.feature.content.1", lang));
+		feature.setStyleClass(FEATURE_CLASS);
+		features.add(feature);
+
+		feature = new FeatureDTO();
+		feature.setIcon(publiProperties.getString("index.feature.icon.2", lang));
+		feature.setTitle(publiProperties.getString("index.feature.title.2", lang));
+		feature.setContent(publiProperties.getString("index.feature.content.2", lang));
+		feature.setStyleClass(FEATURE_CLASS);
+		features.add(feature);
+
+		feature = new FeatureDTO();
+		feature.setIcon(publiProperties.getString("index.feature.icon.3", lang));
+		feature.setTitle(publiProperties.getString("index.feature.title.3", lang));
+		feature.setContent(publiProperties.getString("index.feature.content.3", lang));
+		feature.setStyleClass(FEATURE_CLASS);
+		features.add(feature);
+
+		feature = new FeatureDTO();
+		feature.setIcon(publiProperties.getString("index.feature.icon.4", lang));
+		feature.setTitle(publiProperties.getString("index.feature.title.4", lang));
+		feature.setContent(publiProperties.getString("index.feature.content.4", lang));
+		feature.setStyleClass(FEATURE_CLASS);
+		features.add(feature);
+	}
+	
+	private void buildBanners() {
+		banners = new ArrayList<>();
+
+		BannerDTO banner = new BannerDTO();
+		banner.setContent(publiProperties.getString("index.banner.1", lang));
+		banner.setStyleClass("banner_1");
+		banners.add(banner);
+
+		banner = new BannerDTO();
+		banner.setContent(publiProperties.getString("index.banner.2", lang));
+		banner.setStyleClass("banner_2");
+		banners.add(banner);
+
+		banner = new BannerDTO();
+		banner.setContent(publiProperties.getString("index.banner.3", lang));
+		banner.setStyleClass("banner_3");
+		banners.add(banner);
+
 	}
 
 	/**

@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Map;
 
 public class ExchangeDTO {
+	private Boolean success;
+	private Long timestamp;
 	private String base;
 	private Date date;
 	private Map<String, Double> rates;
@@ -42,5 +44,29 @@ public class ExchangeDTO {
 	 */
 	public void setRates(Map<String, Double> rates) {
 		this.rates = rates;
+	}
+	/**
+	 * @return the success
+	 */
+	public Boolean getSuccess() {
+		return success;
+	}
+	/**
+	 * @param success the success to set
+	 */
+	public void setSuccess(Boolean success) {
+		this.success = success;
+	}
+	/**
+	 * @return the timestamp
+	 */
+	public Long getTimestamp() {
+		return timestamp;
+	}
+	/**
+	 * @param timestamp the timestamp to set
+	 */
+	public void setTimestamp(Long timestamp) {
+		this.timestamp = timestamp;
 	}
 }

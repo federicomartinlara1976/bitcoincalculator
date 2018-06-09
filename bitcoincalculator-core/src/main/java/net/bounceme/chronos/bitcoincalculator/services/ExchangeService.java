@@ -8,5 +8,7 @@ import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 public interface ExchangeService {
 	static final String NAME = "exchangeService";
 
-	BigDecimal changeCurrency(BigDecimal sCurrency, ExchangeTypes base, ExchangeTypes symbol) throws ServiceException;
+	BigDecimal initCurrency(BigDecimal sCurrency, ExchangeTypes symbol) throws ServiceException;
+	
+	BigDecimal changeCurrency(BigDecimal sCurrency, ExchangeTypes symbol) throws ServiceException;
 }

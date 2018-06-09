@@ -10,13 +10,15 @@ import net.bounceme.chronos.bitcoincalculator.dto.BitcoinCalculatorDTO;
 import net.bounceme.chronos.bitcoincalculator.dto.ExchangeDTO;
 import net.bounceme.chronos.bitcoincalculator.messages.MessageProperties;
 import net.bounceme.chronos.bitcoincalculator.messages.PubliProperties;
+import net.bounceme.chronos.utils.cache.config.RemoteCacheConfiguration;
 import net.bounceme.chronos.utils.mapping.JacksonConverter;
 import net.bounceme.chronos.utils.net.json.JSONPool;
 
 @Configuration
-@Import({LogPerformanceConfig.class})
+@Import({LogPerformanceConfig.class, RemoteCacheConfiguration.class})
 @PropertySource(value={"classpath:application.properties"})
 public class AppConfig {
+	
 	public static final String BITCOIN_CONVERTER = "bitcoinConverter";
 	
 	public static final String EXCHANGE_CONVERTER = "exchangeConverter";
