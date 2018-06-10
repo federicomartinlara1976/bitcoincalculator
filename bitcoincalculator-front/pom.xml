@@ -15,13 +15,13 @@
 	<packaging>war</packaging>
 	<name>Calculadora de bitcoins en tiempo real</name>
 	<url>http://bitcoincalculator.buscoloteria.com</url>
-	
+
 	<properties>
 		<jsf.version>2.2.6</jsf.version>
 	</properties>
 
 	<dependencies>
-	
+
 		<!-- Oficial Oracle JSF -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -29,14 +29,14 @@
 			<version>${jsf.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
 			<version>${jsf.version}</version>
 			<scope>provided</scope>
-		</dependency> 
-		
+		</dependency>
+
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
@@ -73,7 +73,7 @@
 			<artifactId>chronos-jsf-components</artifactId>
 			<version>${chronoslibs.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>net.bounceme.chronos.chronoslibs</groupId>
 			<artifactId>chronos-i18n-utils</artifactId>
@@ -86,7 +86,17 @@
 			<version>1.0.10</version>
 		</dependency>
 
-		 
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-servlet</artifactId>
+			<version>${prettyfaces.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-config-prettyfaces</artifactId>
+			<version>${prettyfaces.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -162,19 +172,19 @@
 				</executions>
 			</plugin>
 			<plugin>
-            	<groupId>org.jboss.as.plugins</groupId>
-            	<artifactId>jboss-as-maven-plugin</artifactId>
-            	<version>7.5.Final</version>
-            	<configuration>
-                	<force>true</force>
-                	<hostname>localhost</hostname>
-                	<username>admin</username>
-                	<password>mre13185</password>
-                	<fileNames>
-                    	<fileName>target/BitcoinCalculator.war</fileName>
-                	</fileNames>
-            	</configuration>
-        	</plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<version>7.5.Final</version>
+				<configuration>
+					<force>true</force>
+					<hostname>localhost</hostname>
+					<username>admin</username>
+					<password>mre13185</password>
+					<fileNames>
+						<fileName>target/BitcoinCalculator.war</fileName>
+					</fileNames>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
