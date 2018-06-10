@@ -33,7 +33,7 @@
 					layout="grid" rows="1" id="banners" styleClass="banners">
 
 					<f:facet name="header">
-						<chronos:title type="1" value="Bitcoin calculator"/>
+						<chronos:title type="1" value="Bitcoin calculator" />
 					</f:facet>
 
 					<p:panel styleClass="panelBanner #{banner.styleClass}">
@@ -51,7 +51,31 @@
 			</f:facet>
 
 			<f:facet name="footer">
-				<h1>Pie</h1>
+				<p:panelGrid styleClass="footer-container ui-panelgrid-blank" columns="3"
+					layout="grid">
+					<p:panel id="sponsors" styleClass="panelFooter">
+						<p:panelGrid columns="1" styleClass="ui-panelgrid-blank"
+							layout="grid">
+							<chronos:title type="3" value="Bitcoin calculator" />
+							<h:outputText value="#{res['calculator.pie.texto1']}" />
+							<h:outputLink value="https://alloscomp.com/bitcoin/calculator">
+								<h:outputText value="Bitcoin Mining Calculator" />
+							</h:outputLink>
+						</p:panelGrid>
+					</p:panel>
+
+					<p:panel id="links" header="#{res['calculator.pie.links']}"
+						styleClass="panelFooter">
+					</p:panel>
+
+					<p:panel id="contact" header="#{res['calculator.pie.contact']}" styleClass="panelFooter">
+						<p:panelGrid columns="1" styleClass="ui-panelgrid-blank"
+							layout="grid">
+							
+						</p:panelGrid>
+					</p:panel>
+
+				</p:panelGrid>
 			</f:facet>
 
 			<chronos:landingSection id="section1"
@@ -65,7 +89,7 @@
 							<p:graphicImage
 								name="#{FacesContext.getCurrentInstance().getExternalContext()}/images/#{feature.icon}" />
 							<p:outputPanel>
-								<chronos:title type="4" value="#{feature.title}"/>
+								<chronos:title type="4" value="#{feature.title}" />
 							</p:outputPanel>
 							<h:outputText value="#{feature.content}" />
 						</h:panelGrid>
@@ -87,9 +111,9 @@
 			</chronos:landingSection>
 		</chronos:landing>
 
-		<p:dialog header="#{pub['index.demo.title']}" styleClass="dlgDemo" modal="true"
-			widgetVar="dlgDemoCalc" showEffect="fade" hideEffect="fade"
-			fitViewport="true" responsive="true" dynamic="true"
+		<p:dialog header="#{pub['index.demo.title']}" styleClass="dlgDemo"
+			modal="true" widgetVar="dlgDemoCalc" showEffect="fade"
+			hideEffect="fade" fitViewport="true" responsive="true" dynamic="true"
 			position="center center" onShow="PF('dlgDemoCalc').initPosition()">
 			<ui:include src="calculator.xhtml" />
 		</p:dialog>

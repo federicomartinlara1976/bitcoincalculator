@@ -449,8 +449,7 @@ a.ui-button:active,
 }
 
 .footer {
-	border: 1px solid #003eff;
-    background: #007fff;
+	background: #007fff;
 }
 
 .white, .footer .ui-widget-content .white {

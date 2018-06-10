@@ -49,6 +49,16 @@
 	font-size: 18px;
 }
 
+.home .footer-container {
+	background-color: #8dc8ff;
+	border: none;
+}
+
+.home .footer-container .panelFooter {
+	border: none;
+	background: none;	
+}
+
 .dlgDemo .panelBanner {
 	height: 90px;
 }
