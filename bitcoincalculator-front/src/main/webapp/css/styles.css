@@ -52,6 +52,7 @@
 .home .footer-container {
 	background-color: #8dc8ff;
 	border: none;
+	padding: 1em 3em 1em 3em;
 }
 
 .home .footer-container .panelFooter {
