@@ -49,8 +49,11 @@
 	font-size: 18px;
 }
 
+.home .landing-footer {
+	background: radial-gradient(circle at 50% 50%, #9189fd, #8dc8ff);
+}
+
 .home .footer-container {
-	background-color: #8dc8ff;
 	border: none;
 	padding: 1em 3em 1em 3em;
 }
