@@ -25,7 +25,7 @@
 						symbol=" #{bitcoinCalculator.hashRateMultiply}" symbolPosition="s"
 						decimalSeparator="," thousandSeparator=".">
 						<p:ajax event="blur"
-							listener="#{bitcoinCalculator.onChangeHashRate}" process="@form" />
+							listener="#{bitcoinCalculator.onChangeHashRate}" process="hashRateAmount, hashRateMultiply" />
 					</p:inputNumber>
 
 					<p:selectOneButton id="hashRateMultiply"
@@ -36,7 +36,7 @@
 
 						<p:ajax event="change"
 							listener="#{bitcoinCalculator.onChangeHashRate}"
-							update="hashRateAmount" process="@form" />
+							update="hashRateAmount" process="hashRateAmount, hashRateMultiply" />
 					</p:selectOneButton>
 				</p:panelGrid>
 			</p:outputPanel>
@@ -58,7 +58,7 @@
 
 						<p:ajax event="change"
 							listener="#{bitcoinCalculator.onChangeExchange}"
-							update="exchangeAmount" process="@form" />
+							update="exchangeAmount" process="exchangeAmount, exchangeType" />
 					</p:selectOneButton>
 				</p:panelGrid>
 			</p:outputPanel>
