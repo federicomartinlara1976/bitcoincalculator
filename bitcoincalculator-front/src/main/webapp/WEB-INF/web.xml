@@ -4,6 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name>Buscoloteria</display-name>
 
+	<!-- JSF Params -->
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
@@ -20,15 +21,16 @@
 	</context-param>
 	
 	<context-param>
+        	<param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+        	<param-value>true</param-value>
+    	</context-param>
+	
+	<!-- Primefaces params -->
+	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>bitcoincalculator</param-value>
 	</context-param>
-
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContext.xml</param-value>
-	</context-param>
-
+	
 	<context-param>
 		<param-name>primefaces.FONT_AWESOME</param-name>
 		<param-value>true</param-value>
@@ -53,16 +55,17 @@
         	<param-name>primefaces.TRANSFORM_METADATA</param-name>
         	<param-value>true</param-value>
     	</context-param>
-    
-	<context-param>
-        	<param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
-        	<param-value>true</param-value>
-    	</context-param>
 	
 	<context-param>
         	<param-name>primefaces.LEGACY_WIDGET_NAMESPACE</param-name>
         	<param-value>true</param-value>
     	</context-param>
+	
+	<!-- Spring params -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext.xml</param-value>
+	</context-param>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
