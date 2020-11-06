@@ -86,7 +86,7 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	public void initVars() {
 		try {
 			hashRateMultiply = HashRates.GH.name();
-			hashRateAmount = 0.0;
+			hashRateAmount = 14.0;
 			hashRate = 0L;
 			baseType = ExchangeTypes.EUR;
 			lastType = baseType;
