@@ -25,7 +25,6 @@ import net.bounceme.chronos.bitcoincalculator.messages.PubliProperties;
 import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
 import net.bounceme.chronos.utils.jsf.controller.BaseBean;
-import net.bounceme.chronos.utils.log.Log.LogLevels;
 
 @ManagedBean(name = SessionBean.NAME)
 @SessionScoped
@@ -78,7 +77,7 @@ public class SessionBean extends BaseBean implements Serializable {
 			currentTrader = calculatorService.getTrader(Traders.Default);
 		}
 		catch (ServiceException e) {
-			log.error(LogLevels.ERROR.name(), e);
+			log.error("ERROR", e);
 			String message = messageProperties.getString("calculator.noTraders", lang);
 			addMessage(FacesMessage.SEVERITY_ERROR, message);
 		}

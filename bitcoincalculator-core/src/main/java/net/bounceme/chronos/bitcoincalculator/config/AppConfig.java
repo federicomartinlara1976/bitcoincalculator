@@ -10,12 +10,11 @@ import net.bounceme.chronos.bitcoincalculator.dto.BitcoinCalculatorDTO;
 import net.bounceme.chronos.bitcoincalculator.dto.ExchangeDTO;
 import net.bounceme.chronos.bitcoincalculator.messages.MessageProperties;
 import net.bounceme.chronos.bitcoincalculator.messages.PubliProperties;
-import net.bounceme.chronos.utils.cache.config.RemoteCacheConfiguration;
 import net.bounceme.chronos.utils.mapping.JacksonConverter;
 import net.bounceme.chronos.utils.net.json.JSONPool;
 
 @Configuration
-@Import({LogPerformanceConfig.class, RemoteCacheConfiguration.class})
+@Import({LogPerformanceConfig.class})
 @PropertySource(value={"classpath:application.properties"})
 public class AppConfig {
 	

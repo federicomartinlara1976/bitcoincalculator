@@ -54,6 +54,12 @@
 			<groupId>net.bounceme.chronos.bitcoincalculator</groupId>
 			<artifactId>bitcoincalculator-core</artifactId>
 			<version>${my.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>net.bounceme.chronos.chronoslibs</groupId>
+					<artifactId>chronos-cache-utils</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -138,7 +144,7 @@
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.1.1</version>
 			</plugin>
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-maven-plugin</artifactId>
 				<version>1.1.0.Final</version>
@@ -170,7 +176,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>org.jboss.as.plugins</groupId>
 				<artifactId>jboss-as-maven-plugin</artifactId>

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.services.GestorConexiones;
-import net.bounceme.chronos.utils.log.Log.LogLevels;
 import net.bounceme.chronos.utils.net.exceptions.JSONClientException;
 import net.bounceme.chronos.utils.net.json.JSONClient;
 import net.bounceme.chronos.utils.net.json.JSONPool;
@@ -37,19 +36,19 @@ public class GestorConexionesImpl implements GestorConexiones {
 
 		}
 		catch (JSONClientException e) {
-			log.error(LogLevels.ERROR.name(), e);
+			log.error("ERROR", e);
 			pool.setInitialized(Boolean.FALSE);
 		}
 	}
 
 	@Override
-	public String getData(Map<String, String> parameters) throws ServiceException {
+	public String getData(Map<String, Object> parameters) throws ServiceException {
 		JSONClient conn = pool.get();
 		try {
 			conn.setParameters(parameters);
 			return conn.get();
 		} catch (JSONClientException e) {
-			log.error(LogLevels.ERROR.name(), e);
+			log.error("ERROR", e);
 			throw new ServiceException(e);
 		} finally {
 			pool.put(conn);

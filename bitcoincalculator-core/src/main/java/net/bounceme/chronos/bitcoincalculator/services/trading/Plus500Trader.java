@@ -11,7 +11,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
-import net.bounceme.chronos.utils.log.Log.LogLevels;
 
 public class Plus500Trader extends TraderBase {
 
@@ -32,7 +31,7 @@ public class Plus500Trader extends TraderBase {
 		try {
 			return getCurrencyUSD();
 		} catch (IOException e) {
-			log.error(LogLevels.ERROR.name(), e);
+			log.error("ERROR", e);
 			throw new TraderException(e);
 		}
 	}

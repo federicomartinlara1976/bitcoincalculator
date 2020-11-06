@@ -11,7 +11,6 @@ import javax.annotation.PostConstruct;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +23,6 @@ import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
 import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.GestorConexiones;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
-import net.bounceme.chronos.utils.exceptions.AssembleException;
-import net.bounceme.chronos.utils.log.Log.LogLevels;
 import net.bounceme.chronos.utils.mapping.JacksonConverter;
 
 /**
@@ -91,37 +88,36 @@ public class CalculatorServiceImpl implements CalculatorService {
 			return (trader!=null) ? trader.getExchange() : BigDecimal.ZERO;
 		}
 		catch (TraderException e) {
-			log.error(LogLevels.ERROR.name(), e);
+			log.error("ERROR", e);
 			throw new ServiceException(e);
 		}
 	}
 
 	@Override
-	@Cacheable("bitcoincalculator")
 	public BitcoinCalculatorDTO getData(Long hashRate, BigDecimal exchangeAmount) throws ServiceException {
 		try {
-			Map<String, String> parameters = new HashMap<>();
+			Map<String, Object> parameters = new HashMap<>();
 			parameters.put(Params.hashrate.name(), hashRate.toString());
 			parameters.put(Params.exchange_rate.name(),
 					exchangeAmount.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
 			String result = gestorConexiones.getData(parameters);
 			return bitcoinConverter.reverseAssemble(result);
 		}
-		catch (ServiceException | AssembleException e) {
-			log.error(LogLevels.ERROR.name(), e);
+		catch (ServiceException e) {
+			log.error("ERROR", e);
 			throw new ServiceException(e);
 		}
 	}
 
 	private void initializeData() {
 		try {
-			Map<String, String> parameters = new HashMap<>();
+			Map<String, Object> parameters = new HashMap<>();
 			parameters.put(Params.hashrate.name(), ConstantesBitcoinCalculator.INITIAL_HASHRATE);
 			String result = gestorConexiones.getData(parameters);
 			data = bitcoinConverter.reverseAssemble(result);
 		}
-		catch (ServiceException | AssembleException e) {
-			log.error(LogLevels.ERROR.name(), e);
+		catch (ServiceException e) {
+			log.error("ERROR", e);
 		}
 	}
 
@@ -137,7 +133,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 			return results;
 		}
 		catch (TraderException e) {
-			log.error(LogLevels.ERROR.name(), e);
+			log.error("ERROR", e);
 			throw new ServiceException(e);
 		}
 	}
@@ -148,7 +144,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 			return traderFactory.getTrader(traders);
 		}
 		catch (TraderException e) {
-			log.error(LogLevels.ERROR.name(), e);
+			log.error("ERROR", e);
 			throw new ServiceException(e);
 		}
 	}

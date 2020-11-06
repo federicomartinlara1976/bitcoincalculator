@@ -12,7 +12,6 @@ import org.jsoup.select.Elements;
 
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.ExchangeTypes;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
-import net.bounceme.chronos.utils.log.Log.LogLevels;
 
 public class BitStampTrader extends TraderBase  {
 	private static final String NAME = "BitStamp";
@@ -40,7 +39,7 @@ public class BitStampTrader extends TraderBase  {
 			return BigDecimal.ZERO;
 		}
 		catch (IOException e) {
-			log.error(LogLevels.ERROR.name(), e);
+			log.error("ERROR", e);
 			throw new TraderException(e);
 		}
 	}
