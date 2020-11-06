@@ -1,4 +1,4 @@
-package net.bounceme.chronos.bitcoincalculator.services.impl;
+package net.bounceme.chronos.bitcoincalculator.services;
 
 import org.springframework.stereotype.Service;
 
