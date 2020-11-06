@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.log4j.Log4j;
+import net.bounceme.chronos.bitcoincalculator.aspect.TrackTime;
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator;
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
 import net.bounceme.chronos.bitcoincalculator.config.AppConfig;
@@ -83,6 +84,7 @@ public class CalculatorService {
 		}
 	}
 
+	@TrackTime
 	public BitcoinCalculatorDTO getData(Long hashRate, BigDecimal exchangeAmount) throws ServiceException {
 		try {
 			Map<String, Object> parameters = new HashMap<>();

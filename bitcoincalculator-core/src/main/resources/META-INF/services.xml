@@ -13,9 +13,7 @@
 	
 	<aop:aspectj-autoproxy />
 	
-	<!-- Aspect -->
-	<bean id="timeTrack" class="net.bounceme.chronos.bitcoincalculator.aspect.TimeTrackAspect" />
-	
 	<context:component-scan base-package="net.bounceme.chronos.bitcoincalculator.services" />
+	<context:component-scan base-package="net.bounceme.chronos.bitcoincalculator.services.trading" />
 	
 </beans>
