@@ -5,18 +5,18 @@
 
 	<groupId>net.bounceme.chronos</groupId>
 	<artifactId>bitcoincalculator</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<packaging>pom</packaging>
 
 	<name>BitcoinCalculator</name>
 	<url>http://bitcoincalculator.salasierra12.es</url>
 
 	<properties>
-		<my.version>1.0.1-SNAPSHOT</my.version>
+		<my.version>1.0.1</my.version>
 		<jdk.version>1.8</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.locale>es_ES</project.build.locale>
-		<chronoslibs.version>1.0.2-SNAPSHOT</chronoslibs.version>
+		<chronoslibs.version>1.0.5-SNAPSHOT</chronoslibs.version>
 		<activemq.version>5.10.0</activemq.version>
 		<jsoup.version>1.8.3</jsoup.version>
 		<xml-apis.version>1.4.01</xml-apis.version>

@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import net.bounceme.chronos.logger.Log;
+import net.bounceme.chronos.logger.LogFactory;
 import net.bounceme.chronos.utils.jsf.controller.BaseBean;
-import net.bounceme.chronos.utils.log.Log;
-import net.bounceme.chronos.utils.log.Log.LogLevels;
-import net.bounceme.chronos.utils.log.LogFactory;
 
 /**
  * @author frederik
@@ -29,7 +28,7 @@ public class AppBean extends BaseBean {
 
 	public static final String NAME = "appBean";
 
-	private static final Log LOGGER = LogFactory.getInstance().getLog(AppBean.class);
+	private static final Log LOGGER = LogFactory.getInstance().getLogger(AppBean.class, "LOG4J");
 
 	@Value("${BitcoinCalculator.name}")
 	private String sname;
@@ -50,7 +49,7 @@ public class AppBean extends BaseBean {
 			context = request.getContextPath();
 			externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		} catch (Exception e) {
-			LOGGER.log(LogLevels.ERROR, e);
+			LOGGER.error("ERROR", e);
 		}
 	}
 	

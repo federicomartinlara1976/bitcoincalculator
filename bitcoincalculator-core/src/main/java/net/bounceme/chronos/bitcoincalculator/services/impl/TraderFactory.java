@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
-import net.bounceme.chronos.utils.log.Log.LogLevels;
 
 @Service(TraderFactory.NAME)
 public class TraderFactory {
@@ -25,7 +24,7 @@ public class TraderFactory {
 			Class<?> traderClass = Traders.valueOf(Traders.class, name).getTraderClass();
 			return (Trader) traderClass.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
-			log.error(LogLevels.ERROR.name(), e);
+			log.error("ERROR", e);
 			throw new TraderException(e);
 		}
 	}
@@ -40,7 +39,7 @@ public class TraderFactory {
 			Class<?> traderClass = trader.getTraderClass();
 			return (Trader) traderClass.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
-			log.error(LogLevels.ERROR.name(), e);
+			log.error("ERROR", e);
 			throw new TraderException(e);
 		}
 	}

@@ -65,11 +65,12 @@
 			<artifactId>chronos-net-utils</artifactId>
 			<version>${chronoslibs.version}</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>net.bounceme.chronos.chronoslibs</groupId>
-			<artifactId>chronos-cache-utils</artifactId>
+			<artifactId>chronos-mapper-utils</artifactId>
 			<version>${chronoslibs.version}</version>
+			<scope>compile</scope>
 		</dependency>
 		
 		<dependency>

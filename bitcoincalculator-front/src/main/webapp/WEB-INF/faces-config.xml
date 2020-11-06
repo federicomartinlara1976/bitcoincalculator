@@ -25,14 +25,23 @@
 		</resource-bundle>
 		
 		<system-event-listener>
-        	<system-event-listener-class>
-            	net.bounceme.chronos.bitcoincalculator.listeners.InitListener
-        	</system-event-listener-class>
-        	<system-event-class>
-            	javax.faces.event.PostConstructApplicationEvent
-        	</system-event-class>
-    	</system-event-listener>
+        		<system-event-listener-class>
+            			net.bounceme.chronos.bitcoincalculator.listeners.InitListener
+        		</system-event-listener-class>
+        		<system-event-class>
+            			javax.faces.event.PostConstructApplicationEvent
+        		</system-event-class>
+    		</system-event-listener>
+		
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
+	
+	<factory>
+    		<exception-handler-factory>
+    			org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory
+    		</exception-handler-factory>
+	</factory>
+
 
 	<!-- Global navigation rules -->
 	<navigation-rule>
@@ -56,7 +65,4 @@
 			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	<application>
-		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
-	</application>
 </faces-config>
