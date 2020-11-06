@@ -10,7 +10,6 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.log4j.Log4j;
@@ -21,6 +20,7 @@ import net.bounceme.chronos.bitcoincalculator.dto.BitcoinCalculatorDTO;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
+import net.bounceme.chronos.bitcoincalculator.services.trading.TraderFactory;
 import net.bounceme.chronos.bitcoincalculator.utils.LogWrapper;
 import net.bounceme.chronos.utils.mapping.JacksonConverter;
 
@@ -29,7 +29,6 @@ import net.bounceme.chronos.utils.mapping.JacksonConverter;
  *
  */
 @Service
-@Scope("session")
 @Log4j
 public class CalculatorService {
 	

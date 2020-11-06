@@ -1,19 +1,16 @@
-package net.bounceme.chronos.bitcoincalculator.services;
+package net.bounceme.chronos.bitcoincalculator.services.trading;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import lombok.extern.log4j.Log4j;
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
-import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
 import net.bounceme.chronos.bitcoincalculator.utils.LogWrapper;
 
-@Service(TraderFactory.NAME)
+@Component
 @Log4j
 public class TraderFactory {
 
-	public static final String NAME = "traderFactory";
-	
 	/**
 	 * @param name
 	 * @return

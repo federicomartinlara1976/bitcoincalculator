@@ -13,7 +13,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import lombok.extern.log4j.Log4j;
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
@@ -42,7 +41,6 @@ public class SessionBean extends BaseBean implements Serializable {
 	private static final String FEATURE_CLASS = "feature";
 
 	@Autowired
-	@Qualifier(CalculatorService.NAME)
 	private transient CalculatorService calculatorService;
 
 	@Autowired

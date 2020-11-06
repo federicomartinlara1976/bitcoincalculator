@@ -15,7 +15,6 @@ import javax.faces.event.ActionEvent;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.FlowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator;
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.ExchangeTypes;
@@ -46,11 +45,9 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 	private SessionBean sessionBean;
 
 	@Autowired
-	@Qualifier(CalculatorService.NAME)
 	private transient CalculatorService calculatorService;
 
 	@Autowired
-	@Qualifier(ExchangeService.NAME)
 	private transient ExchangeService exchangeService;
 	
 	@Autowired
