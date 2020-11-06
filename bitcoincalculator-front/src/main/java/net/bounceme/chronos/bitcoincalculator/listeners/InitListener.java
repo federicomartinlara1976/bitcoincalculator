@@ -11,8 +11,8 @@ import javax.faces.event.AbortProcessingException;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 
-import org.jboss.logging.Logger;
-
+import lombok.extern.log4j.Log4j;
+import net.bounceme.chronos.bitcoincalculator.utils.LogWrapper;
 import net.bounceme.chronos.utils.i18n.service.TranslationService;
 import net.bounceme.chronos.utils.spring.BeanUtils;
 
@@ -20,8 +20,8 @@ import net.bounceme.chronos.utils.spring.BeanUtils;
  * @author frederik
  *
  */
+@Log4j
 public class InitListener implements SystemEventListener {
-	private static Logger log = Logger.getLogger(InitListener.class.getName());
 	
 	private static final String basePackage = "net.bounceme.chronos.bitcoincalculator";
 	private static final String[] resources = {"MessageBundle", "PubliBundle"};
@@ -43,13 +43,13 @@ public class InitListener implements SystemEventListener {
 	 * @param application
 	 */
 	private void initSupportedLocales(Application application) {
-		log.info("Loading i18n...");
+		LogWrapper.debug(log, "Loading i18n...");
 		List<String> locales = getLocalesFromApplication(application);
 		TranslationService translationService = loadServiceFromContext();
 		if (!Objects.isNull(translationService)) {
 			translationService.buildTranslations(basePackage, baseLang, resources, locales);
 		}
-		log.info("Ok");
+		LogWrapper.debug(log, "Ok");
 	}
 
 	/**

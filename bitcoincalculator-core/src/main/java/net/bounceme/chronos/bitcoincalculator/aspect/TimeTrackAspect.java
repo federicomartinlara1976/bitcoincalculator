@@ -4,11 +4,13 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.jboss.logging.Logger;
+
+import lombok.extern.log4j.Log4j;
+import net.bounceme.chronos.bitcoincalculator.utils.LogWrapper;
 
 @Aspect
+@Log4j
 public class TimeTrackAspect {
-	private static Logger log = Logger.getLogger(TimeTrackAspect.class.getName());
 	
 	private Long start;
 	
@@ -20,6 +22,6 @@ public class TimeTrackAspect {
 	@After("execution(* net.bounceme.chronos.bitcoincalculator.services.impl.*.*(..))")
 	public void after(JoinPoint joinPoint) {
 		Long elapsedTime = System.currentTimeMillis() - start;
-		log.info(joinPoint.getSignature().getName() + " execution time: " + elapsedTime + " milliseconds");
+		LogWrapper.debug(log, "%s execution time: %d milliseconds", joinPoint.getSignature().getName(), elapsedTime);
 	}
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration
+	xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+	<appender name="CONSOLE"
+		class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<param name="Threshold" value="DEBUG" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%p] %d{HH:mm:ss,SSS} [%t] [%c{1}] %m%n" />
+		</layout>
+	</appender>
+
+	<!-- Appender para la salida por graylog (tiempo de ejecución) -->
+	<appender name="GRAYLOG"
+		class="org.graylog2.log.GelfAppender">
+		<param name="graylogHost" value="192.168.1.2" />
+		<param name="originHost" value="localhost" />
+		<param name="graylogPort" value="12201" />
+		<param name="additionalFields"
+			value="{'environment': 'DEV', 'application': 'BitcoinCalculator'}" />
+		<param name="extractStacktrace" value="true" />
+		<param name="addExtendedInformation" value="true" />
+		<param name="facility" value="log" />
+		<param name="Threshold" value="DEBUG" />
+	</appender>
+
+	<!-- Root Logger -->
+	<root>
+		<priority value="DEBUG" />
+		<appender-ref ref="GRAYLOG" />
+	</root>
+
+</log4j:configuration>

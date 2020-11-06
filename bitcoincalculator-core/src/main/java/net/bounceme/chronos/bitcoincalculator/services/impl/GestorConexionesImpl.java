@@ -4,22 +4,23 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.log4j.Log4j;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.services.GestorConexiones;
+import net.bounceme.chronos.bitcoincalculator.utils.LogWrapper;
 import net.bounceme.chronos.utils.net.exceptions.JSONClientException;
 import net.bounceme.chronos.utils.net.json.JSONClient;
 import net.bounceme.chronos.utils.net.json.JSONPool;
 
 @Service(GestorConexiones.NAME)
 @Scope("singleton")
+@Log4j
 public class GestorConexionesImpl implements GestorConexiones {
-	private static Logger log = Logger.getLogger(GestorConexionesImpl.class.getName());
 	
 	@Value("${BitcoinCalculator.api}")
 	private String url;
@@ -36,7 +37,7 @@ public class GestorConexionesImpl implements GestorConexiones {
 
 		}
 		catch (JSONClientException e) {
-			log.error("ERROR", e);
+			LogWrapper.error(log, "ERROR", e);
 			pool.setInitialized(Boolean.FALSE);
 		}
 	}
@@ -48,7 +49,7 @@ public class GestorConexionesImpl implements GestorConexiones {
 			conn.setParameters(parameters);
 			return conn.get();
 		} catch (JSONClientException e) {
-			log.error("ERROR", e);
+			LogWrapper.error(log, "ERROR", e);
 			throw new ServiceException(e);
 		} finally {
 			pool.put(conn);

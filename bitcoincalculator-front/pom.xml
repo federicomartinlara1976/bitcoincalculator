@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>net.bounceme.chronos</groupId>
 		<artifactId>bitcoincalculator</artifactId>
-		<version>1.0.2-SNAPSHOT</version>
+		<version>1.0.1</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -92,17 +92,6 @@
 			<version>1.0.10</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.ocpsoft.rewrite</groupId>
-			<artifactId>rewrite-servlet</artifactId>
-			<version>${prettyfaces.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.ocpsoft.rewrite</groupId>
-			<artifactId>rewrite-config-prettyfaces</artifactId>
-			<version>${prettyfaces.version}</version>
-		</dependency>
 	</dependencies>
 
 	<build>

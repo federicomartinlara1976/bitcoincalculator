@@ -1,18 +1,18 @@
 package net.bounceme.chronos.bitcoincalculator.services.impl;
 
-import org.jboss.logging.Logger;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.log4j.Log4j;
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
+import net.bounceme.chronos.bitcoincalculator.utils.LogWrapper;
 
 @Service(TraderFactory.NAME)
+@Log4j
 public class TraderFactory {
 
 	public static final String NAME = "traderFactory";
-	
-	private static Logger log = Logger.getLogger(TraderFactory.class.getName());
 	
 	/**
 	 * @param name
@@ -24,7 +24,7 @@ public class TraderFactory {
 			Class<?> traderClass = Traders.valueOf(Traders.class, name).getTraderClass();
 			return (Trader) traderClass.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
-			log.error("ERROR", e);
+			LogWrapper.error(log, "ERROR", e);
 			throw new TraderException(e);
 		}
 	}

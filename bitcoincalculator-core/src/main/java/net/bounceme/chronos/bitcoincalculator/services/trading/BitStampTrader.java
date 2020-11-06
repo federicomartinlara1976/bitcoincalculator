@@ -4,20 +4,20 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ResourceBundle;
 
-import org.jboss.logging.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import lombok.extern.log4j.Log4j;
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.ExchangeTypes;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
+import net.bounceme.chronos.bitcoincalculator.utils.LogWrapper;
 
+@Log4j
 public class BitStampTrader extends TraderBase  {
 	private static final String NAME = "BitStamp";
 
-	private static Logger log = Logger.getLogger(BitStampTrader.class.getName());
-	
 	private static final String BUNDLE_NAME = "net.bounceme.chronos.bitcoincalculator.traders.BitStamp"; //$NON-NLS-1$
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
@@ -39,7 +39,7 @@ public class BitStampTrader extends TraderBase  {
 			return BigDecimal.ZERO;
 		}
 		catch (IOException e) {
-			log.error("ERROR", e);
+			LogWrapper.error(log, "ERROR", e);
 			throw new TraderException(e);
 		}
 	}

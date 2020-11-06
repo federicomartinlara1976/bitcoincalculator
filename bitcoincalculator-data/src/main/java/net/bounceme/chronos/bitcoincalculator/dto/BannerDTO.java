@@ -2,6 +2,12 @@ package net.bounceme.chronos.bitcoincalculator.dto;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class BannerDTO implements Serializable {
 
 	/**
@@ -11,28 +17,4 @@ public class BannerDTO implements Serializable {
 	
 	private String styleClass;
 	private String content;
-	/**
-	 * @return the styleClass
-	 */
-	public String getStyleClass() {
-		return styleClass;
-	}
-	/**
-	 * @param styleClass the styleClass to set
-	 */
-	public void setStyleClass(String styleClass) {
-		this.styleClass = styleClass;
-	}
-	/**
-	 * @return the content
-	 */
-	public String getContent() {
-		return content;
-	}
-	/**
-	 * @param content the content to set
-	 */
-	public void setContent(String content) {
-		this.content = content;
-	}
 }

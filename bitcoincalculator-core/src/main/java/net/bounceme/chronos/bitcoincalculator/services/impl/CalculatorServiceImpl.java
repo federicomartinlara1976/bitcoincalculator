@@ -8,12 +8,12 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.log4j.Log4j;
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator;
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
 import net.bounceme.chronos.bitcoincalculator.config.AppConfig;
@@ -23,6 +23,7 @@ import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
 import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 import net.bounceme.chronos.bitcoincalculator.services.GestorConexiones;
 import net.bounceme.chronos.bitcoincalculator.services.trading.Trader;
+import net.bounceme.chronos.bitcoincalculator.utils.LogWrapper;
 import net.bounceme.chronos.utils.mapping.JacksonConverter;
 
 /**
@@ -31,8 +32,8 @@ import net.bounceme.chronos.utils.mapping.JacksonConverter;
  */
 @Service(CalculatorService.NAME)
 @Scope("session")
+@Log4j
 public class CalculatorServiceImpl implements CalculatorService {
-	private static Logger log = Logger.getLogger(CalculatorServiceImpl.class.getName());
 	
 	private enum Params {
 		hashrate, exchange_rate
@@ -104,7 +105,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 			return bitcoinConverter.reverseAssemble(result);
 		}
 		catch (ServiceException e) {
-			log.error("ERROR", e);
+			LogWrapper.error(log, "ERROR", e);
 			throw new ServiceException(e);
 		}
 	}
@@ -117,7 +118,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 			data = bitcoinConverter.reverseAssemble(result);
 		}
 		catch (ServiceException e) {
-			log.error("ERROR", e);
+			LogWrapper.error(log, "ERROR", e);
 		}
 	}
 
@@ -133,7 +134,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 			return results;
 		}
 		catch (TraderException e) {
-			log.error("ERROR", e);
+			LogWrapper.error(log, "ERROR", e);
 			throw new ServiceException(e);
 		}
 	}
@@ -144,7 +145,7 @@ public class CalculatorServiceImpl implements CalculatorService {
 			return traderFactory.getTrader(traders);
 		}
 		catch (TraderException e) {
-			log.error("ERROR", e);
+			LogWrapper.error(log, "ERROR", e);
 			throw new ServiceException(e);
 		}
 	}

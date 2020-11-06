@@ -4,20 +4,20 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ResourceBundle;
 
-import org.jboss.logging.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import lombok.extern.log4j.Log4j;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
+import net.bounceme.chronos.bitcoincalculator.utils.LogWrapper;
 
+@Log4j
 public class Plus500Trader extends TraderBase {
 
 	private static final String NAME = "Plus500";
 
-	private static Logger log = Logger.getLogger(Plus500Trader.class.getName());
-	
 	private static final String BUNDLE_NAME = "net.bounceme.chronos.bitcoincalculator.traders.Plus500"; //$NON-NLS-1$
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
@@ -31,7 +31,7 @@ public class Plus500Trader extends TraderBase {
 		try {
 			return getCurrencyUSD();
 		} catch (IOException e) {
-			log.error("ERROR", e);
+			LogWrapper.error(log, "ERROR", e);
 			throw new TraderException(e);
 		}
 	}
@@ -54,7 +54,7 @@ public class Plus500Trader extends TraderBase {
 			}
 		}
 		else {
-			log.warn("Error: no se ha podido obtener información de " + getName());
+			LogWrapper.warn(log, "Error: no se ha podido obtener información de " + getName());
 		}
 
 		return value;
