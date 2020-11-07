@@ -5,3 +5,4 @@
 .settings
 .clover
 /.tern-project
+/target/
