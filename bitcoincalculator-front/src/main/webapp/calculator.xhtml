@@ -3,120 +3,127 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 	<p:messages id="msgs" closable="true">
 		<p:autoUpdate />
 	</p:messages>
 
-	<p:outputPanel id="parametros" styleClass="ui-fluid">
+	<div jsf:id="calculator">
+		<div jsf:id="parametros" jsf:rendered="#{empty bitcoinCalculator.thisDifficulty and empty bitcoinCalculator.nextDifficulty}" 
+			class="ui-g-12 ui-md-12 ui-lg-12">
+			<div class="ui-g-6">
+				<h:outputLabel for="hashRateAmount"
+					value="#{res['calculator.tasaHash']}" styleClass="ui-g-12" />
+				<p:inputNumber id="hashRateAmount"
+					value="#{bitcoinCalculator.hashRateAmount}"
+					symbol=" #{bitcoinCalculator.hashRateMultiply}" symbolPosition="s"
+					decimalSeparator="," thousandSeparator="." styleClass="ui-g-12">
+				</p:inputNumber>
 
-		<p:panelGrid columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6"
-			rendered="#{empty bitcoinCalculator.thisDifficulty and empty bitcoinCalculator.nextDifficulty}"
-			style="margin-bottom:10px" cellpadding="5" layout="grid"
-			styleClass="ui-panelgrid-blank c100">
+				<p:selectOneButton id="hashRateMultiply"
+					value="#{bitcoinCalculator.hashRateMultiply}" styleClass="ui-g-12">
+					<f:selectItem itemLabel="MH/s" itemValue="MH" />
+					<f:selectItem itemLabel="GH/s" itemValue="GH" />
+					<f:selectItem itemLabel="TH/s" itemValue="TH" />
 
-			<p:outputPanel layout="block">
-				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
-					<h:outputLabel for="hashRateAmount"
-						value="#{res['calculator.tasaHash']}" />
-					<p:inputNumber id="hashRateAmount"
-						value="#{bitcoinCalculator.hashRateAmount}"
-						symbol=" #{bitcoinCalculator.hashRateMultiply}" symbolPosition="s"
-						decimalSeparator="," thousandSeparator=".">
-					</p:inputNumber>
+					<p:ajax event="change"
+						listener="#{bitcoinCalculator.onChangeHashRate}"
+						update="hashRateAmount" process="hashRateAmount, hashRateMultiply" />
+				</p:selectOneButton>
+			</div>
 
-					<p:selectOneButton id="hashRateMultiply"
-						value="#{bitcoinCalculator.hashRateMultiply}" style="float:right;">
-						<f:selectItem itemLabel="MH/s" itemValue="MH" />
-						<f:selectItem itemLabel="GH/s" itemValue="GH" />
-						<f:selectItem itemLabel="TH/s" itemValue="TH" />
+			<div class="ui-g-6">
+				<h:outputLabel for="exchangeAmount"
+					value="#{res['calculator.tasaCambio']}" styleClass="ui-g-12" />
+				<p:inputNumber id="exchangeAmount"
+					value="#{bitcoinCalculator.exchangeAmount}"
+					symbol=" #{bitcoinCalculator.exchangeType}" symbolPosition="s"
+					decimalSeparator="," thousandSeparator="." readonly="true"
+					styleClass="ui-g-12">
+				</p:inputNumber>
 
-						<p:ajax event="change"
-							listener="#{bitcoinCalculator.onChangeHashRate}"
-							update="hashRateAmount" process="hashRateAmount, hashRateMultiply" />
-					</p:selectOneButton>
-				</p:panelGrid>
-			</p:outputPanel>
+				<p:selectOneButton id="exchangeType"
+					value="#{bitcoinCalculator.exchangeType}" styleClass="ui-g-12">
+					<f:selectItem itemLabel="USD" itemValue="USD" />
+					<f:selectItem itemLabel="EUR" itemValue="EUR" />
 
-			<p:outputPanel layout="block">
-				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
-					<h:outputLabel for="exchangeAmount"
-						value="#{res['calculator.tasaCambio']}" />
-					<p:inputNumber id="exchangeAmount"
-						value="#{bitcoinCalculator.exchangeAmount}"
-						symbol=" #{bitcoinCalculator.exchangeType}" symbolPosition="s"
-						decimalSeparator="," thousandSeparator="." readonly="true">
-					</p:inputNumber>
+					<p:ajax event="change"
+						listener="#{bitcoinCalculator.onChangeExchange}"
+						update="exchangeAmount" process="exchangeAmount, exchangeType" />
+				</p:selectOneButton>
+			</div>
+		</div>
 
-					<p:selectOneButton id="exchangeType"
-						value="#{bitcoinCalculator.exchangeType}" style="float:right;">
-						<f:selectItem itemLabel="USD" itemValue="USD" />
-						<f:selectItem itemLabel="EUR" itemValue="EUR" />
+		<div jsf:id="info" jsf:rendered="#{empty bitcoinCalculator.thisDifficulty and empty bitcoinCalculator.nextDifficulty}"
+			class="ui-g-12">
+			<div class="ui-g-4">
+				<p:panel layout="block" styleClass="panelBanner banner_1">
+					<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
+						<h:outputLabel value="#{res['calculator.dificultad']}" />
+						<h:outputText styleClass="value"
+							value="#{sessionBean.difficultyFactor}">
+							<f:convertNumber maxFractionDigits="4" groupingUsed="false" />
+						</h:outputText>
+					</p:panelGrid>
+				</p:panel>
+			</div>
 
-						<p:ajax event="change"
-							listener="#{bitcoinCalculator.onChangeExchange}"
-							update="exchangeAmount" process="exchangeAmount, exchangeType" />
-					</p:selectOneButton>
-				</p:panelGrid>
-			</p:outputPanel>
-		</p:panelGrid>
+			<div class="ui-g-4">
+				<p:panel layout="block" styleClass="panelBanner banner_2">
+					<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
+						<h:outputLabel value="#{res['calculator.siguienteDificultad']}" />
+						<h:outputText styleClass="value"
+							value="#{sessionBean.nextDifficultyFactor}">
+							<f:convertNumber maxFractionDigits="4" groupingUsed="false" />
+						</h:outputText>
+					</p:panelGrid>
+				</p:panel>
+			</div>
 
-		<p:panelGrid columns="3" layout="grid"
-			rendered="#{empty bitcoinCalculator.thisDifficulty and empty bitcoinCalculator.nextDifficulty}"
-			styleClass="ui-panelgrid-blank c100">
+			<div class="ui-g-4">
+				<p:panel layout="block" styleClass="panelBanner banner_3">
+					<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
+						<h:outputLabel value="#{res['calculator.bcPerBlock']}" />
+						<h:outputText styleClass="value" value="#{sessionBean.bcPerBlock}">
+							<f:convertNumber maxFractionDigits="2" groupingUsed="false" />
+						</h:outputText>
+					</p:panelGrid>
+				</p:panel>
+			</div>
+		</div>
 
-			<p:panel layout="block" styleClass="panelBanner banner_1">
-				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
-					<h:outputLabel value="#{res['calculator.dificultad']}" />
-					<h:outputText styleClass="value"
-						value="#{sessionBean.difficultyFactor}">
-						<f:convertNumber maxFractionDigits="4" groupingUsed="false" />
-					</h:outputText>
-				</p:panelGrid>
-			</p:panel>
+		<div jsf:id="botonera" jsf:rendered="#{empty bitcoinCalculator.thisDifficulty and empty bitcoinCalculator.nextDifficulty}"
+			class="ui-g-12" style="margin-bottom: 10px">
+			<div class="ui-g-6">
+				<p:commandButton value="#{res['calculator.calcular']}"
+					id="calculate"
+					actionListener="#{bitcoinCalculator.calculate}"
+					update="calculator"
+					styleClass="ui-button c100" />
+			</div>
+			<div class="ui-g-6">
+				<p:commandButton value="#{res['calculator.limpiar']}" id="reset"
+					actionListener="#{bitcoinCalculator.reset}"
+					update="calculator"
+					styleClass="ui-button c100" />
+			</div>
+		</div>
 
-			<p:panel layout="block" styleClass="panelBanner banner_2">
-				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
-					<h:outputLabel value="#{res['calculator.siguienteDificultad']}" />
-					<h:outputText styleClass="value"
-						value="#{sessionBean.nextDifficultyFactor}">
-						<f:convertNumber maxFractionDigits="4" groupingUsed="false" />
-					</h:outputText>
-				</p:panelGrid>
-			</p:panel>
+		<div jsf:id="resultados" jsf:rendered="#{not empty bitcoinCalculator.thisDifficulty and not empty bitcoinCalculator.nextDifficulty}"
+			class="ui-g-12">
+			<p:panel header="#{res['calculator.resultados']}">
 
-			<p:panel layout="block" styleClass="panelBanner banner_3">
-				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank c100">
-					<h:outputLabel value="#{res['calculator.bcPerBlock']}" />
-					<h:outputText styleClass="value" value="#{sessionBean.bcPerBlock}">
-						<f:convertNumber maxFractionDigits="2" groupingUsed="false" />
-					</h:outputText>
-				</p:panelGrid>
-			</p:panel>
-		</p:panelGrid>
-	</p:outputPanel>
-	
-	<p:panelGrid id="botonera" columns="2" style="margin-bottom:10px"
-		cellpadding="5" styleClass="ui-panelgrid-blank c100">
-		<p:commandButton value="#{res['calculator.calcular']}" id="calculate"
-			rendered="#{empty bitcoinCalculator.thisDifficulty and empty bitcoinCalculator.nextDifficulty}"
-			actionListener="#{bitcoinCalculator.calculate}"
-			update="parametros,botonera,resultados" styleClass="ui-button c100" />
-		<p:commandButton value="#{res['calculator.limpiar']}" id="reset"
-			actionListener="#{bitcoinCalculator.reset}"
-			update="hashRateAmount,hashRateMultiply,exchangeType,exchangeAmount,parametros,botonera,resultados"
-			styleClass="ui-button c100" />
-	</p:panelGrid>
+				<f:facet name="actions">
+					<p:commandButton icon="fa fa-close"
+						actionListener="#{bitcoinCalculator.reset}"
+						update="calculator" />
+				</f:facet>
 
-	<p:outputPanel id="resultados">
-		<p:panel header="#{res['calculator.resultados']}"
-			rendered="#{not empty bitcoinCalculator.thisDifficulty and not empty bitcoinCalculator.nextDifficulty}">
-			<p:panelGrid columns="1">
 				<p:dataTable id="thisDifficulty" var="difficulty"
 					value="#{bitcoinCalculator.thisDifficulty}" paginatorPosition="top"
-					paginatorTemplate="{Titulo}" paginator="true" rows="10"
-					style="margin-bottom:20px;width:604px">
+					paginatorTemplate="{Titulo}" paginator="true"
+					style="margin-bottom:20px;">
 
 					<f:facet name="{Titulo}">
 						<p:panelGrid styleClass="ui-panelgrid-blank" columns="4"
@@ -167,8 +174,8 @@
 
 				<p:dataTable id="nextDifficulty" var="difficulty"
 					value="#{bitcoinCalculator.nextDifficulty}" paginatorPosition="top"
-					paginatorTemplate="{Titulo}" paginator="true" rows="10"
-					style="margin-bottom:20px;width:604px;">
+					paginatorTemplate="{Titulo}" paginator="true"
+					style="margin-bottom:20px;">
 
 					<f:facet name="{Titulo}">
 						<p:panelGrid columns="4" styleClass="ui-panelgrid-blank"
@@ -217,8 +224,7 @@
 					</p:column>
 				</p:dataTable>
 
-			</p:panelGrid>
-		</p:panel>
-	</p:outputPanel>
-
+			</p:panel>
+		</div>
+	</div>
 </ui:composition>
