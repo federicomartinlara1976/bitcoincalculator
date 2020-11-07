@@ -24,8 +24,6 @@
 						value="#{bitcoinCalculator.hashRateAmount}"
 						symbol=" #{bitcoinCalculator.hashRateMultiply}" symbolPosition="s"
 						decimalSeparator="," thousandSeparator=".">
-						<p:ajax event="blur"
-							listener="#{bitcoinCalculator.onChangeHashRate}" process="hashRateAmount, hashRateMultiply" />
 					</p:inputNumber>
 
 					<p:selectOneButton id="hashRateMultiply"
