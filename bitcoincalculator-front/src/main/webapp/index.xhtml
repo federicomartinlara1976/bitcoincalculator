@@ -94,13 +94,6 @@
 			position="center center" onShow="PF('dlgDemoCalc').initPosition()">
 			<ui:include src="calculator.xhtml" />
 		</p:dialog>
-
-		<p:ajaxStatus onstart="PF('statusDialog').show()"
-			onsuccess="PF('statusDialog').hide()" />
-
-		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
-			closable="false" resizable="false" showHeader="false">
-			<i class="fa fa-clock-o"></i>
-		</p:dialog>
+		
 	</ui:define>
 </ui:composition>
