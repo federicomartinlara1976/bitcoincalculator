@@ -1,10 +1,12 @@
 package net.bounceme.chronos.bitcoincalculator.services.trading;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import net.bounceme.chronos.bitcoincalculator.dto.BitcoinCalculatorDTO;
 import net.bounceme.chronos.bitcoincalculator.exceptions.TraderException;
 import net.bounceme.chronos.bitcoincalculator.services.CalculatorService;
 
@@ -20,7 +22,8 @@ public class DefaultTrader extends TraderBase  {
 	}
 
 	public BigDecimal getExchange() throws TraderException {
-		return calculatorService.getCurrentExchange();
+		BitcoinCalculatorDTO data = calculatorService.getData();
+		return (!Objects.isNull(data)) ? new BigDecimal(data.getExchange_rate()) : null;
 	}
 
 	@Override

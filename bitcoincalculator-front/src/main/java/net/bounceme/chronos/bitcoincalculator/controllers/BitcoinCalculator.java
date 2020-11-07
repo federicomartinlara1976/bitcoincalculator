@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -91,13 +92,18 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 			baseType = ExchangeTypes.EUR;
 			lastType = baseType;
 			exchangeType = lastType.name();
-			
-			BigDecimal amount = calculatorService.getCurrentExchange();
-			exchangeBase = exchangeService.initCurrency(amount, ExchangeTypes.USD);
-			exchangeAmount = exchangeBase;
-			exchangeRateSource = calculatorService.getCurrentExchangeRateSource();
 			exchange = BigDecimal.ZERO;
-			traders = calculatorService.getTraders();
+			
+			BitcoinCalculatorDTO data = calculatorService.getData();
+			
+			if (!Objects.isNull(data)) {
+				BigDecimal amount = new BigDecimal(data.getExchange_rate());
+				exchangeBase = exchangeService.initCurrency(amount, ExchangeTypes.USD);
+				exchangeAmount = exchangeBase;
+				exchangeRateSource = data.getExchange_rate_source();
+				traders = calculatorService.getTraders();
+			}
+			
 			if (thisDifficulty != null) {
 				thisDifficulty.clear();
 			}

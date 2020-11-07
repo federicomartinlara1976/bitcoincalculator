@@ -54,26 +54,6 @@ public class CalculatorService {
 		initializeData();
 	}
 
-	public Double getCurrentDifficultyFactor() {
-		return (data != null) ? data.getDifficulty() : null;
-	}
-
-	public Double getNextDifficultyFactor() {
-		return (data != null) ? data.getNext_difficulty() : null;
-	}
-
-	public BigDecimal getCurrentExchange() {
-		return (data != null) ? new BigDecimal(data.getExchange_rate()) : null;
-	}
-
-	public BigDecimal getCurrentBcPerBlock() {
-		return (data != null) ? data.getBc_per_block() : null;
-	}
-
-	public String getCurrentExchangeRateSource() {
-		return (data != null) ? data.getExchange_rate_source() : null;
-	}
-
 	public BigDecimal getExchange(Trader trader) throws ServiceException {
 		try {
 			return (trader!=null) ? trader.getExchange() : BigDecimal.ZERO;
@@ -82,6 +62,10 @@ public class CalculatorService {
 			log.error("ERROR", e);
 			throw new ServiceException(e);
 		}
+	}
+	
+	public BitcoinCalculatorDTO getData() {
+		return data;
 	}
 
 	@TrackTime

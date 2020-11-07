@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.log4j.Log4j;
 import net.bounceme.chronos.bitcoincalculator.common.ConstantesBitcoinCalculator.Traders;
 import net.bounceme.chronos.bitcoincalculator.dto.BannerDTO;
+import net.bounceme.chronos.bitcoincalculator.dto.BitcoinCalculatorDTO;
 import net.bounceme.chronos.bitcoincalculator.dto.FeatureDTO;
 import net.bounceme.chronos.bitcoincalculator.exceptions.ServiceException;
 import net.bounceme.chronos.bitcoincalculator.messages.MessageProperties;
@@ -69,9 +71,14 @@ public class SessionBean extends BaseBean implements Serializable {
 	public void init() {
 		try {
 			lang = FacesContext.getCurrentInstance().getApplication().getDefaultLocale();
-			difficultyFactor = calculatorService.getCurrentDifficultyFactor();
-			nextDifficultyFactor = calculatorService.getNextDifficultyFactor();
-			bcPerBlock = calculatorService.getCurrentBcPerBlock();
+			
+			BitcoinCalculatorDTO data = calculatorService.getData();
+			
+			if (!Objects.isNull(data)) {
+				difficultyFactor = data.getDifficulty();
+				nextDifficultyFactor = data.getNext_difficulty();
+				bcPerBlock = data.getBc_per_block();
+			}
 			currentTrader = calculatorService.getTrader(Traders.Default);
 		}
 		catch (ServiceException e) {
