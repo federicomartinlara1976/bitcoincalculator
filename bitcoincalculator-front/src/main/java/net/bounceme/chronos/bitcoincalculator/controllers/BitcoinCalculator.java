@@ -117,10 +117,6 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 		}
 	}
 
-	public void setSessionBean(SessionBean sessionBean) {
-		this.sessionBean = sessionBean;
-	}
-
 	public void calculate(ActionEvent actionEvent) {
 		try {
 			if (validateHash() && validateExchange()) {
@@ -427,5 +423,19 @@ public class BitcoinCalculator extends BaseBean implements Serializable {
 
 	public String getCharset() {
 		return ConstantesBitcoinCalculator.ENCODING_EXPORTS;
+	}
+
+	/**
+	 * @return the sessionBean
+	 */
+	public SessionBean getSessionBean() {
+		return sessionBean;
+	}
+
+	/**
+	 * @param sessionBean the sessionBean to set
+	 */
+	public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
 	}
 }
