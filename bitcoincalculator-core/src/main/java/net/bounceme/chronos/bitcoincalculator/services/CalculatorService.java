@@ -75,7 +75,11 @@ public class CalculatorService {
 			parameters.put(Params.hashrate.name(), hashRate.toString());
 			parameters.put(Params.exchange_rate.name(),
 					exchangeAmount.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+			LogWrapper.debug(log, parameters.toString());
+			
 			String result = gestorConexiones.getData(parameters);
+			
+			LogWrapper.debug(log, "Resultado: %s", result);
 			return bitcoinConverter.reverseAssemble(result);
 		}
 		catch (ServiceException e) {

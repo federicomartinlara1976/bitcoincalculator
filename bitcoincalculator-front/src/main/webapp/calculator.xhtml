@@ -110,7 +110,7 @@
 			</div>
 		</div>
 
-		<div jsf:id="resultados" jsf:rendered="#{not empty bitcoinCalculator.thisDifficulty and not empty bitcoinCalculator.nextDifficulty}"
+		<div jsf:id="resultados" jsf:rendered="#{not empty bitcoinCalculator.thisDifficulty or not empty bitcoinCalculator.nextDifficulty}"
 			class="ui-g-12">
 			<p:panel header="#{res['calculator.resultados']}">
 
@@ -123,6 +123,7 @@
 				<p:dataTable id="thisDifficulty" var="difficulty"
 					value="#{bitcoinCalculator.thisDifficulty}" paginatorPosition="top"
 					paginatorTemplate="{Titulo}" paginator="true"
+					rendered="#{not empty bitcoinCalculator.thisDifficulty}"
 					style="margin-bottom:20px;">
 
 					<f:facet name="{Titulo}">
@@ -175,6 +176,7 @@
 				<p:dataTable id="nextDifficulty" var="difficulty"
 					value="#{bitcoinCalculator.nextDifficulty}" paginatorPosition="top"
 					paginatorTemplate="{Titulo}" paginator="true"
+					rendered="#{not empty bitcoinCalculator.nextDifficulty}"
 					style="margin-bottom:20px;">
 
 					<f:facet name="{Titulo}">
